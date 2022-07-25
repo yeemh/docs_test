@@ -16,12 +16,12 @@ theme:
 plugins:
   - search
   - i18n:
-      default_language: ko
+      default_language: kr
       docs_structure: folder
       languages:
         en: English
-  - git-revision-date-localized:
-      type: iso_date
+#   - git-revision-date-localized:
+#       type: iso_date
 markdown_extensions:
   - admonition
   - attr_list
