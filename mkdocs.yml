@@ -1,6 +1,6 @@
 site_name: ThanoSQL
 site_description: AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로
-# site_url: https://docs.thanosql.ai/
+site_url: https://yeemh.github.io/docs_test/
 site_author: Smartmind Team
 theme:
   name: material
