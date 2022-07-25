@@ -16,7 +16,7 @@ theme:
 plugins:
   - search
   - i18n:
-      default_language: ko
+      default_language: kr
       docs_structure: folder
       languages:
         en: English
@@ -100,7 +100,7 @@ nav:
 extra:
   alternate:
     - name: English
-      link: /en/
+      link: ./en/
       lang: en
     - name: 한국어
       link: /
