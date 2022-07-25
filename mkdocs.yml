@@ -1,6 +1,6 @@
 site_name: ThanoSQL
 site_description: AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로
-site_url: https://docs.thanosql.ai/
+# site_url: https://docs.thanosql.ai/
 site_author: Smartmind Team
 theme:
   name: material
@@ -15,8 +15,13 @@ theme:
     - navigation.top
 plugins:
   - search
-#   - git-revision-date-localized:
-#       type: iso_date
+  - i18n:
+      default_language: ko
+      docs_structure: folder
+      languages:
+        en: English
+  - git-revision-date-localized:
+      type: iso_date
 markdown_extensions:
   - admonition
   - attr_list
