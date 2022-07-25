@@ -8,7 +8,6 @@ theme:
   favicon: assets/images/favicon.png
   features:
     - navigation.expand
-    - navigation.instant
     - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
@@ -16,12 +15,17 @@ theme:
 plugins:
   - search
   - i18n:
-      default_language: kr
+      default_language: ko
       docs_structure: folder
       languages:
         en: English
-#   - git-revision-date-localized:
-#       type: iso_date
+      nav_translations:
+        en:
+          개요: Overview
+          튜토리얼: Tutorial
+          가이드: Guide
+  - git-revision-date-localized:
+      type: iso_date
 markdown_extensions:
   - admonition
   - attr_list
@@ -110,4 +114,4 @@ extra:
     property: G-8KVG4NMMFK
 
 extra_css:
-  - /assets/css/extra.css
+  - assets/css/extra.css
