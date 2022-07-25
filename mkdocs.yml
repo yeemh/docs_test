@@ -16,7 +16,7 @@ theme:
 plugins:
   - search
   - i18n:
-      default_language: kr
+      default_language: ko
       docs_structure: folder
       languages:
         en: English
