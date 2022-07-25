@@ -97,17 +97,13 @@ nav:
           - 결과 출력하기: how-to_guides/modelling/PRINT_SYNTAX.md
       - ThanoSQL 알고리즘 쿼리 구문: how-to_guides/modelling/OPTIONS.md
 
-  - FAQ:
-      - 자주 묻는 질문: FAQ/faq.md
-      - 문의하기: FAQ/contact_us.md
-
 extra:
   alternate:
     - name: English
       link: ./en/
       lang: en
     - name: 한국어
-      link: /
+      link: ./
       lang: ko
   analytics:
     provider: google
