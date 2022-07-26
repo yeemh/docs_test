@@ -9,6 +9,7 @@ mkdocs-git-revision-date-localized-plugin = "*"
 mkdocs-material = "*"
 pymdown-extensions = "*"
 mkdocs-static-i18n = "*"
+mkdocs-awesome-pages-plugin = "*"
 
 [dev-packages]
 

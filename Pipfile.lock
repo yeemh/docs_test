@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fb2eb6a9e10c090e61d5f1da14006906ae3c01e066f2ce1b9eb369fb0d96a34e"
+            "sha256": "2e119e52a1b17d87003b4ee8956b535d8ccdc37d14d9e57163cf7030e1831480"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==2.10.3"
+        },
+        "bracex": {
+            "hashes": [
+                "sha256:351b7f20d56fb9ea91f9b9e9e7664db466eb234188c175fd943f8f755c807e73",
+                "sha256:e7b23fc8b2cd06d3dec0692baabecb249dda94e06a617901ff03a6c56fd71693"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==2.3.post1"
         },
         "click": {
             "hashes": [
@@ -141,6 +149,14 @@
             "index": "pypi",
             "version": "==1.3.1"
         },
+        "mkdocs-awesome-pages-plugin": {
+            "hashes": [
+                "sha256:6b21ad4f41aecbe89e3a9a51f8837892cc7ce8ca0f9f4e0a355d56159ace3d68",
+                "sha256:af7e327e14b2eea3b2735c37428e33a528ecd2d9ae2296dc0f1632f0f3bc28f7"
+            ],
+            "index": "pypi",
+            "version": "==2.8.0"
+        },
         "mkdocs-git-revision-date-localized-plugin": {
             "hashes": [
                 "sha256:38517e2084229da1a1b9460e846c2748d238c2d79efd405d1b9174a87bd81d79",
@@ -171,6 +187,14 @@
             ],
             "index": "pypi",
             "version": "==0.46"
+        },
+        "natsort": {
+            "hashes": [
+                "sha256:c7c1f3f27c375719a4dfcab353909fe39f26c2032a062a8c80cc844eaaca0445",
+                "sha256:f59988d2f24e77b6b56f8a8f882d5df6b3b637e09e075abc67b486d59fba1a4b"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==8.1.0"
         },
         "packaging": {
             "hashes": [
@@ -312,6 +336,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==2.1.9"
+        },
+        "wcmatch": {
+            "hashes": [
+                "sha256:ba4fc5558f8946bf1ffc7034b05b814d825d694112499c86035e0e4d398b6a67",
+                "sha256:dc7351e5a7f8bbf4c6828d51ad20c1770113f5f3fd3dfe2a03cfde2a63f03f98"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==8.4"
         },
         "zipp": {
             "hashes": [

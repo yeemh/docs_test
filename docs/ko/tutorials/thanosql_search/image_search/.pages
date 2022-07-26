@@ -1,0 +1,5 @@
+title: Query 무작정 따라하기
+nav:
+    - 키워드로 이미지 검색하기: select_image_query.md
+    - 이미지로 이미지 검색하기: simclr_image_search.md
+    - 텍스트로 이미지 검색하기: clip_image_search.md

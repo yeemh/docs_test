@@ -2,31 +2,37 @@ site_name: ThanoSQL
 site_description: AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로
 site_url: https://yeemh.github.io/docs_test/
 site_author: Smartmind Team
+
 theme:
   name: material
   logo: assets/images/docs_logo.png
   favicon: assets/images/favicon.png
   custom_dir: overrides
   features:
-    - navigation.expand
-    - navigation.sections
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.top
+    - navigation.expand # Default dropdown to expand
+    - navigation.instant # Instant loading
+    - navigation.sections # At sidebar top-level section name with bold & not dropdown menu
+    - navigation.tabs # Make top-level sections
+    - navigation.tabs.sticky # Make top-level sections always visible
+    - navigation.top # Enable back to top button
+    - search.highlight # Highlight all search result
+    - search.suggest # Display the likeliest completion for the last word
+
 plugins:
-  - search
+  - search # Built-in search plugin
+  # Multiple language versions
   - i18n:
       default_language: ko
       docs_structure: folder
       languages:
+        ko: 한국어
         en: English
-      nav_translations:
-        en:
-          개요: Overview
-          튜토리얼: Tutorial
-          가이드: Guide
+  - awesome-pages # Omits nav and control over page
+  # Adding the date of last update
   - git-revision-date-localized:
-      type: iso_date
+      type: iso_date # Format yyyy-mm-dd
+      
+# Extensions
 markdown_extensions:
   - admonition
   - attr_list
@@ -46,69 +52,18 @@ markdown_extensions:
   - pymdownx.tilde
   - pymdownx.tabbed:
       alternate_style: true
+
+# Git info
 repo_name: smartmind-team/thanosql-docs
 repo_url: https://github.com/smartmind-team/thanosql-docs
 edit_uri: ""
 
-nav:
-  - 개요:
-      - What is ThanoSQL?: index.md
-      - 빠른 시작 (Quick Start):
-          - ThanoSQL 웹 사용법: quick_start/how_to_use_ThanoSQL.md
-          - ThanoSQL 워크스페이스 사용법: quick_start/hello_ThanoSQL.md
-          - 안내 가이드: quick_start/algorithm_list.md
-
-  - 튜토리얼:
-      - Query 무작정 따라하기:
-          - 키워드로 이미지 검색하기: tutorials/thanosql_search/image_search/select_image_query.md
-          - 이미지로 이미지 검색하기: tutorials/thanosql_search/image_search/simclr_image_search.md
-          - 텍스트로 이미지 검색하기: tutorials/thanosql_search/image_search/clip_image_search.md
-
-      - ML 무작정 따라하기:
-          - 분류 모델 만들기:
-              - Auto-ML을 사용하여 분류 모델 만들기: tutorials/thanosql_ml/classification/automl_classification.md
-              - 이미지 분류 모델 만들기: tutorials/thanosql_ml/classification/classification_convNext.md
-              - 텍스트 분류 모델 만들기: tutorials/thanosql_ml/classification/classification_Electra.md
-          - 회귀 모델 만들기:
-              - Auto-ML을 사용하여 예측 모델 만들기: tutorials/thanosql_ml/regression/automl_regression.md
-          - 음성 인식 모델 만들기:
-              - 오디오 파일을 받아쓰는 음성 인식 모델 만들기: tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec.md
-
-  - 가이드:
-      - ThanoSQL Syntax: how-to_guides/syntax_list.md
-      - ThanoSQL REST API 다루기:
-          - 데이터 불러오기: how-to_guides/ThanoSQL_connecting/data_upload.md
-          - REST API 사용하기:
-              - 인증 가능한 토큰 만들기: how-to_guides/thanosql_api/rest_api_token.md
-              - ThanoSQL 구문 활용하기: how-to_guides/thanosql_api/rest_api_thanosql_query.md
-              - ThanoSQL DB 업로드하기: how-to_guides/thanosql_api/rest_api_thanosql_insert.md
-              - ThanoSQL 서치 사용하기: how-to_guides/thanosql_api/rest_api_thanosql_search.md
-      - ThanoSQL ML 다루기:
-          - 모델 학습하기: how-to_guides/modelling/BUILD_MODEL_SYNTAX.md
-          - 모델 평가하기: how-to_guides/modelling/EVALUATE_MODEL_SYNTAX.md
-          - 모델 재학습하기: how-to_guides/modelling/FIT_MODEL_SYNTAX.md
-          - 모델 적용을 위해 데이터 전처리하기: how-to_guides/modelling/TRANSFORM_MODEL_SYNTAX.md
-          - 모델 적용하기: how-to_guides/modelling/PREDICT_MODEL_SYNTAX.md
-          - 모델 삭제하기: how-to_guides/modelling/DELETE_MODEL_SYNTAX.md
-      - ThanoSQL Query 다루기:
-          - 저장한 모델 확인하기: how-to_guides/modelling/LIST_SYNTAX.md
-          - 비정형 데이터 변환하기: how-to_guides/modelling/CREATE_TABLE_SYNTAX.md
-          - 비정형 특성 추가하기: how-to_guides/modelling/CONVERT_USING_SYNTAX.md
-          - 비정형 데이터 검색하기: how-to_guides/modelling/SEARCH_SYNTAX.md
-          - 결과 출력하기: how-to_guides/modelling/PRINT_SYNTAX.md
-      - ThanoSQL 알고리즘 쿼리 구문: how-to_guides/modelling/OPTIONS.md
-
 extra:
-  alternate:
-    - name: English
-      link: ./en/
-      lang: en
-    - name: 한국어
-      link: ./
-      lang: ko
+  # Google Analytics
   analytics:
     provider: google
     property: G-8KVG4NMMFK
+  generator: false # Hide "Made with Material for Mkdocs"
 
 extra_css:
-  - assets/css/extra.css
+  - assets/css/extra.css # For grid sections

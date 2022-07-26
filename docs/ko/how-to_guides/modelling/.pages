@@ -1,0 +1,15 @@
+nav:
+    - ThanoSQL ML 다루기:
+        - 모델 학습하기: BUILD_MODEL_SYNTAX.md
+        - 모델 평가하기: EVALUATE_MODEL_SYNTAX.md
+        - 모델 재학습하기: FIT_MODEL_SYNTAX.md
+        - 모델 적용을 위해 데이터 전처리하기: TRANSFORM_MODEL_SYNTAX.md
+        - 모델 적용하기: PREDICT_MODEL_SYNTAX.md
+        - 모델 삭제하기: DELETE_MODEL_SYNTAX.md
+    - ThanoSQL Query 다루기:
+        - 저장한 모델 확인하기: LIST_SYNTAX.md
+        - 비정형 데이터 변환하기: CREATE_TABLE_SYNTAX.md
+        - 비정형 특성 추가하기: CONVERT_USING_SYNTAX.md
+        - 비정형 데이터 검색하기: SEARCH_SYNTAX.md
+        - 결과 출력하기: PRINT_SYNTAX.md
+    - ThanoSQL 알고리즘 쿼리 구문: OPTIONS.md

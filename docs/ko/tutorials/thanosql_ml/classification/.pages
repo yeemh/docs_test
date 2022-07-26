@@ -1,0 +1,5 @@
+title: 분류 모델 만들기
+nav:
+    - Auto-ML을 사용하여 분류 모델 만들기: automl_classification.md
+    - 이미지 분류 모델 만들기: classification_convNext.md
+    - 텍스트 분류 모델 만들기: classification_Electra.md
