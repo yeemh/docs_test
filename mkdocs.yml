@@ -31,7 +31,7 @@ plugins:
   # Adding the date of last update
   - git-revision-date-localized:
       type: iso_date # Format yyyy-mm-dd
-      
+
 # Extensions
 markdown_extensions:
   - admonition
@@ -67,3 +67,5 @@ extra:
 
 extra_css:
   - assets/css/extra.css # For grid sections
+
+copyright: "D-201, 39, Maeheon-ro 8-gil, Seocho-gu, Seoul 06770 South Korea<br />Email : contact@smartmind.team<br />Phone : (+82) 070-7151-9357<br /><br />© Since 2018 SmartMind, Inc. All Rights Reserved."
