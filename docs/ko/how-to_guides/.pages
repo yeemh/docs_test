@@ -1,6 +1,7 @@
-title: 가이드
 nav:
-    - ThanoSQL Syntax: syntax_list.md
+    - algorithm_list.md
+    - syntax_list.md
+    - ThanoSQL_query
+    - ThanoSQL_ml
     - ThanoSQL_connecting
-    - thanosql_api
-    - modelling
+    - OPTIONS.md

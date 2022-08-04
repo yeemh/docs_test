@@ -1,6 +1,8 @@
-# __이미지로 이미지 검색하기__ 
+---
+title: 이미지로 이미지 검색하기
+---
 
-**[이전 문서 - 키워드로 이미지 검색하기](/tutorials/thanosql_search/image_search/select_image_query/)** <br>**[다음 문서 - 텍스트로 이미지 검색하기](/tutorials/thanosql_search/image_search/clip_image_search/)**
+# __이미지로 이미지 검색하기__ 
 
 ## 시작 전 사전정보
 
@@ -18,7 +20,7 @@
 
 이미지의 유사도를 정의하는 방법은 여러가지가 있습니다. 색상이 비슷하거나, 이미지 내의 사물이 비슷하거나, 손글씨처럼 의미가 동일할 수도 있습니다. 유사한 이미지에 대한 정확한 정의를 내리기 어렵지만 이미지가 보유하고 있는 일반적인 특징을 인공지능은 학습하고 수치화합니다.
 
-ThanoSQL에서는 이미지를 입력하고 DB에서 유사한 이미지를 검색하기 위해 [자가학습모델(Self-Supervised Learning Model)](https://en.wikipedia.org/wiki/Self-supervised_learning)을 사용합니다. 사용자가 보유하고 있는 이미지들을 ThanoSQL의 DB에 올리면 인공지능 알고리즘을 통해 비슷한 이미지는 가깝게 다른 이미지들은 멀리 배치하며 스스로 학습을 진행합니다. 정답이 없는 데이터셋에서 이미지의 일반적인 표현을 학습하고 소량의 목표값(Target)이 있는 이미지로 미세 조정하여 분류나 회귀 작업에 활용할 수 있습니다. 
+ThanoSQL에서는 이미지를 입력하고 DB에서 유사한 이미지를 검색하기 위해 [자가학습모델(Self-Supervised Learning Model)](https://en.wikipedia.org/wiki/Self-supervised_learning)을 사용합니다. 사용자가 보유하고 있는 이미지들을 ThanoSQL의 DB에 올리면 인공지능 알고리즘을 통해 비슷한 이미지는 가깝게 다른 이미지들은 멀리 배치하며 스스로 학습을 진행합니다. 정답이 없는 데이터셋에서 이미지의 일반적인 표현을 학습하고 소량의 목푯값(Target)이 있는 이미지로 미세 조정하여 분류나 회귀 작업에 활용할 수 있습니다. 
 
 또한, ThanoSQL은 인공지능 알고리즘을 이용해서 데이터 세트를 수치화 합니다. 이렇게 수치화 된 데이터는 DB의 컬럼 내에 저장되고, 이미지 간 유사도(거리) 계산을 통해 비슷한 이미지를 검색하는데 사용됩니다.
 
@@ -36,7 +38,7 @@ ThanoSQL을 사용하여 손글씨 데이터를 입력하고 DB 내에서 입력
 <img src = "/img/thanosql_search/simclr_search/simclr_img7.png" title = "MNIST 데이터">
 
 ## __0. 데이터 세트 준비__
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/quick_start/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.
 ```sql
 %load_ext thanosql
@@ -57,9 +59,10 @@ OPTIONS(overwrite=True)
 FROM "tutorial_data/mnist_data/mnist_test.csv"
 ```
 
-!!! note "__OPTIONS 설명__"
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
+!!! note "__쿼리 세부 정보__"
+    - "__COPY__" 쿼리 구문을 사용하여 DB에 저장 할 데이터 세트명을 지정합니다. 
+    - "__OPTIONS__" 쿼리 구문을 통해 __COPY__ 에 사용할 옵션을 지정합니다.
+        - "overwrite" : 동일 이름의 데이터 세트가 DB상에 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) 
     
 
 ## __1. 데이터 세트 확인__
@@ -80,7 +83,7 @@ LIMIT 5
 !!! note "데이터 테이블 이해하기" 
     <mark style="background-color:#FFEC92">mnist_train</mark> 테이블은 아래와 같은 정보를 담고 있습니다. "6782.jpg" 이미지 파일은 숫자 5를 쓴 손글씨 이미지입니다.
 
-    - <mark style="background-color:#D7D0FF">img_path</mark>: 이미지 경로
+    - <mark style="background-color:#D7D0FF">image_path</mark>: 이미지 경로
     - <mark style="background-color:#D7D0FF">filename</mark>: 파일 이름
     - <mark style="background-color:#D7D0FF">label</mark> : 이미지 라벨
 
@@ -102,19 +105,17 @@ SELECT *
 FROM mnist_train
 ```
 
-!!! note "쿼리 세부정보" 
+!!! note "쿼리 세부 정보" 
     - "__BUILD MODEL__" 쿼리 구문을 사용하여 <mark style="background-color:#E9D7FD">mnist_model</mark> 이라는 모델을 만들고 학습시킵니다.
     - "__USING__" 쿼리 구문을 통해 베이스 모델로 <mark style="background-color:#E9D7FD">SimCLR</mark> 모델을 사용할 것을 명시합니다.
     - "__OPTIONS__" 쿼리 구문을 통해 모델 생성에 사용할 옵션을 지정합니다.  
-        -  "image_col" : 데이터 테이블에서 이미지의 경로를 담은 컬럼 (Default : "image_path")
+        -  "image_col" : 데이터 테이블에서 이미지의 경로를 담은 컬럼 (Default : "<mark style="background-color:#D7D0FF ">image_path</mark>")
         -  "max_epochs" : 이미지 수치화 모델을 생성하기 위한 데이터 세트 학습 횟수
-
-!!! note ""
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
+        - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 모델은 새로운 모델로 변경됨 (True|False, DEFAULT : False) 
 
 
-아래 쿼리 구문을 사용하여 이미지 수치화 결과를 확인합니다. `my_image_search_model`을 "__CONVERT USING__" 쿼리 구문을 사용하여 `mnist_test` 이미지들을 임베딩합니다. 
+
+다음 "__CONVERT USING__ " 쿼리 구문을 실행하여 `mnist_test` 이미지들을 수치화 합니다. 수치화 된 결과는 `mnist_test` 테이블에 <mark style="background-color:#D7D0FF ">my_image_search_model_simclr</mark>이라는 새로운 이름의 컬럼에 저장됩니다.
 
 ```sql
 %%thanosql
@@ -136,9 +137,6 @@ FROM mnist_test
     - "__OPTIONS__" 쿼리 구문을 통해 이미지 수치화 시 필요한 변수들을 정의합니다. 
         - "table_name" : ThanoSQL DB 내에 저장될 테이블 이름을 정의합니다. 
         - "image_col" : 데이터 테이블에서 이미지의 경로를 담은 컬럼(default: "image_path")
-
-!!! note "" 
-    `mnist_test` 테이블에 `my_image_search_model_simclr`이라는 컬럼을 새롭게 생성하고 수치화 결과를 저장합니다.
 
 
 ## __3. 이미지 수치화 모델을 사용해서 유사 이미지 검색하기__

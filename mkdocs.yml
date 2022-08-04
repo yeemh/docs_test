@@ -27,6 +27,26 @@ plugins:
       languages:
         ko: 한국어
         en: English
+      nav_translations: # manage directory names
+        ko:
+          Getting started: 시작하기
+          Tutorials: 사용해보기
+          Image search: Query 무작정 따라하기
+          Thanosql ml: ML 무작정 따라하기
+          Classification: 분류 모델 만들기
+          Regression: 회귀 모델 만들기
+          Audio recognition: 음성 인식 모델 만들기
+          How to guides: 안내 가이드
+          ThanoSQL query: ThanoSQL Query 다루기
+          ThanoSQL ml: ThanoSQL ML 다루기
+          ThanoSQL connecting: ThanoSQL REST API 다루기
+          Thanosql api: REST API 사용하기
+          FAQ: 자주 묻는 질문
+        en:
+          Getting started: Getting Started
+          Tutorials: Tutorials
+          How to guides: Guides
+          FAQ: FAQ
   - awesome-pages # Omits nav and control over page
   # Adding the date of last update
   - git-revision-date-localized:

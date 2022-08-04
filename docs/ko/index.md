@@ -1,6 +1,8 @@
-# __ThanoSQL__
+---
+title: Intro
+---
 
-**[다음 문서 - ThanoSQL 웹 서비스 사용법](/quick_start/how_to_use_ThanoSQL/)**
+# __ThanoSQL__
 
 ## 시작 전 사전 정보
 

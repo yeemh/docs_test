@@ -1,6 +1,0 @@
-title: REST API 사용하기
-nav:
-    - 인증 가능한 토큰 만들기: rest_api_token.md
-    - ThanoSQL 구문 활용하기: rest_api_thanosql_query.md
-    - ThanoSQL DB 업로드하기: rest_api_thanosql_insert.md
-    - ThanoSQL 서치 사용하기: rest_api_thanosql_search.md

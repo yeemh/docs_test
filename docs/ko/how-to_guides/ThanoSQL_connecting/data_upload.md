@@ -1,7 +1,8 @@
-# __데이터 불러오기__ 
+---
+title: 데이터 불러오기
+---
 
-**[이전 문서 - ThanoSQL Syntax](/how-to_guides/syntax_list/)**  
-**[다음 문서 - 인증 가능한 토큰 만들기](/how-to_guides/thanosql_api/rest_api_token/)**
+# __데이터 불러오기__ 
 
 ## 시작 전 사전 정보
 

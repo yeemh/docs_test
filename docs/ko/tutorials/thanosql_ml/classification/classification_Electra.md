@@ -1,7 +1,8 @@
-# __텍스트 분류 모델 만들기__
+---
+title: 텍스트 분류 모델 만들기
+---
 
-**[이전 문서 - 이미지 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_convNext/)** <br>
-**[다음 문서 - Auto-ML을 사용하여 예측 모델 만들기](/tutorials/thanosql_ml/regression/automl_regression/)**
+# __텍스트 분류 모델 만들기__
 
 ## 시작 전 사전 정보
 
@@ -15,14 +16,14 @@
 ## 튜토리얼 소개
 
 !!! note "분류 작업 이해하기"
-    분류 작업은 목표값(Target)이 속한 범주(Category 또는 Class)를 예측하기 위해 사용하는 [머신러닝(기계학습/Machine Learning)](https://ko.wikipedia.org/wiki/%EA%B8%B0%EA%B3%84_%ED%95%99%EC%8A%B5)의 한 형태입니다. 예를 들어, 남성 또는 여성을 분류하는 이진 분류와 동물의 종(개, 고양이, 토끼 등)을 예측하는 다중 분류 모두 분류 작업에 포함됩니다.
+    분류 작업은 목푯값(Target)이 속한 범주(Category 또는 Class)를 예측하기 위해 사용하는 [머신러닝(기계학습/Machine Learning)](https://ko.wikipedia.org/wiki/%EA%B8%B0%EA%B3%84_%ED%95%99%EC%8A%B5)의 한 형태입니다. 예를 들어, 남성 또는 여성을 분류하는 이진 분류와 동물의 종(개, 고양이, 토끼 등)을 예측하는 다중 분류 모두 분류 작업에 포함됩니다.
 
 [자연어 처리(NLP, Natural Language Processing)](https://ko.wikipedia.org/wiki/%EC%9E%90%EC%97%B0%EC%96%B4_%EC%B2%98%EB%A6%AC)는 인공지능의 한 분야로서 머신러닝을 사용하여 텍스트 기반 데이터를 처리하고 해석합니다.
 
 !!! tip "[자연어 처리(NLP, Natural Language Processing)](https://ko.wikipedia.org/wiki/%EC%9E%90%EC%97%B0%EC%96%B4_%EC%B2%98%EB%A6%AC)란"
     NLP는 작업의 목적에 따라 자연어 이해(NLU, Natural Language Understanding)와 자연어 생성(NLG, Natural Language Generation)으로 분류할 수 있습니다. 자연어 이해는 사람이 이해하는 자연어를 컴퓨터가 이해할 수 있는 값으로 바꾸는 처리를 의미합니다. 반면에 자연어 생성은 더 나아가 컴퓨터가 이해할 수 있는 값을 사람이 이해하도록 자연어로 바꾸는 과정을 의미합니다.
 
- 최근 [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)), [GPT-3](https://en.wikipedia.org/wiki/GPT-3) 등 사전 훈련 기술의 발전으로 많은 양의 목표값(Target)이 없는 텍스트를 활용하여 감정 분석이나 질의 응답과 같은 특정 NLP 작업에 대해 미세 조정하기 전에 언어 이해의 일반적인 모델 구축을 가능하게 합니다.
+ 최근 [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)), [GPT-3](https://en.wikipedia.org/wiki/GPT-3) 등 사전 훈련 기술의 발전으로 많은 양의 목푯값(Target)이 없는 텍스트를 활용하여 감정 분석이나 질의 응답과 같은 특정 NLP 작업에 대해 미세 조정하기 전에 언어 이해의 일반적인 모델 구축을 가능하게 합니다.
 
 !!! summary ""
     즉, 대량의 데이터 세트에 대한 [데이터 라벨링](https://en.wikipedia.org/wiki/Labeled_data) 작업을 최소화 함으로써 더욱 많은 데이터를 효율적으로 활용할 수 있습니다.
@@ -36,17 +37,17 @@ __아래는 ThanoSQL 텍스트 분류 모델의 활용 및 예시입니다.__
 - ThanoSQL 텍스트 분류 모델은 뉴스나 게시물 공유 서비스에서 게시 콘텐츠의 그룹을 분류할 수 있게 합니다. 게시 콘텐츠의 댓글에 텍스트 분류 모델을 적용함으로써 감정 분석을 가능하게 합니다. 이 작업은 갑자기 이슈가 되거나 욕설이나 비방에 의해 발생할 수 있는 문제를 효율적으로 관리를 가능하게 합니다.
 
 !!! note "본 튜토리얼에서는"
-    :point_right: 대표적인 머신러닝 경진대회 플랫폼인 [캐글](https://www.kaggle.com/)의  <mark style="background-color:#FFD79C">IMDB Movie Reviews</mark> 데이터 세트를 사용하여 영화 리뷰의 감정을 분류하는 모델을 만듭니다. 이 데이터 세트는 50,000 개의 영화 리뷰 텍스트와 긍정 또는 부정 감정에 대한 목표값(Target)으로 구성되어 있습니다. 영화 평점을 기준으로 5보다 작은 값을 부정, 7보다 큰 값을 긍정으로 표현하였으며 각 개별 영화는 30 개 이상의 리뷰 결과를 갖지 않습니다.
+    :point_right: 대표적인 머신러닝 경진대회 플랫폼인 [캐글](https://www.kaggle.com/)의  <mark style="background-color:#FFD79C">IMDB Movie Reviews</mark> 데이터 세트를 사용하여 영화 리뷰의 감정을 분류하는 모델을 만듭니다. 이 데이터 세트는 50,000 개의 영화 리뷰 텍스트와 긍정 또는 부정 감정에 대한 목푯값(Target)으로 구성되어 있습니다. 영화 평점을 기준으로 5보다 작은 값을 부정, 7보다 큰 값을 긍정으로 표현하였으며 각 개별 영화는 30 개 이상의 리뷰 결과를 갖지 않습니다.
 
 !!! warning "튜토리얼 주의 사항"
-    - 텍스트 분류 모델은 하나의 텍스트에서 하나의 목표값(Target, 범주)를 예측하는 용도로 사용할 수 있습니다.
-    - 텍스트를 나타내는 컬럼과, 텍스트의 목표값을 나타내는 컬럼이 존재해야 합니다.
+    - 텍스트 분류 모델은 하나의 텍스트에서 하나의 목푯값(Target, 범주)를 예측하는 용도로 사용할 수 있습니다.
+    - 텍스트를 나타내는 컬럼과, 텍스트의 목푯값을 나타내는 컬럼이 존재해야 합니다.
     - 해당 텍스트 분류 모델의 베이스 모델(`ELECTRA`)은 GPU를 사용합니다. 사용한 모델의 크기와 배치 사이즈에 따라 GPU 메모리가 부족할 수 있습니다. 이 경우, 더 작은 모델을 사용하시거나 배치 사이즈를 줄여보십시오.
 
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/quick_start/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.   
 
 ```sql
@@ -68,9 +69,10 @@ OPTIONS(overwrite = True)
 FROM "tutorial_data/movie_review_data/movie_review_test.csv"
 ```
 
-!!! note "__OPTIONS__"
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
+!!! note "__쿼리 세부 정보__"
+    - "__COPY__" 쿼리 구문을 사용하여 DB에 저장 할 데이터 세트명을 지정합니다. 
+    - "__OPTIONS__" 쿼리 구문을 통해 __COPY__ 에 사용할 옵션을 지정합니다.
+        - "overwrite" : 동일 이름의 데이터 세트가 DB상에 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) 
 
 
 
@@ -91,7 +93,7 @@ LIMIT 5
 
 !!! note "__데이터 이해하기__"
     - <mark style="background-color:#D7D0FF ">review</mark> : 영화 리뷰 텍스트
-    - <mark style="background-color:#D7D0FF ">sentiment</mark> : 해당 리뷰가 긍정적인지(positive), 부정적인지(negative)를 나타내는 목표값(Target)
+    - <mark style="background-color:#D7D0FF ">sentiment</mark> : 해당 리뷰가 긍정적인지(positive), 부정적인지(negative)를 나타내는 목푯값(Target)
 
 
 ## __2. 사전 학습된 모델을 사용하여 영화 리뷰 감정 분류 결과 예측__
@@ -139,7 +141,7 @@ FROM movie_review_train
 !!! note "쿼리 세부 정보"
     - "__BUILD MODEL__" 쿼리 구문을 사용하여 <mark style="background-color:#E9D7FD ">my_movie_review_classifier</mark>라는 모델을 만들고 학습시킵니다. 
     - "__USING__" 쿼리 구문을 통해 베이스 모델로 `ElectraEn`을 사용할 것을 명시합니다. 
-    - "__OPTIONS__" 쿼리 구문을 통해 모델 생성에 사용할 옵션을 지정합니다. "text_col"은 학습에 사용할 텍스트를 담은 컬럼의 이름이며, "label_col"은 목표값의 정보를 담은 컬럼의 이름입니다. "epochs"를 통해 몇 번의 학습을 반복할 지를 지정합니다. "batch_size"는 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다.
+    - "__OPTIONS__" 쿼리 구문을 통해 모델 생성에 사용할 옵션을 지정합니다. "text_col"은 학습에 사용할 텍스트를 담은 컬럼의 이름이며, "label_col"은 목푯값의 정보를 담은 컬럼의 이름입니다. "epochs"를 통해 몇 번의 학습을 반복할 지를 지정합니다. "batch_size"는 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다.
 
 !!! tip ""
     여기서는 빠르게 학습하기 위해 "epochs"를 1로 지정했습니다. 일반적으로 숫자가 클수록 많은 계산 시간이 소요되지만 학습이 진행됨에 따라 예측 성능이 올라갑니다.
@@ -150,7 +152,7 @@ FROM movie_review_train
 
 ## __4. 생성된 모델을 사용하여 영화 리뷰 감정 분류 결과 예측__
 
-이전 단계에서 만든 텍스트 분류 예측 모델을 사용해서 특정 리뷰(학습에 이용되지 않은 데이터 테이블, <mark style="background-color:#FFEC92 ">movie_review_test</mark>)의 목표값을 예측해 봅니다.
+이전 단계에서 만든 텍스트 분류 예측 모델을 사용해서 특정 리뷰(학습에 이용되지 않은 데이터 테이블, <mark style="background-color:#FFEC92 ">movie_review_test</mark>)의 목푯값을 예측해 봅니다.
 
 ```sql
 %%thanosql

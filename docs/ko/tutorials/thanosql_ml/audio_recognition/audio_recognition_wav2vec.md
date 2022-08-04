@@ -1,7 +1,8 @@
-# __오디오 파일을 받아쓰는 음성 인식 모델 만들기__
+---
+title: 오디오 파일을 받아쓰는 음성 인식 모델 만들기
+---
 
-**[이전 문서 - Auto-ML을 사용하여 예측 모델 만들기](/tutorials/thanosql_ml/regression/automl_regression/)** <br>
-**[다음 문서 - ThanoSQL Syntax](/how-to_guides/syntax_list/)**
+# __오디오 파일을 받아쓰는 음성 인식 모델 만들기__
 
 ## 시작 전 사전 정보
 
@@ -34,12 +35,12 @@ __아래는 ThanoSQL 음성 인식 모델의 활용 및 예시입니다.__
 
 !!! warning "튜토리얼 주의 사항"
     - ThanoSQL에서 현재 지원하는 오디오 파일의 형식은 '.wav', '.flac' 입니다.
-    - 오디오 파일 경로를 나타내는 컬럼(Column)과 목표값(Target)에 해당하는 텍스트를 나타내는 컬럼이 테이블에 존재해야 합니다.
+    - 오디오 파일 경로를 나타내는 컬럼(Column)과 목푯값(Target)에 해당하는 텍스트를 나타내는 컬럼이 테이블에 존재해야 합니다.
     - 해당 음성 인식 모델의 베이스 모델(`Wav2Vec2En`)은 GPU를 사용합니다. 사용한 모델의 크기와 배치 사이즈에 따라 GPU 메모리가 부족할 수 있습니다. 이 경우, 더 작은 모델을 사용하시거나 배치 사이즈를 줄여보십시오.
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/quick_start/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.
 
 ```sql
@@ -59,9 +60,10 @@ OPTIONS(overwrite = True)
 FROM "tutorial_data/librispeech_data/librispeech_test.csv"
 ```
 
-!!! note "__OPTIONS__"
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
+!!! note "__쿼리 세부 정보__"
+    - "__COPY__" 쿼리 구문을 사용하여 DB에 저장 할 데이터 세트명을 지정합니다. 
+    - "__OPTIONS__" 쿼리 구문을 통해 __COPY__ 에 사용할 옵션을 지정합니다.
+        - "overwrite" : 동일 이름의 데이터 세트가 DB상에 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) 
 
 
 ## __1. 데이터 세트 확인__
@@ -82,7 +84,7 @@ LIMIT 5
 
 !!! note "데이터 이해하기"
     - <mark style="background-color:#D7D0FF ">audio_path</mark>: 음성 파일의 위치 경로
-    - <mark style="background-color:#D7D0FF ">text</mark>: 해당 음성의 목표값(Target, 스크립트)
+    - <mark style="background-color:#D7D0FF ">text</mark>: 해당 음성의 목푯값(Target, 스크립트)
 
 
 ```sql
@@ -100,7 +102,8 @@ LIMIT 3
 
 ## __2. 사전 학습된 모델을 사용하여 음성 인식 결과 예측__
 
-먼저 저희가 미리 준비해둔 모델로 바로 결과를 예측해보겠습니다. 다음 쿼리문을 실행하면, 사전 학습된 음성인식 모델인 <mark style="background-color:#E9D7FD ">tutorial_image_classification</mark>모델을 사용하여 결과를 예측해볼 수 있습니다.
+다음 쿼리 구문을 실행하여 사전 학습된 음성인식 모델인 <mark style="background-color:#E9D7FD ">tutorial_image_classification</mark>을 사용하여 
+결과를 예측합니다. 
 
 ```sql
 %%thanosql
@@ -148,17 +151,14 @@ FROM librispeech_train
         - "text_col" :  오디오의 스크립트 정보를 담은 컬럼의 이름
         - "epochs" : 모든 학습 데이터 세트를 학습하는 횟수
         - "batch_size" : 한 번의 학습에서 읽는 데이터 세트 묶음의 크기
+        - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 모델은 새로운 모델로 변경됨 (True|False, DEFAULT : False)
 
 !!! tip ""
     여기서는 빠르게 학습하기 위해 "epochs"를 1로 지정했습니다. 일반적으로 숫자가 클수록 많은 계산 시간이 소요되지만 학습이 진행됨에 따라 예측 성능이 올라갑니다.
 
-!!! note ""
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
-
 ## __4. 만든 모델을 사용하여 음성 인식 결과 예측__
 
-이전 단계에서 만든 음성 인식 모델을 사용해서 특정 음성(학습에 이용되지 않은 데이터 테이블,  <mark style="background-color:#FFEC92 ">librispeech_test</mark>)의 목표값(스크립트)를 예측해 봅니다. 아래 쿼리를 수행하고 나면, 예측 결과는 <mark style="background-color:#D7D0FF">predicted</mark> 컬럼에 저장되어 반환됩니다.
+이전 단계에서 만든 음성 인식 모델을 사용해서 특정 음성(학습에 이용되지 않은 데이터 테이블,  <mark style="background-color:#FFEC92 ">librispeech_test</mark>)의 목푯값(스크립트)를 예측해 봅니다. 아래 쿼리를 수행하고 나면, 예측 결과는 <mark style="background-color:#D7D0FF">predicted</mark> 컬럼에 저장되어 반환됩니다.
 
 ```sql
 %%thanosql
