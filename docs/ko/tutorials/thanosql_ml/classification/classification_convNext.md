@@ -43,7 +43,7 @@ __아래는 ThanoSQL 이미지 분류 모델의 활용 및 예시입니다.__
 !!! note "본 튜토리얼에서는"
     :point_right: 대표적인 AI 오픈데이터 공유 플랫폼인 [AI-Hub](https://aihub.or.kr/)의 `상품 이미지` 데이터 세트를 사용하여 10,000종 이상의 상품을 분류하는 모델을 구축합니다. 구축된 모델은 스마트물류창고, 무인 스토어등에서 탐지, 식별 솔루션으로 활용이 가능합니다. 데이터 세트는 일반적으로 이미지 분류 기술의 학습에 활용하는 이미지 및 라벨(정답)쌍의 약 10,000 종 이상의 상품 데이터 세트로 구성되어 있고 총 1,440,000 장의 이미지가 포함되어 있습니다. 본 튜토리얼에서는 ThanoSQL의 사용방법을 익히고 빠른 결과 확인을 위해, 훈련용 데이터 1,800장과 테스트 데이터 200장만을 사용합니다. <br>
 
-![상품 이미지 예시](/img/thanosql_ml/classification/classification_convNext/classification_convNext_data_intro.png)
+[![상품 이미지 예시](/img/thanosql_ml/classification/classification_convnext/classification_convnext_data_intro.png)](/img/thanosql_ml/classification/classification_convnext/classification_convnext_data_intro.png)
 
 
 
@@ -54,7 +54,7 @@ __아래는 ThanoSQL 이미지 분류 모델의 활용 및 예시입니다.__
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.
 
 ```sql
@@ -93,9 +93,7 @@ SELECT *
 FROM product_image_train
 LIMIT 5
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/train_data_limit_5.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/train_data_limit_5.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/train_data_limit_5.png)](/img/thanosql_ml/classification/classification_convnext/train_data_limit_5.png)
 
 !!! note "__데이터 이해하기__"
     -  <mark style="background-color:#D7D0FF ">image_path</mark>: 각 이미지의 파일의 위치 정보
@@ -115,9 +113,7 @@ SELECT image_path
 FROM product_image_train
 LIMIT 5
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/print_image_train_data.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/print_image_train_data.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/print_image_train_data.png)](/img/thanosql_ml/classification/classification_convnext/print_image_train_data.png)
 
 ## __2. 사전 학습된 모델을 사용하여 상품 이미지 분류 결과 예측__
 
@@ -130,13 +126,11 @@ AS
 SELECT *
 FROM product_image_test
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_1.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_1.png)](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_1.png)
 
 ## __3. 이미지 분류 모델 생성__
 
-이전 단계에서 확인한  <mark style="background-color:#FFEC92 ">product_image_train</mark> 데이터 세트를 사용하여 이미지 분류 모델을 만듭니다. 아래의 쿼리 구문을 실행하여 <mark style="background-color:#E9D7FD ">my_product_classifier</mark>이라는 이름의 모델을 만듭니다.
+이전 단계에서 확인한  <mark style="background-color:#FFEC92 ">product_image_train</mark> 데이터 세트를 사용하여 이미지 분류 모델을 만듭니다. 아래의 쿼리 구문을 실행하여 <mark style="background-color:#E9D7FD ">my_product_classifier</mark>이라는 이름의 모델을 만듭니다.  
 (쿼리 실행 시 예상 소요 시간: 5 min)
 
 ```sql
@@ -183,16 +177,12 @@ AS
 SELECT *
 FROM product_image_test
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_2.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_2.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_2.png)](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_2.png)
 
 !!! note "__쿼리 세부 정보__"
     - "__PREDICT USING__" 쿼리 구문을 통해 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">my_product_classifier</mark> 모델을 예측에 사용합니다.
     - "__OPTIONS__" 쿼리 구문을 통해 예측에 사용할 옵션을 지정합니다.
         - "image_col" : 예측에 사용할 이미지의 경로가 기록되어 있는 컬럼의 이름
-
-<br>
 
 ## __5. 튜토리얼을 마치며__
 
@@ -203,7 +193,7 @@ FROM product_image_test
 * [나만의 데이터 업로드하기](/how-to_guides/ThanoSQL_connecting/data_upload/)
 * [중급 이미지 분류 모델 만들기]
 * [이미지 변환과 Auto-ML을 이용한 나만의 모델 만들기]
-* [나만의 이미지 분류 모델 배포하기](/how-to_guides/thanosql_api/rest_api_thanosql_query/)
+* [나만의 이미지 분류 모델 배포하기](/how-to_guides/ThanoSQL_connecting/thanosql_api/rest_api_thanosql_query/)
 
 
 !!! tip "__나만의 서비스를 위한 모델 배포 관련 문의__"

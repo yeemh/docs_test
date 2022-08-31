@@ -44,7 +44,7 @@ __자동화된 ML을 사용하면 다음과 같은 장점이 있습니다__
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.   
 
 ```sql
@@ -83,24 +83,23 @@ SELECT *
 FROM titanic_train 
 LIMIT 5 
 ```
-<a href ="/img/thanosql_ml/classification/automl/img1.png">
-    <img src = "/img/thanosql_ml/classification/automl/img1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/automl/img1.png)](/img/thanosql_ml/classification/automl/img1.png)
 
 !!! note "__데이터 이해하기__"
-    <mark style="background-color:#FFEC92 ">__tianic_train__</mark> 데이터 세트는 다음과 같은 정보를 담고 있습니다.  
-    - <mark style="background-color:#D7D0FF ">passengerid</mark> : 탑승승객 아이디  
-    - <mark style="background-color:#D7D0FF ">survived</mark> : 탑승승객  
-    - <mark style="background-color:#D7D0FF ">pclass</mark> : 탑승승객 티켓 등급  
-    - <mark style="background-color:#D7D0FF ">name</mark> : 탑승승객 이름  
-    - <mark style="background-color:#D7D0FF ">sex</mark> : 탑승승객 성별  
-    - <mark style="background-color:#D7D0FF ">age</mark> : 탑승승객 나이  
-    - <mark style="background-color:#D7D0FF ">sibsp</mark> : 탑승한 형제 자매 또는 배우자 수   
-    - <mark style="background-color:#D7D0FF ">parch</mark> : 탑승한 부모 또는 자녀의 수  
-    - <mark style="background-color:#D7D0FF ">ticket</mark> : 티켓 번호  
-    - <mark style="background-color:#D7D0FF ">fare</mark> : 요금  
-    - <mark style="background-color:#D7D0FF ">cabin</mark> : 선실  
-    - <mark style="background-color:#D7D0FF">embarked</mark> : 승선지 또는 항구   
+    <mark style="background-color:#FFEC92 ">__tianic_train__</mark> 데이터 세트는 다음과 같은 정보를 담고 있습니다.
+
+    - <mark style="background-color:#D7D0FF">passengerid</mark> : 탑승승객 아이디
+    - <mark style="background-color:#D7D0FF">survived</mark> : 탑승승객  생존 여부
+    - <mark style="background-color:#D7D0FF">pclass</mark> : 탑승승객 티켓 등급
+    - <mark style="background-color:#D7D0FF">name</mark> : 탑승승객 이름
+    - <mark style="background-color:#D7D0FF">sex</mark> : 탑승승객 성별
+    - <mark style="background-color:#D7D0FF">age</mark> : 탑승승객 나이
+    - <mark style="background-color:#D7D0FF">sibsp</mark> : 탑승한 형제 자매 또는 배우자 수
+    - <mark style="background-color:#D7D0FF">parch</mark> : 탑승한 부모 또는 자녀의 수
+    - <mark style="background-color:#D7D0FF">ticket</mark> : 티켓 번호
+    - <mark style="background-color:#D7D0FF">fare</mark> : 요금
+    - <mark style="background-color:#D7D0FF">cabin</mark> : 선실
+    - <mark style="background-color:#D7D0FF">embarked</mark> : 승선지 또는 항구
  
 이번 튜토리얼에서는 추가적인 쿼리문을 이용한 데이터 전처리가 필요한
 <mark style="background-color:#D7D0FF">name</mark>, <mark style="background-color:#D7D0FF">ticket</mark>, <mark style="background-color:#D7D0FF">cabin</mark>컬럼을 제외하고 모델 학습을 진행하겠습니다.
@@ -112,7 +111,7 @@ LIMIT 5
 
 ```sql
 %%thanosql
-BUILD MODEL tutorial_automl_classification 
+BUILD MODEL titanic_automl_classification 
 USING AutomlClassifier 
 OPTIONS (
     target='survived', 
@@ -136,7 +135,7 @@ FROM titanic_train
         - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 모델은 새로운 모델로 변경됨 (True|False, DEFAULT : False) 
 
 !!! warning
-    Auto-ML 분류 모델 생성시 [OPTIONS](/how-to_guides/modelling/OPTIONS/#1-automlclassifier) 내에 명시된 파라미터 외 다른 파라미터 사용시 모델 생성은 될 수 있으나 설정한 값들은 모두 무시 됩니다. 
+    Auto-ML 분류 모델 생성시 [OPTIONS](/how-to_guides/OPTIONS/#1-automlclassifier) 내에 명시된 파라미터 외 다른 파라미터 사용시 모델 생성은 될 수 있으나 설정한 값들은 모두 무시 됩니다. 
     
 
 
@@ -145,7 +144,7 @@ FROM titanic_train
 
 ```sql
 %%thanosql 
-EVALUATE USING tutorial_automl_classification 
+EVALUATE USING titanic_automl_classification 
 OPTIONS (
     target = 'survived'
     )
@@ -153,14 +152,15 @@ AS
 SELECT *
 FROM titanic_train
 ```
-<a href ="/img/thanosql_ml/classification/automl/img2.png">
-    <img src = "/img/thanosql_ml/classification/automl/img2.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/automl/img2.png)](/img/thanosql_ml/classification/automl/img2.png)
 
 !!! note "__쿼리 세부 정보__"   
     - "__EVALUATE USING__" 쿼리 구문을 사용하여 구축한  <mark style="background-color:#E9D7FD ">titanic_automl_classification</mark>이라는 모델을 평가합니다. 
     - "__OPTIONS__" 쿼리 구문을 통해 모델 평가에 사용할 옵션을 지정합니다.
         - "target" : 분류 예측 모델에 목푯값이 되는 컬럼의 이름
+
+!!! warning "__평가용 데이터 세트__"
+    평가용 데이터 세트는 학습 데이터 세트의 일부를 분리하여 학습에 사용되지 않아야 하나 튜토리얼에서는 편의상 학습 데이터를 사용합니다
          
          
 ## __4. 생성된 모델을 사용하여 생존자 예측__ 
@@ -169,18 +169,16 @@ FROM titanic_train
 
 ```sql
 %%thanosql 
-PREDICT USING tutorial_automl_classification
+PREDICT USING titanic_automl_classification
 AS 
 SELECT * 
 FROM titanic_test
 ```
 
-<a href ="/img/thanosql_ml/classification/automl/img3.png">
-    <img src = "/img/thanosql_ml/classification/automl/img3.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/automl/img3.png)](/img/thanosql_ml/classification/automl/img3.png)
 
 !!! note "__쿼리 세부 정보__" 
-    "__PREDICT USING__" 쿼리 구문을 사용하여 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">tutorial_automl_classification</mark> 모델을 예측에 사용합니다. "__PREDICT__"의 경우 생성된 모델의 절차를 따르기 때문에 특별한 옵션이 필요없습니다. 
+    "__PREDICT USING__" 쿼리 구문을 사용하여 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">titanic_automl_classification</mark> 모델을 예측에 사용합니다. "__PREDICT__"의 경우 생성된 모델의 절차를 따르기 때문에 특별한 옵션이 필요없습니다. 
 
 ## __5. 튜토리얼을 마치며__ 
 
@@ -191,7 +189,7 @@ FROM titanic_test
 * [나만의 데이터 업로드하기](/how-to_guides/ThanoSQL_connecting/data_upload/)
 * [중급 이미지 분류 모델 만들기]
 * [이미지 변환과 Auto-ML을 이용한 나만의 모델 만들기]
-* [나만의 이미지 분류 모델 배포하기](/how-to_guides/thanosql_api/rest_api_thanosql_query/)
+* [나만의 이미지 분류 모델 배포하기](/how-to_guides/ThanoSQL_connecting/thanosql_api/rest_api_thanosql_query/)
 
 !!! tip "__나만의 서비스를 위한 모델 배포 관련 문의__"
     ThanoSQL을 활용해 나만의 모델을 만들거나, 나의 서비스에 적용하는데 어려움이 있다면 언제든 아래로 문의주세요😊

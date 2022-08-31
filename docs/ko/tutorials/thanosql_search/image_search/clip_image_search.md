@@ -66,7 +66,7 @@ SELECT photo_id, image_path, photo_image_url, photo_description, ai_description
 FROM unsplash_data
 LIMIT 5
 ```
-<img src = "/img/thanosql_search/clip_search/select_data.png"></img>
+[![IMAGE](/img/thanosql_search/clip_search/select_data.png)](/img/thanosql_search/clip_search/select_data.png)
 
 !!! note "데이터 이해하기"
     - `photo_id` 이미지의 고유 id 컬럼 명
@@ -83,9 +83,7 @@ SELECT image_path
 FROM unsplash_data 
 LIMIT 5
 ```
-<a href = "/img/thanosql_search/clip_search/print_dataset_image.png">
-    <img src = "/img/thanosql_search/clip_search/print_dataset_image.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/print_dataset_image.png)](/img/thanosql_search/clip_search/print_dataset_image.png)
 
 ## __2. 텍스트 검색을 위한 이미지 수치화 모델 생성하기__
 
@@ -93,7 +91,7 @@ LIMIT 5
     텍스트-이미지 검색 알고리즘은 학습에 오랜 시간이 걸리고 총 4억 개의 데이터 세트로 사전 학습된 모델을 사용하기 때문에 "__BUILD MODEL__" 쿼리 구문을 이용한 학습 과정을 본 튜토리얼에서는 생략합니다. `tutorial_search_clip` 모델은 베이스 알고리즘으로 `clipen`을 사용한 사전학습 된 모델을 가져와서 사용하게 됩니다. "__CONVERT USING__" 쿼리 구문을 실행하게 되면 "모델명(`tutorial_search_clip`)_베이스 알고리즘명(`clipen`)"으로 이미지가 수치화 된 컬럼이 자동으로 생성이 되며, "__SEARCH IMAGE__" 쿼리 구문을 실행하게 되면 "모델명(`tutorial_search_clip`)_베이스 알고리즘 명(`clipen`)_similarity수(1)"로 이미지 유사도 컬럼이 자동으로 생성 됩니다. 여기수 "수"는 검색에 사용한 텍스트의 갯수를 의미합니다. 2개 이상의 텍스트로 검색이 이루어 질 경우 순서에 따라 컬럼의 수가 순차적으로 증가되어 생성 됩니다. 자세한 사항은 아래 내용을 참고하세요.
 (쿼리 실행 시 예상 소요 시간: 3 min)  
 
-다음 "__CONVERT USING__" 쿼리 구문을 실행하여 `unsplah_data` 이미지들을 수치화 합니다. 수치화된 결과값은 새로 생긴 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen</mark> 컬럼에 저장됩니다. (결과 컬럼명은 {model_name}_{base_model_name}으로 추가됩니다) 
+다음 "__CONVERT USING__" 쿼리 구문을 실행하여 `unsplash_data` 이미지들을 수치화 합니다. 수치화된 결과값은 새로 생긴 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen</mark> 컬럼에 저장됩니다. (결과 컬럼명은 {model_name}_{base_model_name}으로 추가됩니다) 
 
 ```sql
 %%thanosql
@@ -115,7 +113,7 @@ FROM unsplash_data
         - "image_col" : 이미지 경로를 담고 있는 컬럼 명
         - "batch_size" : 한번의 학습에서 읽는 데이터 세트 묶음의 크기. 논문에 따르면 클 수록 학습 성능이 증가하지만 메모리의 크기를 고려하여 128을 사용합니다. (DEFAULT : 16)  
            
-<img src = "/img/thanosql_search/clip_search/select_data_with_embedding.png"></img>
+[![IMAGE](/img/thanosql_search/clip_search/select_data_with_embedding.png)](/img/thanosql_search/clip_search/select_data_with_embedding.png)
 
 <br>
 
@@ -135,9 +133,7 @@ AS
 SELECT * 
 FROM unsplash_data
 ```
-<a href = "/img/thanosql_search/clip_search/search_result_raw.png">
-    <img src = "/img/thanosql_search/clip_search/search_result_raw.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/search_result_raw.png)](/img/thanosql_search/clip_search/search_result_raw.png)
 
 !!! note "쿼리 세부 정보"
     - "__SEARCH IMAGE__" 쿼리 구문을 사용하여 이미지를 찾을 것임을 명시합니다. "text" 변수를 이용해서 찾고자 하는 이미지의 텍스트 내용을 입력합니다. 
@@ -158,9 +154,7 @@ FROM (
 ORDER BY tutorial_search_clip_clipen_similarity1 DESC 
 LIMIT 5
 ```
-<a href = "/img/thanosql_search/clip_search/search_result_sorted.png">
-    <img src = "/img/thanosql_search/clip_search/search_result_sorted.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/search_result_sorted.png)](/img/thanosql_search/clip_search/search_result_sorted.png)
 
 !!! note "쿼리 세부 정보"    
     - "__SEARCH IMAGE__" 쿼리 구문은 입력한 텍스트와 이미지 사이의 유사도를 계산하여 반환합니다.
@@ -187,9 +181,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_black_cat.png">
-    <img src = "/img/thanosql_search/clip_search/result_black_cat.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_black_cat.png)](/img/thanosql_search/clip_search/result_black_cat.png)
 
 
 !!! note "쿼리 세부 정보"
@@ -215,9 +207,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_dog_on_chair.png">
-    <img src = "/img/thanosql_search/clip_search/result_dog_on_chair.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_dog_on_chair.png)](/img/thanosql_search/clip_search/result_dog_on_chair.png)
 
 ```sql
 %%thanosql
@@ -236,9 +226,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_gloomy.png">
-    <img src = "/img/thanosql_search/clip_search/result_gloomy.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_gloomy.png)](/img/thanosql_search/clip_search/result_gloomy.png)
 
 
 ```sql
@@ -258,9 +246,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_happy.png">
-    <img src = "/img/thanosql_search/clip_search/result_happy.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_happy.png)](/img/thanosql_search/clip_search/result_happy.png)
 
 ## __4. 튜토리얼을 마치며__
 

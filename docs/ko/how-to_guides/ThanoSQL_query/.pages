@@ -1,5 +1,7 @@
 nav:
     - LIST_SYNTAX.md
+    - GET_SYNTAX.md
+    - UPLOAD_SYNTAX.md 
     - CREATE_TABLE_SYNTAX.md
     - CONVERT_USING_SYNTAX.md
     - SEARCH_SYNTAX.md

@@ -47,7 +47,7 @@ __아래는 ThanoSQL 텍스트 분류 모델의 활용 및 예시입니다.__
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.   
 
 ```sql
@@ -87,9 +87,7 @@ SELECT *
 FROM movie_review_train
 LIMIT 5
 ```
-<a href = "/img/thanosql_ml/classification/classification_Electra/train_data.png">
-    <img src = "/img/thanosql_ml/classification/classification_Electra/train_data.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_electra/train_data.png)](/img/thanosql_ml/classification/classification_electra/train_data.png)
 
 !!! note "__데이터 이해하기__"
     - <mark style="background-color:#D7D0FF ">review</mark> : 영화 리뷰 텍스트
@@ -112,9 +110,7 @@ SELECT *
 FROM movie_review_test
 ```
 
-<a href = "/img/thanosql_ml/classification/classification_Electra/predict_on_test_data_1.png">
-    <img src = "/img/thanosql_ml/classification/classification_Electra/predict_on_test_data_1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_electra/predict_on_test_data_1.png)](/img/thanosql_ml/classification/classification_electra/predict_on_test_data_1.png)
 
 
 ## __3. 텍스트 분류 모델 만들기__
@@ -165,15 +161,12 @@ SELECT *
 FROM movie_review_test
 ```
 
-<a href = "/img/thanosql_ml/classification/classification_Electra/predict_on_test_data_2.png">
-    <img src = "/img/thanosql_ml/classification/classification_Electra/predict_on_test_data_2.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_electra/predict_on_test_data_2.png)](/img/thanosql_ml/classification/classification_electra/predict_on_test_data_2.png)
 
 !!! note "쿼리 세부 정보"
     "__PREDICT USING__" 쿼리 구문을 통해 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">my_movie_review_classifier</mark> 모델을 예측에 사용합니다.
     "__OPTIONS__"를 통해 예측에 사용할 옵션을 지정합니다. <mark style="background-color:#D7D0FF">review</mark>는 예측에 사용할 텍스트를 담은 컬럼의 이름입니다.
     예측 결과는 <mark style="background-color:#D7D0FF">predicted</mark> 컬럼에 저장되어 반환됩니다.
-
 
 ## __5. 튜토리얼을 마치며__
 
@@ -184,7 +177,7 @@ FROM movie_review_test
 * [나만의 데이터 업로드하기](/how-to_guides/ThanoSQL_connecting/data_upload/)
 * [중급 텍스트 분류 모델 만들기]
 * [텍스트 변환과 Auto-ML을 이용한 나만의 모델 만들기]
-* [나만의 텍스트 분류 모델 배포하기](/how-to_guides/thanosql_api/rest_api_thanosql_query/)
+* [나만의 텍스트 분류 모델 배포하기](/how-to_guides/ThanoSQL_connecting/thanosql_api/rest_api_thanosql_query/)
 
 !!! tip "__나만의 서비스를 위한 모델 배포 관련 문의__"
     ThanoSQL을 활용해 나만의 모델을 만들거나, 나의 서비스에 적용하는데 어려움이 있다면 언제든 아래로 문의주세요😊

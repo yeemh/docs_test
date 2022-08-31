@@ -25,7 +25,7 @@ AS
 ```
 
 !!! NOTE
-    "__OPTIONS__"에서 사용하는 옵션값은 사용할 인공지능 모델에 따라 다르게 적용됩니다. 각 인공지능 모델에 대한 "__OPTIONS__"는 [다음 문서](/how-to_guides/modelling/OPTIONS/)에서 확인 가능합니다.
+    "__OPTIONS__"에서 사용하는 옵션값은 사용할 인공지능 모델에 따라 다르게 적용됩니다. 각 인공지능 모델에 대한 "__OPTIONS__"는 [다음 문서](/how-to_guides/OPTIONS/)에서 확인 가능합니다.
 
 ## __3. BUILD MODEL 구문 예시__
 ### __3-1. 분류 모델 생성을 위한 Auto_ML 모델 사용__

@@ -44,7 +44,7 @@ __ThanoSQL의 자동화 된 머신러닝을 사용하면 다음과 같은 장점
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.   
 
 ```sql
@@ -83,22 +83,21 @@ SELECT *
 FROM bike_sharing_train 
 LIMIT 5
 ```
-<a href = "/img/thanosql_ml/regression/img1.png">
-    <img src = "/img/thanosql_ml/regression/img1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/regression/img1.png)](/img/thanosql_ml/regression/img1.png)
 
 !!! note "__데이터 이해하기__"
-    <mark style="background-color:#FFEC92 ">__bike_sharing_train__</mark> 데이터 세트에는 2011년 1월부터 2012년 12월까지 날짜와 시간, 기온, 습도, 풍속 등의 정보를 기반으로 1시간 간격 동안의 자전거 대여 횟수에 대한 정보를 담고 있습니다.  
-    - <mark style="background-color:#D7D0FF ">datetime</mark> : 시간별 날짜  
-    - <mark style="background-color:#D7D0FF ">season</mark> : 계절(1 = 봄, 2 = 여름, 3 = 가을, 4 = 겨울)  
-    - <mark style="background-color:#D7D0FF ">holiday</mark> : 휴일(0 = 휴일이 아닌 날, 1 = 주말을 제외한 국경일 등의 휴일)  
-    - <mark style="background-color:#D7D0FF ">workingday</mark> : 작업일(0 = 주말 및 휴일, 1 = 주말 및 휴일이 아닌 주중)  
-    - <mark style="background-color:#D7D0FF ">weather</mark> : 날씨  
-    - <mark style="background-color:#D7D0FF ">temp</mark> : 온도  
-    - <mark style="background-color:#D7D0FF ">atemp</mark> : 체감온도  
-    - <mark style="background-color:#D7D0FF ">humidity</mark> : 상대습도  
-    - <mark style="background-color:#D7D0FF ">windspeed</mark> : 풍속  
-    - <mark style="background-color:#D7D0FF ">count</mark> : 대여 횟수  
+    <mark style="background-color:#FFEC92 ">__bike_sharing_train__</mark> 데이터 세트에는 2011년 1월부터 2012년 12월까지 날짜와 시간, 기온, 습도, 풍속 등의 정보를 기반으로 1시간 간격 동안의 자전거 대여 횟수에 대한 정보를 담고 있습니다.
+
+    - <mark style="background-color:#D7D0FF ">datetime</mark> : 시간별 날짜
+    - <mark style="background-color:#D7D0FF ">season</mark> : 계절(1 = 봄, 2 = 여름, 3 = 가을, 4 = 겨울)
+    - <mark style="background-color:#D7D0FF ">holiday</mark> : 휴일(0 = 휴일이 아닌 날, 1 = 주말을 제외한 국경일 등의 휴일)
+    - <mark style="background-color:#D7D0FF ">workingday</mark> : 작업일(0 = 주말 및 휴일, 1 = 주말 및 휴일이 아닌 주중)
+    - <mark style="background-color:#D7D0FF ">weather</mark> : 날씨
+    - <mark style="background-color:#D7D0FF ">temp</mark> : 온도
+    - <mark style="background-color:#D7D0FF ">atemp</mark> : 체감온도
+    - <mark style="background-color:#D7D0FF ">humidity</mark> : 상대습도
+    - <mark style="background-color:#D7D0FF ">windspeed</mark> : 풍속
+    - <mark style="background-color:#D7D0FF ">count</mark> : 대여 횟수
 
 ## __2. 회귀 모델 생성__
 
@@ -131,7 +130,7 @@ FROM bike_sharing_train
         - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 모델은 새로운 모델로 변경됨 (True|False, DEFAULT : False) 
 
 !!! warning
-    Auto-ML 회귀 예측 모델 생성시 [OPTIONS](/how-to_guides/modelling/OPTIONS/#2-automlregressor) 내에 명시된 파라미터 외 다른 파라미터 사용시 모델 생성은 될 수 있으나 설정한 값들은 모두 무시 됩니다. 
+    Auto-ML 회귀 예측 모델 생성시 [OPTIONS](/how-to_guides/OPTIONS/#2-automlregressor) 내에 명시된 파라미터 외 다른 파라미터 사용시 모델 생성은 될 수 있으나 설정한 값들은 모두 무시 됩니다. 
 
 
 ## __3. 생성된 모델 평가__
@@ -149,14 +148,15 @@ SELECT *
 FROM bike_sharing_train
 ```
 
-<a href = "/img/thanosql_ml/regression/img2.png">
-    <img src = "/img/thanosql_ml/regression/img2.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/regression/img2.png)](/img/thanosql_ml/regression/img2.png)
 
 !!! note "__쿼리 세부 정보__"
     - "__EVALUATE USING__" 쿼리 구문을 사용하여 구축한 <mark style="background-color:#E9D7FD ">bike_regression</mark> 모델을 평가합니다. 
     - "__OPTIONS__" 쿼리 구문을 사용하여 평가에 사용할 옵션을 지정합니다.
         - "target" : 회귀 예측 모델의 목푯값이 담겨있는 컬럼명
+
+!!! warning "__평가용 데이터 세트__"
+    평가용 데이터 세트는 학습 데이터 세트의 일부를 분리하여 학습에 사용되지 않아야 하나 튜토리얼에서는 편의상 학습 데이터를 사용합니다
 
 ## __4. 생성된 모델을 사용하여 자전거 대여 수량 예측__
 
@@ -170,14 +170,10 @@ SELECT *
 FROM bike_sharing_test
 LIMIT 10
 ```
-<a href = "/img/thanosql_ml/regression/img3.png">
-    <img src = "/img/thanosql_ml/regression/img3.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/regression/img3.png)](/img/thanosql_ml/regression/img3.png)
 !!! note "__쿼리 세부 정보__"  
     - "__PREDICT USING__" 쿼리 구문을 사용하여 <mark style="background-color:#E9D7FD ">bike_regression</mark> 모델을 예측에 사용합니다. 
     - "__PREDICT__"의 경우 생성된 모델의 절차를 따르기 때문에 특별한 옵션값이 필요없습니다.
-
-<br>
 
 ## __5. 튜토리얼을 마치며__
 
@@ -188,7 +184,7 @@ LIMIT 10
 * [나만의 데이터 업로드하기](/how-to_guides/ThanoSQL_connecting/data_upload/)
 * [중급 이미지 분류 모델 만들기]
 * [이미지 변환과 Auto-ML을 이용한 나만의 모델 만들기]
-* [나만의 이미지 분류 모델 배포하기](/how-to_guides/thanosql_api/rest_api_thanosql_query/)
+* [나만의 이미지 분류 모델 배포하기](/how-to_guides/ThanoSQL_connecting/thanosql_api/rest_api_thanosql_query/)
 
 !!! tip "__나만의 서비스를 위한 모델 배포 관련 문의__"
     ThanoSQL을 활용해 나만의 모델을 만들거나, 나의 서비스에 적용하는데 어려움이 있다면 언제든 아래로 문의주세요😊

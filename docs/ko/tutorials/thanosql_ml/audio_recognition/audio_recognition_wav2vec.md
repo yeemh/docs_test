@@ -77,9 +77,7 @@ FROM librispeech_train
 LIMIT 5
 ```
 
-<a href = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/train_data.png">
-    <img src = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/train_data.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/train_data.png)](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/train_data.png)
 
 
 !!! note "데이터 이해하기"
@@ -96,13 +94,11 @@ FROM librispeech_train
 LIMIT 3
 ```
 
-<a href = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/print_audio.png">
-    <img src = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/print_audio.png" width = 400px></img>
-</a>
+[![IMAGE](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/print_audio.png){: style="width:400px"}](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/print_audio.png)
 
 ## __2. 사전 학습된 모델을 사용하여 음성 인식 결과 예측__
 
-다음 쿼리 구문을 실행하여 사전 학습된 음성인식 모델인 <mark style="background-color:#E9D7FD ">tutorial_image_classification</mark>을 사용하여 
+다음 쿼리 구문을 실행하여 사전 학습된 음성인식 모델인 <mark style="background-color:#E9D7FD ">tutorial_audio_recognition</mark>을 사용하여 
 결과를 예측합니다. 
 
 ```sql
@@ -119,9 +115,7 @@ SELECT *
 FROM librispeech_train
 ```
 
-<a href = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_1.png">
-    <img src = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_1.png)](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_1.png)
 
 ## __3. 음성 인식 모델 만들기__
 
@@ -170,18 +164,13 @@ AS
 SELECT *
 FROM librispeech_test
 ```
-<a href = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_2.png">
-    <img src = "/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_2.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_2.png)](/img/thanosql_ml/audio_recognition/audio_recognition_wav2vec/predict_on_test_data_2.png)
 
 
 !!! note "쿼리 세부 정보"
     - "__PREDICT USING__" 쿼리 구문을 통해 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">my_speech_recognition_model</mark> 모델을 예측에 사용합니다.
     - "__OPTIONS__" 쿼리 구문을 통해 예측에 사용할 옵션을 지정합니다.
         - "audio_col" : 예측에 사용할 오디오 경로를 담은 컬럼의 이름
-
-
-<br>
 
 ## __5. 튜토리얼을 마치며__
 
@@ -191,7 +180,7 @@ FROM librispeech_test
 
 * [나만의 데이터 업로드하기](/how-to_guides/ThanoSQL_connecting/data_upload/)
 * [중급 음성 인식 모델 만들기]
-* [나만의 음성 인식 모델 배포하기](/how-to_guides/thanosql_api/rest_api_thanosql_query/)
+* [나만의 음성 인식 모델 배포하기](/how-to_guides/ThanoSQL_connecting/thanosql_api/rest_api_thanosql_query/)
 
 
 !!! tip "__나만의 서비스를 위한 모델 배포 관련 문의__"

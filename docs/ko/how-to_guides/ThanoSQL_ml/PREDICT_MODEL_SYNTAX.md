@@ -23,7 +23,7 @@ AS
 ```
 
 ## __3. PREDICT USING 구문 예시__ 
-[텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_Electra/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_electra/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -37,8 +37,5 @@ FROM movie_review_test```
 ```
 
 !!! note "__쿼리 세부 정보__" 
-
-    "__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
-    - "text_col" : 데이터 테이블에서 분류의 대상이 될 텍스트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
-
-
+    - "__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+        - "text_col" : 데이터 테이블에서 분류의 대상이 될 텍스트를 담은 컬럼을 설정합니다. (DEFAULT : "text")

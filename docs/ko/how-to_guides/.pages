@@ -1,6 +1,5 @@
 nav:
     - algorithm_list.md
-    - syntax_list.md
     - ThanoSQL_query
     - ThanoSQL_ml
     - ThanoSQL_connecting

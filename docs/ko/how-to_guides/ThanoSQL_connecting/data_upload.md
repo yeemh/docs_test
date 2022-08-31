@@ -13,7 +13,7 @@ title: 데이터 불러오기
 사용자는 아래 두가지 방법으로 데이터를 불러올 수 있습니다. 
 
 !!! note "데이터 세트를 불러오는 방법"
-    1. 워크스페이스 환경에서 로컬 데이터 세트 업로드하기
+    1. 워크스페이스 환경에서 로컬 데이터 세트 불러오기
     2. 개인키를 사용하여 SFTP 연결하여 로컬 데이터 세트 불러오기
 
 ## __1. 워크스페이스 환경에 데이터 불러오기__
@@ -23,6 +23,9 @@ ThanoSQL 워크스페이스에 로컬 데이터 세트를 업로드하려면 다
     1. ThanoSQL 콘솔에 로그인합니다. 
     2. Upload 버튼을 클릭합니다. (Jupyter Lab 방식과 동일)
     3. 업로드할 파일을 선택합니다. 
+
+!!! warning "업로드 주의사항" 
+    많은 양의 파일을 다중 선택으로 업로드할 경우 한 번에 많은 연결 요청이 발생하다 보니 문제가 발생할 수 있습니다. 대량의 데이터를 처리할 때는 zip 파일로 업로드하여 사용하시면 조금 더 안전하게 데이터를 불러오실 수 있습니다.
 
 ## __2. 원격 시스템에 접속하여 데이터 불러오기(SFTP)__
 
@@ -92,9 +95,7 @@ sftp -i [pem 파일 절대경로] [워크스페이스 이름]@engine.thanosql.ai
 
 연결되면 아래와 같은 화면을 확인하실 수 있습니다.
 
-<a href = "/img/thanosql_syntax/connecting/img1.png">
-    <img src = "/img/thanosql_syntax/connecting/img1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_syntax/connecting/img1.png)](/img/thanosql_syntax/connecting/img1.png)
 
 ### __STEP 5. 데이터 파일 접속하기__
 

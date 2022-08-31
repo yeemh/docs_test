@@ -65,7 +65,7 @@ SELECT *
 FROM diet
 ```
 
-<img src = "/img/thanosql_search/base_search/select_img1.png"></img>
+[![IMAGE](/img/thanosql_search/base_search/select_img1.png)](/img/thanosql_search/base_search/select_img1.png)
 
 !!! note "데이터 테이블 이해하기" 
     <mark style="background-color:#FFEC92">diet</mark> 테이블은 아래와 같은 정보를 담고 있습니다.   
@@ -116,7 +116,7 @@ SELECT *
 FROM diet
 ```
 
-<img src = "/img/thanosql_search/base_search/select_img2.png"></img>
+[![IMAGE](/img/thanosql_search/base_search/select_img2.png)](/img/thanosql_search/base_search/select_img2.png)
 
 !!! note "__쿼리 세부 정보__"
     - "__PREDICT USING__" 쿼리 구문을 통해 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">diet_image_classification</mark> 모델을 예측에 사용합니다.
@@ -139,14 +139,13 @@ AND A.label LIKE '사과파이'
 LIMIT 10
 ```
 
-<img src = "/img/thanosql_search/base_search/select_img3.png"></img>
+[![IMAGE](/img/thanosql_search/base_search/select_img3.png)](/img/thanosql_search/base_search/select_img3.png)
 
 !!! note "__쿼리 세부 정보__"
     - "__SELECT * FROM (...)__" 쿼리 구문을 통해  "__PREDICT USING__"으로 시작하는 쿼리 구문의 결과를 모두 선택합니다.
     - "__WHERE__" 쿼리 구문을 통해 조건을 설정합니다. 이 조건은 "__AND__"를 통해 이어집니다.
         - "label = predicted" : <mark style="background-color:#D7D0FF ">label</mark> 컬럼과 <mark style="background-color:#D7D0FF ">predicted</mark> 컬럼의 값이 같은 데이터만 추출합니다.
         - "label = '사과파이'" : <mark style="background-color:#D7D0FF ">label</mark> 컬럼이 '사과파이'인 데이터만 추출합니다.
-
 
 ## __5. 튜토리얼을 마치며__
 

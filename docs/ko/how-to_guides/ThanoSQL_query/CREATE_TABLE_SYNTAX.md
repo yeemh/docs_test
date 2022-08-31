@@ -17,7 +17,9 @@ title: 비정형 데이터 변환하기
 ```sql
 CREATE TABLE [사용자 지정 데이터 테이블 이름]
 USING [사용할 인공지능 모델]
-OPTIONS (overwrite=True) -- default:False
+OPTIONS (
+    overwrite=True 
+) -- default:False
 FROM [사용할 데이터 세트]
 ```
 

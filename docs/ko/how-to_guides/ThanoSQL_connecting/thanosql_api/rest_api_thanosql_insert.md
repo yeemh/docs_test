@@ -17,7 +17,7 @@ REST API를 사용하여 자신의 ThanoSQL 저장 공간에 원격으로 이미
     import json
 
     api_token = "발급받은_API_TOKEN"
-    base_url="http://engine.thanosql.ai/api/v1/insert"
+    base_url="https://engine.thanosql.ai/api/v1/insert/"
     table_name = "테이블 명"
     column_name = "컬럼 명"
 
@@ -43,3 +43,6 @@ REST API를 사용하여 자신의 ThanoSQL 저장 공간에 원격으로 이미
       -H 'Content-Type: multipart/form-data' \
       -F 'file=@이미지 파일 경로;type=image/이미지 파일 타입'
     ```
+
+!!! faq "FAQ" 
+    - Jupyter 내부의 path를 조회하기 위해서는 앞에 /home/jovyan 을 붙여야 합니다.

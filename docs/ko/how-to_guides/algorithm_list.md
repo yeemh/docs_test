@@ -20,12 +20,12 @@ ThanoSQL은 PostgreSQL을 기반으로 만들어졌으며, SQL 쿼리를 사용�
 
 ## __1. ThanoSQL에서 제공하는 인공지능 알고리즘__ 
 
-ThanoSQL의 인공지능 알고리즘은 다양한 사전학습 모델을 제공합니다. 아래 튜토리얼을 통해 다양한 알고리즘을 적용하여 나만의 모델을 만들어 보세요. 사전학습 모델을 계속해서 업데이트 될 예정입니다. 모델에 대한 자세한 설명은 [다음 문서](/how-to_guides/modelling/OPTIONS/)를 확인하세요.
+ThanoSQL의 인공지능 알고리즘은 다양한 사전학습 모델을 제공합니다. 아래 튜토리얼을 통해 다양한 알고리즘을 적용하여 나만의 모델을 만들어 보세요. 사전학습 모델을 계속해서 업데이트 될 예정입니다. 모델에 대한 자세한 설명은 [다음 문서](/how-to_guides/OPTIONS/)를 확인하세요.
 
 - [분류 작업을 위한  Auto-ML(자동화된 머신러닝)](/tutorials/thanosql_ml/classification/automl_classification/) 
 - [예측 작업을 위한 Auto-ML(자동화된 머신러닝)](/tutorials/thanosql_ml/regression/automl_regression/)
-- [이미지 분류을 위한 ConvNeXt](/tutorials/thanosql_ml/classification/classification_convNext)
-- [텍스트 분류을 위한 ELECTRA](/tutorials/thanosql_ml/classification/classification_Electra/)
+- [이미지 분류을 위한 ConvNeXt](/tutorials/thanosql_ml/classification/classification_convnext)
+- [텍스트 분류을 위한 ELECTRA](/tutorials/thanosql_ml/classification/classification_electra/)
 - [음성 인식을 위한 wav2vec](/tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec/)
 - [키워드를 통한 이미지 검색을 위한 CLIP](/tutorials/thanosql_search/image_search/clip_image_search/)
 - [이미지 유사도 기반 검색을 위한 SimCLR](/tutorials/thanosql_search/image_search/simclr_image_search/) 
@@ -45,7 +45,7 @@ ThanoSQL의 인공지능 알고리즘을 적용해보기 위해 아래와 같은
 
 ## __3. ThanoSQL의 쿼리 구문__ 
 
-쿼리 구문은 표현식을 한 개 이상 검색하고 계산된 결과 테이블을 반환합니다. ThanoSQL은 아래와 같은 쿼리 구문을 제공합니다. 쿼리 구문에 대한 자세한 설명은 [다음문서](/how-to_guides/syntax_list/)를 확인하세요.
+쿼리 구문은 표현식을 한 개 이상 검색하고 계산된 결과 테이블을 반환합니다. ThanoSQL은 아래와 같은 쿼리 구문을 제공합니다.
 
 - "__BUILD MODEL__" : ThanoSQL을 이용하여 모델을 학습시킵니다. 
 - "__FIT MODEL__" : ThanoSQL 모델을 재학습시킵니다. 

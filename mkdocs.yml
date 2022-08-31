@@ -1,6 +1,6 @@
 site_name: ThanoSQL
 site_description: AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로
-site_url: https://docs2.thanosql.ai
+site_url: https://docs.thanosql.ai/
 site_author: Smartmind Team
 
 theme:
@@ -15,6 +15,7 @@ theme:
     - navigation.tabs # Make top-level sections
     - navigation.tabs.sticky # Make top-level sections always visible
     - navigation.top # Enable back to top button
+    - navigation.tracking # Enable the URL automatically updated with the active anchor as highlighted in the toc
     - search.highlight # Highlight all search result
     - search.suggest # Display the likeliest completion for the last word
 
@@ -47,10 +48,13 @@ plugins:
           Tutorials: Tutorials
           How to guides: Guides
           FAQ: FAQ
-  - awesome-pages # Omits nav and control over page
+  - awesome-pages: # Omits nav and control over page
+      strict: false # For ipynb tutorial folder
   # Adding the date of last update
   - git-revision-date-localized:
       type: iso_date # Format yyyy-mm-dd
+  - mkdocs-jupyter:
+      include_source: True # Enable download ipynb files
 
 # Extensions
 markdown_extensions:
@@ -86,6 +90,6 @@ extra:
   generator: false # Hide "Made with Material for Mkdocs"
 
 extra_css:
-  - assets/css/extra.css # For grid sections
+  - /assets/css/extra.css # For grid sections
 
 copyright: "D-201, 39, Maeheon-ro 8-gil, Seocho-gu, Seoul 06770 South Korea<br />Email : contact@smartmind.team<br />Phone : (+82) 070-7151-9357<br /><br />© Since 2018 SmartMind, Inc. All Rights Reserved."

@@ -23,9 +23,7 @@ title: 저장한 모델 확인하기
 %%thanosql
 LIST MODEL
 ```
-<a href = "/img/thanosql_syntax/query/LIST/img1.png">
-    <img src = "/img/thanosql_syntax/query/LIST/img1.png"> </img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/LIST/img1.png)](/img/thanosql_syntax/query/LIST/img1.png)
 
 "__LIST THANOSQL MODEL__" 구문은 ThanoSQL의 Pre-built 모델들의 리스트를 확인합니다.
 
@@ -33,9 +31,7 @@ LIST MODEL
 %%thanosql
 LIST THANOSQL MODEL
 ```
-<a href = "/img/thanosql_syntax/query/LIST/img2.png">
-    <img src = "/img/thanosql_syntax/query/LIST/img2.png"> </img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/LIST/img2.png)](/img/thanosql_syntax/query/LIST/img2.png)
 
 "__LIST THANOSQL TUTORIAL__" 구문은 ThanoSQL에 저장되어 있는 Tutorial들의 리스트를 확인합니다.
 
@@ -43,9 +39,7 @@ LIST THANOSQL MODEL
 %%thanosql
 LIST THANOSQL TUTORIAL
 ```
-<a href = "/img/thanosql_syntax/query/LIST/img3.png">
-    <img src = "/img/thanosql_syntax/query/LIST/img3.png"> </img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/LIST/img3.png)](/img/thanosql_syntax/query/LIST/img3.png)
 
 "__LIST THANOSQL DATASET__" 구문은 ThanoSQL의 Dataset들의 리스트를 확인합니다.
 
@@ -53,9 +47,7 @@ LIST THANOSQL TUTORIAL
 %%thanosql
 LIST THANOSQL DATASET
 ```
-<a href = "/img/thanosql_syntax/query/LIST/img4.png">
-    <img src = "/img/thanosql_syntax/query/LIST/img4.png"> </img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/LIST/img4.png)](/img/thanosql_syntax/query/LIST/img4.png)
 
 "__LIST TABLE__" 구문은 사용자가 만든 테이블들의 리스트를 확인합니다.
 
@@ -66,6 +58,4 @@ LIST THANOSQL DATASET
 %%thanosql
 LIST TABLE
 ```
-<a href = "/img/thanosql_syntax/query/LIST/img5.png">
-    <img src = "/img/thanosql_syntax/query/LIST/img5.png"> </img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/LIST/img5.png)](/img/thanosql_syntax/query/LIST/img5.png)

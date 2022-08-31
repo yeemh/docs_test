@@ -1,0 +1,5 @@
+nav:
+    - rest_api_token.md
+    - rest_api_thanosql_query.md
+    - rest_api_thanosql_insert.md
+    - rest_api_thanosql_search.md

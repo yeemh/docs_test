@@ -35,7 +35,7 @@ __아래는 ThanoSQL 유사 이미지 검색 알고리즘의 활용 및 예시 �
     
 ThanoSQL을 사용하여 손글씨 데이터를 입력하고 DB 내에서 입력 이미지와 유사한 이미지를 검색해주는 모델을 만들어 봅니다. 
 
-<img src = "/img/thanosql_search/simclr_search/simclr_img7.png" title = "MNIST 데이터">
+[![IMAGE](/img/thanosql_search/simclr_search/simclr_img7.png "MNIST 데이터")](/img/thanosql_search/simclr_search/simclr_img7.png)
 
 ## __0. 데이터 세트 준비__
 ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
@@ -77,7 +77,7 @@ FROM mnist_train
 LIMIT 5
 ```
 
-<img src = "/img/thanosql_search/simclr_search/simclr_img1.png" >
+[![IMAGE](/img/thanosql_search/simclr_search/simclr_img1.png)](/img/thanosql_search/simclr_search/simclr_img1.png)
 
 
 !!! note "데이터 테이블 이해하기" 
@@ -130,7 +130,7 @@ FROM mnist_test
 
 ```
 
-<img src = "/img/thanosql_search/simclr_search/simclr_img3.png"></img>
+[![IMAGE](/img/thanosql_search/simclr_search/simclr_img3.png)](/img/thanosql_search/simclr_search/simclr_img3.png)
 
 !!! note "쿼리 세부정보" 
     - "__CONVERT USING__" 쿼리 구문은 `my_image_search_model`을 이미지 수치화를 위한 알고리즘으로 사용합니다.   
@@ -143,7 +143,7 @@ FROM mnist_test
 
 이번 단계에서는 `my_image_search_model` 이미지 수치화 모델과 테스트 테이블을 사용하여 "923.jpg" 이미지 파일(손글씨 8)과 유사한 이미지를 검색합니다. <br>
 
-<img src ="/img/thanosql_search/simclr_search/simclr_img8.png" width = "100px"></img>
+[![IMAGE](/img/thanosql_search/simclr_search/simclr_img8.png){: style="width:100px"}](/img/thanosql_search/simclr_search/simclr_img8.png)
 
 <p style = "text-align:center">923.jpg 이미지파일</p>
 
@@ -157,7 +157,7 @@ SELECT *
 FROM mnist_test
 ```
 
-<img src ="/img/thanosql_search/simclr_search/simclr_img4.png"></img>
+[![IMAGE](/img/thanosql_search/simclr_search/simclr_img4.png)](/img/thanosql_search/simclr_search/simclr_img4.png)
 
 
 !!! note "쿼리 세부정보" 
@@ -185,11 +185,10 @@ AS (
     )
 ```
 
-<img src ="/img/thanosql_search/simclr_search/simclr_img5.png"></img>
+[![IMAGE](/img/thanosql_search/simclr_search/simclr_img5.png)](/img/thanosql_search/simclr_search/simclr_img5.png)
 
 !!! danger "참고 사항"
     이미지 유사도 검색 알고리즘의 기본 학습 옵션은 이미지의 좌우상하 반전, 색상의 변화 등에 관계없이 모두 같은 이미지로 인식하도록 학습이 진행 됩니다. 강아지의 사진은 뒤집히거나 색이 변해도 강아지로 인식되어야 하기 때문입니다. 의류 이미지 등과 같이 색의 변화가 중요하거나 숫자 처럼 상하, 좌우 반전이 중요한 경우 학습 시 옵션을 변경해 주어야 합니다. 본 튜토리얼에서는 이러한 이미지 유사도 검색의 특징을 보여주고 있습니다.
-
 
 ## __4. 튜토리얼을 마치며__
 

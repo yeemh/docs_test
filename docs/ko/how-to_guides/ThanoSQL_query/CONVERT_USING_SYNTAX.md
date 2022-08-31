@@ -26,7 +26,7 @@ AS
 ## __3. CONVERT USING 쿼리 구문 예시__ 
 
 ### __3.1 `Color_descriptor` 알고리즘을 사용한 이미지 수치화__ 
-아래 예는 [비정형 데이터 변환하기(CREATE TABLE)](/how-to_guides/modelling/CREATE_TABLE_SYNTAX/)에서 만들었던 색 특징 추출 모델을 사용하여 수치화한 결과를 ThanoSQL DB 에 저장되어 있는 "color_descriptor_table_test" 테이블에 새로운 칼럼을 추가하여 저장합니다.
+아래 예는 [비정형 데이터 변환하기(CREATE TABLE)](/how-to_guides/Thanosql_query/CREATE_TABLE_SYNTAX/)에서 만들었던 색 특징 추출 모델을 사용하여 수치화한 결과를 ThanoSQL DB 에 저장되어 있는 "color_descriptor_table_test" 테이블에 새로운 칼럼을 추가하여 저장합니다.
 
 ```sql
 %%thanosql
@@ -38,9 +38,7 @@ AS
 SELECT * 
 FROM color_descriptor_table_test
 ```
-<a href ="/img/thanosql_syntax/query/CONVERT/img1.png">
-    <img src = "/img/thanosql_syntax/query/CONVERT/img1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/CONVERT/img1.png)](/img/thanosql_syntax/query/CONVERT/img1.png)
 
 ### __3.2 `clip_en` 알고리즘을 사용한 이미지 수치화__
 아래 예는 `clip_en` 알고리즘을 사용하여 수치화한 결과를 ThanoSQL DB 상에 저장된 "mnist_dataset" 테이블에 새로운 칼럼을 추가하여 저장합니다.

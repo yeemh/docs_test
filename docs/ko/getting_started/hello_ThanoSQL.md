@@ -30,6 +30,13 @@ ex)
 %thanosql API_TOKEN=eyGVFDdfafddvczs
 ```
 
+!!! notice "ThanoSQL의 쿼리문 작성 방법"
+    ThanoSQL에서 쿼리문을 작성하는 방법에는 one-line 작성 방법과 multi-line 작성 방법이 있습니다.  
+    - one-line 문법의 경우, 쿼리를 테이블 형식으로 반환하며 변수에 테이블을 할당할 때, 주로 사용됩니다. 또한 워크스페이스 사용법 1번과 2번처럼 ThanoSQL cell magic과 Token을 할당할 때 사용합니다.  
+    - multi-line 문법의 경우, 다른 DBMS를 사용할 때와 같은 사용자 경험을 제공하며 테이블을 조회하거나 ThanoSQL 확장 문법을 실행할 때 사용합니다.
+
+
+
 ## __3. LIST 쿼리 구문으로 ThanoSQL 모델/튜토리얼 목록 확인하기__
 
 **ThanoSQL**을 사용할 모든 준비가 끝났습니다.
@@ -41,9 +48,7 @@ ex)
 LIST THANOSQL MODEL
 ```
 
-<a href = "/img/getting_started/img6.png">
-    <img src = "/img/getting_started/img6.png"></img>
-</a>
+[![IMAGE](/img/getting_started/img6.png)](/img/getting_started/img6.png)
 
 아래 ThanoSQL문을 실행시키면 [ThanoSQL 기술 문서](https://docs.thanosql.ai)에 있는 튜토리얼 목록을 확인할 수 있습니다.
 
@@ -52,9 +57,7 @@ LIST THANOSQL MODEL
 LIST THANOSQL TUTORIAL
 ```
 
-<a href = "/img/getting_started/img9.png">
-    <img src = "/img/getting_started/img9.png"></img>
-</a>
+[![IMAGE](/img/getting_started/img9.png)](/img/getting_started/img9.png)
 
 
 아래 ThanoSQL문을 실행시키면 [ThanoSQL 기술 문서](https://docs.thanosql.ai)에 있는 튜토리얼에서 사용된 데이터 테이블 리스트를 확인할 수 있습니다.
@@ -64,6 +67,4 @@ LIST THANOSQL TUTORIAL
 LIST THANOSQL DATASET
 ```
 
-<a href = "/img/getting_started/img10.png">
-    <img src = "/img/getting_started/img10.png"></img>
-</a>
+[![IMAGE](/img/getting_started/img10.png)](/img/getting_started/img10.png)

@@ -15,7 +15,7 @@ title: ThanoSQL 알고리즘 쿼리 구문
 __표기법 규칙__ 
 
 - 괄호 `()`는 ^^리터럴^^ 괄호를 나타냅니다.  
-- 중괄호 { }는 옵션 조합을 묶는 데 사용됩니다.  
+- 중괄호 {}는 옵션 조합을 묶는 데 사용됩니다.  
 - 대괄호 `[]`는 선택적 절을 나타냅니다.   
 - 대괄호 [ , ... ] 안에 있는 쉼표 다음에 오는 줄임표는 앞의 항목이 쉼표로 구분된 
 목록으로 반복될 수 있음을 의미합니다.
@@ -37,7 +37,7 @@ __표기법 규칙__
 query_statement:
     query_expr
 
-BUILD MODEL [expression] 
+BUILD MODEL (model_name_expression) 
 USING AutomlClassifier
 OPTIONS (
     expression [ , ...]
@@ -45,6 +45,9 @@ OPTIONS (
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 베이스 인공지능 모델을 model_name_expression 이름으로 저장합니다. 
 
  __OPTIONS 절__
 
@@ -64,14 +67,14 @@ OPTIONS(
 
 - "target" : 데이터 테이블에서 분류 예측 모델에 목푯값이 되는 컬럼을 설정합니다.
 - "impute_type" : 데이터 테이블에서 빈 값을 처리하는 방법을 설정합니다. (DEFAULT : "simple")
-> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.
-  "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
+> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.  
+> "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
 - "features_to_drop" : 데이터 테이블에서 학습에 이용하지 못하는 컬럼을 설정합니다.
 - "datetime_attribs" : 데이터 테이블에서 날짜에 해당하는 컬럼을 설정합니다. 
 - "outlier_method" : 데이터 테이블에서 이상치 처리하는 방법을 설정합니다. (DEFAULT : "iso")
-> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.   
-  "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
-  "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
+> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.  
+> "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다.)  
+> "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
 - "time_left_for_this_task" : 적합한 분류 예측 모델을 찾는데 소요되는 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다.(DEFAULT : 300)
 - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (DEFAULT : False)
 
@@ -104,14 +107,17 @@ FROM titanic_train
 query_statement:
     query_expr
 
-FIT MODEL [expression] 
-USING [expression]
+FIT MODEL (model_name_expression) 
+USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 인공지능 모델을 model_name_expression 이름으로 저장하고 같은 이름에 새로운 모델을 저장합니다. 
 
  __OPTIONS 절__
 
@@ -132,21 +138,21 @@ OPTIONS(
 
 - "target" : 데이터 테이블에서 분류 예측 모델에 목푯값이 되는 컬럼을 설정합니다.
 - "impute_type" : 데이터 테이블에서 빈 값을 처리하는 방법을 설정합니다. (DEFAULT : "simple")
-> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.
-  "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
+> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.  
+> "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
 - "features_to_drop" : 데이터 테이블에서 학습에 이용하지 못하는 컬럼을 설정합니다.
 - "datetime_attribs" : 데이터 테이블에서 날짜에 해당하는 컬럼을 설정합니다. 
 - "outlier_method" : 데이터 테이블에서 이상치 처리하는 방법을 설정합니다. (DEFAULT : "iso")
-> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.   
-  "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
-  "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
+> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.  
+> "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
+> "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
 - "time_left_for_this_task" : 적합한 분류 예측 모델을 찾는데 소요되는 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다.(DEFAULT : 300)
 - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (DEFAULT : False) 
 
 
  __FIT MODEL 쿼리 구문 예시__
 
-[모델 재학습하기](/how-to_guides/modelling/FIT_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
+[모델 재학습하기](/how-to_guides/ThanoSQL_ml/FIT_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
 
 ```sql
 %%thanosql
@@ -171,14 +177,16 @@ FROM titanic_train
 query_statement:
     query_expr
 
-TRANSFORM USING [expression] 
+TRANSFORM USING (model_name_expression) 
 AS 
 (query_expr)
 ``` 
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델인 model_name_expression 을 사용합니다. 
 
  __TRANSFORM USING 쿼리 구문 예시__
 
-[모델 적용을 위해 데이터 전처리하기](/how-to_guides/modelling/TRANSFORM_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
+[모델 적용을 위해 데이터 전처리하기](/how-to_guides/ThanoSQL_ml/TRANSFORM_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
 
 ```sql
 %%thanosql
@@ -196,10 +204,13 @@ FROM titanic_test
 query_statement:
     query_expr
 
-PREDICT USING [expression] 
+PREDICT USING (model_name_expression) 
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다.
 
 __PREDICT USING 쿼리 구문 예시__
 
@@ -220,13 +231,16 @@ FROM titanic_test
 query_statement:
     query_expr
 
-EVALUATE USING [expression] 
+EVALUATE USING (model_name_expression) 
 OPTIONS (
     target = expression
     )
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다. 
 
  __OPTIONS 절__
 
@@ -265,7 +279,7 @@ FROM titanic_train
 query_statement:
     query_expr
 
-BUILD MODEL [expression] 
+BUILD MODEL (model_name_expression) 
 USING AutomlRegressor
 OPTIONS (
     expression [ , ...]
@@ -273,6 +287,10 @@ OPTIONS (
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 베이스 인공지능 모델을 model_name_expression 이름으로 저장합니다. 
+
 
 __OPTIONS 절__
 
@@ -292,14 +310,14 @@ OPTIONS(
 
 - "target" : 데이터 테이블에서 회귀 예측 모델에 목푯값이 되는 컬럼을 설정합니다.
 - "impute_type" : 데이터 테이블에서 빈 값을 처리하는 방법을 설정합니다. (DEFAULT : "simple")
-> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.
-  "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
+> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.  
+> "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
 - "features_to_drop" : 데이터 테이블에서 학습에 이용하지 못하는 컬럼을 설정합니다.
 - "datetime_attribs" : 데이터 테이블에서 날짜에 해당하는 컬럼을 설정합니다. 
 - "outlier_method" : 데이터 테이블에서 이상치 처리하는 방법을 설정합니다. (DEFAULT : "iso")
-> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.   
-  "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
-  "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
+> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.  
+> "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
+> "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
 - "time_left_for_this_task" : 적합한 분류 예측 모델을 찾는데 소요되는 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다.(DEFAULT : 300)
 - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (DEFAULT : False)
 
@@ -331,14 +349,17 @@ FROM bike_sharing
 query_statement:
     query_expr
 
-FIT MODEL [expression] 
-USING [expression]
+FIT MODEL (model_name_expression) 
+USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 인공지능 모델을 model_name_expression 이름으로 저장하고 같은 이름에 새로운 모델을 저장합니다.
 
  __OPTIONS 절__
 
@@ -358,21 +379,21 @@ OPTIONS(
 
 - "target" : 데이터 테이블에서 회귀 예측 모델에 목푯값이 되는 컬럼을 설정합니다.
 - "impute_type" : 데이터 테이블에서 빈 값을 처리하는 방법을 설정합니다. (DEFAULT : "simple")
-> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.
-  "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
+> "simple" : 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.  
+> "iterative" : 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
 - "features_to_drop" : 데이터 테이블에서 학습에 이용하지 못하는 컬럼을 설정합니다.
 - "datetime_attribs" : 데이터 테이블에서 날짜에 해당하는 컬럼을 설정합니다. 
 - "outlier_method" : 데이터 테이블에서 이상치 처리하는 방법을 설정합니다. (DEFAULT : "iso")
-> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.   
-  "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
-  "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
+> "pca" : 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.  
+> "iso" : 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다)  
+> "knn" : K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.
 - "time_left_for_this_task" : 적합한 분류 예측 모델을 찾는데 소요되는 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다.(DEFAULT : 300)
 - "overwrite" : 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (DEFAULT : False)
 
 
  __FIT MODEL 쿼리 구문 예시__
 
-[모델 재학습하기](/how-to_guides/modelling/FIT_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
+[모델 재학습하기](/how-to_guides/ThanoSQL_ml/FIT_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
 
 ```sql
 %%thanosql
@@ -398,14 +419,17 @@ FROM titanic_train
 query_statement:
     query_expr
 
-TRANSFORM USING [expression] 
+TRANSFORM USING (model_name_expression) 
 AS 
 (query_expr)
 ``` 
 
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델인 model_name_expression 을 사용합니다.
+
  __TRANSFORM USING 쿼리 구문 예시__
 
-[모델 적용을 위해 데이터 전처리하기](/how-to_guides/modelling/TRANSFORM_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
+[모델 적용을 위해 데이터 전처리하기](/how-to_guides/ThanoSQL_ml/TRANSFORM_MODEL_SYNTAX/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다. 
 
 ```sql
 %%thanosql
@@ -423,10 +447,12 @@ FROM titanic_test
 query_statement:
     query_expr
 
-PREDICT USING [expression] 
+PREDICT USING (model_name_expression) 
 AS 
 (query_expr)
 ``` 
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다.
 
  __PREDICT USING 쿼리 구문 예시__
 
@@ -447,13 +473,16 @@ FROM bike_sharing_test
 query_statement:
     query_expr
 
-EVALUATE USING [expression] 
+EVALUATE USING (model_name_expression) 
 OPTIONS (
     expression
     )
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다.
 
  __OPTIONS 절__
 
@@ -493,7 +522,7 @@ FROM bike_sharing
 query_statement:
     query_expr
 
-BUILD MODEL [expression]
+BUILD MODEL (model_name_expression)
 USING { ConvNeXt_Tiny | ConvNeXt_Base | EfficientNetV2S | EfficientNetV2M }
 OPTIONS (
     expression [ , ...]
@@ -501,6 +530,9 @@ OPTIONS (
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 베이스 인공지능 모델을 model_name_expression 이름으로 저장합니다.
+
 
  __OPTIONS 절__
 
@@ -527,7 +559,7 @@ OPTIONS(
 
  __BUILD MODEL 쿼리 구문 예시__
 
-[이미지 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_convNext/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[이미지 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_convnext/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -552,14 +584,17 @@ FROM product_image_train
 query_statement:
     query_expr
 
-FIT MODEL [expression]
-USING [expression]
+FIT MODEL (model_name_expression)
+USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS
 (query_expr)
 ```
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 인공지능 모델을 model_name_expression 이름으로 저장하고 같은 이름에 새로운 모델을 저장합니다.
+
 
  __OPTIONS 절__
 
@@ -592,13 +627,16 @@ OPTIONS(
 query_statement:
     query_expr
 
-PREDICT USING [expression]
+PREDICT USING (model_name_expression)
 OPTIONS (
     expression
     )
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다.
+
 
 __OPTIONS 절__
 
@@ -617,7 +655,7 @@ OPTIONS(
 
  __PREDICT USING 쿼리 구문 예시__
 
-[이미지 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_convNext/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[이미지 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_convnext/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -630,37 +668,6 @@ SELECT *
 FROM product_image_test
 ```
 
-### __EVALUATE USING 쿼리 구문__
-
-이 "__EVALUATE USING__" 쿼리 구문을 사용하여 인공지능 모델에 대한 평가 작업을 수행할 수 있습니다. "__EVALUATE USING__" 표현식은 "__AS__" 뒤에 나오는 query_expr을 통해 정의한 데이터 세트를 평가합니다.
-
-``` sql
-query_statement:
-    query_expr
-
-EVALUATE USING [expression]
-OPTIONS (
-    expression
-    )
-AS
-(query_expr)
-```
-
- __OPTIONS 절__
-
-```sql
-OPTIONS(
-    (image_col = column_name),
-    [batch_size = VALUE]
-    )
-```
-
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
-
-- "image_col" : 데이터 테이블에서 이미지의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "image")
-- "batch_size" : 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다. (DEFAULT : 16)
-
-
 ## __4. Albert, Electra 모델__
 
 ### __BUILD MODEL 쿼리 구문__
@@ -672,7 +679,7 @@ OPTIONS(
 query_statement:
     query_expr
 
-BUILD MODEL [expression]
+BUILD MODEL (model_name_expression)
 USING {AlbertKo | AlbertEn | ElectraKo | ElectraEn}
 OPTIONS (
     expression [ , ...]
@@ -680,6 +687,9 @@ OPTIONS (
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 베이스 인공지능 모델을 model_name_expression 이름으로 저장합니다.
+
 
  __OPTIONS 절__
 
@@ -694,7 +704,7 @@ OPTIONS(
     )
 ```
 
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절은 텍스트 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "text_col" : 데이터 테이블에서 분류의 대상이 될 텍스트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
 - "label_col" : 데이터 테이블에서 라벨의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "label")
@@ -706,7 +716,7 @@ OPTIONS(
 
  __BUILD MODEL 쿼리 구문 예시__
 
-[텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_Electra/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_electra/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -732,14 +742,16 @@ FROM movie_review_train
 query_statement:
     query_expr
 
-FIT MODEL [expression]
-USING [expression]
+FIT MODEL (model_name_expression)
+USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 인공지능 모델을 model_name_expression 이름으로 저장하고 같은 이름에 새로운 모델을 저장합니다.
 
  __OPTIONS 절__
 
@@ -754,7 +766,7 @@ OPTIONS(
     )
 ```
 
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절은 텍스트 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "text_col" : 데이터 테이블에서 분류의 대상이 될 텍스트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
 - "label_col" : 데이터 테이블에서 라벨의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "label")
@@ -771,17 +783,19 @@ OPTIONS(
 query_statement:
     query_expr
 
-PREDICT USING [expression]
+PREDICT USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다.
 
  __PREDICT USING 쿼리 구문 예시__
 
-[텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_Electra/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_electra/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -791,36 +805,7 @@ OPTIONS (
     )
 AS
 SELECT *
-FROM movie_review_test```
-
- __OPTIONS 절__
-
-```sql
-OPTIONS(
-    (text_col = column_name),
-    )
-```
-
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
-
-- "text_col" : 데이터 테이블에서 분류의 대상이 될 텍스트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
-
-
-
-### __EVALUATE USING 쿼리 구문__
-
-이 "__EVALUATE USING__" 쿼리 구문을 사용하여 인공지능 모델에 대한 평가 작업을 수행할 수 있습니다. "__EVALUATE USING__" 표현식은 "__AS__" 뒤에 나오는 query_expr을 통해 정의한 데이터 세트를 평가합니다.
-
-``` sql
-query_statement:
-    query_expr
-
-EVALUATE USING [expression]
-OPTIONS (
-    expression [ , ...]
-    )
-AS
-(query_expr)
+FROM movie_review_test
 ```
 
  __OPTIONS 절__
@@ -828,16 +813,12 @@ AS
 ```sql
 OPTIONS(
     (text_col = column_name),
-    [batch_size = VALUE]
     )
 ```
 
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절은 텍스트 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "text_col" : 데이터 테이블에서 분류의 대상이 될 텍스트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
-
-- "batch_size" : 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다. (DEFAULT : 16)
-
 
 ## __5. Wav2Vec2 모델__
 
@@ -850,7 +831,7 @@ OPTIONS(
 query_statement:
     query_expr
 
-BUILD MODEL [expression]
+BUILD MODEL (model_name_expression)
 USING { Wav2Vec2Ko | Wav2Vec2En }
 OPTIONS (
     expression [ , ...]
@@ -858,6 +839,8 @@ OPTIONS (
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 베이스 인공지능 모델을 model_name_expression 이름으로 저장합니다.
 
  __OPTIONS 절__
 
@@ -872,7 +855,7 @@ OPTIONS(
     )
 ```
 
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절은 오디오 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "audio_col" : 데이터 테이블에서 오디오 파일들의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "audio_path")
 - "text_col" : 데이터 테이블에서 오디오의 스크립트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
@@ -884,7 +867,7 @@ OPTIONS(
 
  __BUILD MODEL 쿼리 구문 예시__
 
-[음성 인식 모델 만들기](/tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[음성 인식 모델 만들기](/tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -910,14 +893,16 @@ FROM librispeech_train
 query_statement:
     query_expr
 
-FIT MODEL [expression]
-USING [expression]
+FIT MODEL (model_name_expression)
+USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 인공지능 모델을 model_name_expression 이름으로 저장하고 같은 이름에 새로운 모델을 저장합니다.
 
  __OPTIONS 절__
 
@@ -932,7 +917,7 @@ OPTIONS(
     )
 ```
 
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절은 오디오 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "audio_col" : 데이터 테이블에서 오디오 파일들의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "audio_path")
 - "text_col" : 데이터 테이블에서 오디오의 스크립트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
@@ -950,13 +935,16 @@ OPTIONS(
 query_statement:
     query_expr
 
-PREDICT USING [expression]
+PREDICT USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 AS
 (query_expr)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 인공지능 모델을 사용합니다.
+
  __OPTIONS 절__
 
 ```sql
@@ -966,7 +954,7 @@ OPTIONS(
     )
 ```
 
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절은 오디오 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "audio_col" : 데이터 테이블에서 오디오 파일들의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "audio")
 - "batch_size" : 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다. (DEFAULT : 16)
@@ -974,7 +962,7 @@ OPTIONS(
 
  __PREDICT USING 쿼리 구문 예시__
 
-[음성 인식 모델 만들기](/tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[음성 인식 모델 만들기](/tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -987,39 +975,6 @@ SELECT *
 FROM librispeech_test
 ```
 
-
-### __EVALUATE USING 쿼리 구문__
-
-이 "__EVALUATE USING__" 쿼리 구문을 사용하여 인공지능 모델에 대한 평가 작업을 수행할 수 있습니다. "__EVALUATE USING__" 표현식은 "__AS__" 뒤에 나오는 query_expr을 통해 정의한 데이터 세트를 평가합니다.
-
-``` sql
-query_statement:
-    query_expr
-
-EVALUATE USING [expression]
-OPTIONS (
-    expression [ , ...]
-    )
-AS
-(query_expr)
-```
-
- __OPTIONS 절__
-
-```sql
-OPTIONS(
-    (audio_col = column_name),
-    (text_col = column_name),
-    [batch_size = VALUE]
-    )
-```
-
-"__OPTIONS__" 절은 이미지 모델에서 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
-
-- "audio_col" : 데이터 테이블에서 오디오 파일들의 경로를 담은 컬럼을 설정합니다. (DEFAULT : "audio_path")
-- "text_col" : 데이터 테이블에서 오디오의 스크립트를 담은 컬럼을 설정합니다. (DEFAULT : "text")
-- "batch_size" : 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다. (DEFAULT : 16)
-
 ## __6. SimCLR 모델__
 ### __BUILD MODEL 쿼리 구문__ 
 ​
@@ -1027,8 +982,7 @@ OPTIONS(
 "__BUILD MODEL__" 표현식은 "__AS__" 뒤에 나오는 query_expr을 통해 정의된 데이터 세트를 학습할 수 있습니다. 
 ​
 ``` sql
-
-BUILD MODEL [expression] 
+BUILD MODEL (model_name_expression)
 USING SimCLR
 OPTIONS (
     expression [ , ...]
@@ -1036,6 +990,10 @@ OPTIONS (
 AS 
 (query_expr)
 ``` 
+
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나오는 베이스 인공지능 모델을 model_name_expression 이름으로 저장합니다.
+
 ​
 __OPTIONS 절__
 ​
@@ -1077,22 +1035,24 @@ AS
 SELECT * 
 FROM mnist_train
 ```
-​
+
 ### __CREATE TABLE 쿼리 구문__
 
-이 "__CREATE TABLE__" 쿼리 구문을 사용하여 이미지별 폴더경로 정보가 포함되어 있는 테이블 없이도 이미지 폴더 경로를 사용하여 수치화 변환이 가능합니다. 
+이 "__CREATE TABLE__" 쿼리 구문을 사용하여 이미지별 폴더 경로 정보가 포함되어 있는 테이블 없이도 이미지 폴더 경로를 사용하여 수치화 변환이 가능합니다. 
 "__CREATE TABLE__" 표현식은 "__FROM__" 뒤에 나오는 이미지 폴더 경로의 이미지 파일들을 수치화하여 테이블로 저장합니다. 
 ​
 ``` sql
-​
-CREATE TABLE [expression] 
-USING [expression]
+CREATE TABLE (table_name_expression) 
+USING (model_name_expression)
 OPTIONS (
     expression [ , ...]
     )
 FROM
 (query_expr)
 ``` 
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 SimCLR 모델을 사용하여 도출된 수치화 벡터를 CREATE TABLE 뒤에 나온 table_name_expression 이름으로 저장합니다.
+
 ​
 __OPTIONS 절__
 ​
@@ -1102,7 +1062,6 @@ OPTIONS(
     (data_type = {'image'|'audio'|'video'}),
     (file_type = LIST),
     [overwrite = {True | False}]
-
     )
 ```
 ​
@@ -1121,13 +1080,17 @@ OPTIONS(
 이 "__CONVERT USING__" 쿼리 구문을 사용하여 기존 이미지들의 경로가 포함되어 있는 데이터 세트를 사용하여 수치화 된 결과를 기존의 데이터셋에 새로운 컬럼으로 저장합니다. 새로운 수치화 모델을 사용할때마다 새로운 수치화 컬럼이 추가되어 수치화 결과 별 비교가 용이합니다.  
 ​
 ```sql
-CONVERT USING [expression]
+CONVERT USING (model_name_expression)
 OPTIONS(
     expression [ , ...] 
     )
 AS 
 (query_expr)
 ``` 
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 모델인 model_name_expression을 사용합니다.
+
 __OPTIONS 절__
 
 ```sql
@@ -1138,7 +1101,7 @@ OPTIONS(
 "__OPTIONS__" 절은 SimCLR 수치화 모델의 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다. 
 ​
 
-- "table_name" : 새로운 수치화 결과를 저장할 테이블 이름을 설정합니다. (DEFAULT: 5)
+- "table_name" : 새로운 수치화 결과를 저장할 테이블 이름을 설정합니다.
 
 __CONVERT USING 쿼리 구문 예시__
 
@@ -1161,13 +1124,17 @@ FROM mnist_test
 "__SEARCH IMAGE__" 쿼리 구문을 사용하여 수치화을 생성한 테이블에서 원하는 이미지를 검색할 수 있습니다.
 
 ``` sql
-SEARCH IMAGE [images = expression]
-USING [expression]
+SEARCH IMAGE (images = expression)
+USING (model_name_expression)
 AS 
 (query_expr)
 ```
 !!! note ""
     사용자로부터 images를 입력으로 받아야 합니다. 입력은 string (예: 'a black cat', 'data/image/image01.jpg')이어야 합니다.
+
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 모델인 model_name_expression을 사용합니다.
+
 
 __SEARCH IMAGE 구문 예시__
 
@@ -1189,7 +1156,7 @@ FROM mnist_test
 "__CREATE TABLE__" 구문을 사용하여 이미지 데이터의 수치화 벡터를 포함한 데이터 테이블을 생성할 수 있습니다.
 
 ```sql
-CREATE TABLE [expression]
+CREATE TABLE (table_name_expression)
 USING clip_en
 OPTIONS (
     expression [ , ...]
@@ -1197,6 +1164,10 @@ OPTIONS (
 FROM
 (query_expresison)
 ```
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 clip_en 모델을 사용하여 도출된 수치화 벡터를 CREATE TABLE 뒤에 나온 table_name_expression 이름으로 저장합니다.
+
+
 
 __OPTIONS 절__
 
@@ -1233,6 +1204,9 @@ AS
 (query_expr)
 ```
 
+!!!faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 모델인 clip_en을 사용합니다. clip의 경우 현재 Build를 제공하지 않기 때문에 베이스 모델인 clip_en을 사용합니다.
+
 __OPTIONS 절__
 
 ```sql
@@ -1250,9 +1224,9 @@ OPTIONS(
 - "batch_size" : 한 번의 예측에서 읽는 데이터 세트 묶음의 크기입니다. (DEFAULT : 16)
 
 
-__CONVERT TABLE 구문 예시__
+__CONVERT USING 구문 예시__
 
-[텍스트로 이미지 검색하기](/tutorials/thanosql_search/image_search/clip_image_search)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[텍스트로 이미지 검색하기](/tutorials/thanosql_search/image_search/clip_image_search/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 
 ```sql
@@ -1273,7 +1247,7 @@ FROM unsplash_data
 "__SEARCH IMAGE__" 쿼리 구문을 사용하여 수치화을 생성한 테이블에서 원하는 이미지를 검색할 수 있습니다.
 
 ``` sql
-SEARCH IMAGE [{text|texts|image|images} = expression]
+SEARCH IMAGE ({text|texts|image|images} = expression)
 USING clip_en
 AS 
 (query_expr)
@@ -1281,10 +1255,12 @@ AS
 !!! note ""
     text, texts, image, images 중 하나를 입력으로 받아야 합니다. text와 texts, image와 images는 각각 동일합니다. 입력은 string (예: 'a black cat', 'data/image/image01.jpg'), 또는 list of string (예: ['a black cat', 'a orange cat'], ['data/image/image01.jpg', 'data/image/image02.jpg']) 이어야 합니다.
 
+!!! faq ""
+    본 쿼리를 통해서 USING 뒤에 나온 모델인 clip_en을 사용합니다. clip의 경우 현재 Build를 제공하지 않기 때문에 베이스 모델인 clip_en을 사용합니다.
 
 __SEARCH IMAGE 구문 예시__
 
-[텍스트로 이미지 검색하기](/tutorials/thanosql_search/image_search/clip_image_search)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
+[텍스트로 이미지 검색하기](/tutorials/thanosql_search/image_search/clip_image_search/)에서 해당 알고리즘 쿼리 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql

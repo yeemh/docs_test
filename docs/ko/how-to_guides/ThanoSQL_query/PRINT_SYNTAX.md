@@ -63,9 +63,7 @@ AS
 SELECT * 
 FROM junyong_aud
 ```
-<a href = "/img/thanosql_syntax/query/PRINT/PRINT_img1.png">
-    <img src = "/img/thanosql_syntax/query/PRINT/PRINT_img1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_syntax/query/PRINT/PRINT_img1.png)](/img/thanosql_syntax/query/PRINT/PRINT_img1.png)
 
 !!! note ""
     - `junyong_aud` : 오디오 파일 경로가 저장되어 있는 데이터 테이블
@@ -90,7 +88,7 @@ FROM junyong_vid
 
 ### __3.4 서브 쿼리를 사용하여 출력하기__
 
-다음 쿼리는 이전 [SEARCH 쿼리](/how-to_guides/modelling/SEARCH_SYNTAX)에서 만들었던 "__SEARCH__" 쿼리문을 "__PRINT__" 구문의 서브 쿼리로 사용하여 "__SEARCH__"의 결과 테이블을 바로 출력합니다.
+다음 쿼리는 이전 [SEARCH 쿼리](/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX)에서 만들었던 "__SEARCH__" 쿼리문을 "__PRINT__" 구문의 서브 쿼리로 사용하여 "__SEARCH__"의 결과 테이블을 바로 출력합니다.
 
 ```sql
 %%thanosql
