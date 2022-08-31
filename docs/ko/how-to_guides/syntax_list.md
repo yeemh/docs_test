@@ -1,7 +1,8 @@
-# __ThanoSQL Syntax__
+---
+title: ThanoSQL Syntax
+---
 
-**[이전 문서 - 오디오 파일을 받아쓰는 음성 인식 모델 만들기](/tutorials/thanosql_ml/audio_recognition/audio_recognition_wav2vec/)**  
-**[다음 문서 - 데이터 불러오기](/how-to_guides/ThanoSQL_connecting/data_upload/)**  
+# __ThanoSQL Syntax__
 
 ## 시작 전 사전 정보
 
@@ -17,14 +18,62 @@
     
 <div class="card">
   <header>
-    <h2 id="card-h2"> ThanoSQL Rest API 다루기</h2>
+    <h2 id="card-h2"> ThanoSQL Query 다루기</h2>
   </header>
   <ul class="fullclick">
     <li>
-      <a href="../thanosql_api/rest_api_token/">
-        <h3>REST API 사용하기</h3>
+      <a href="../ThanoSQL_query/LIST_SYNTAX/">
+        <h3>저장한 모델 확인하기</h3>
         <p>
-            REST API를 사용하여 ThanoSQL을 사용하는 방법을 알아봅니다.
+          ThanoSQL에 저장한 모델을 조회하는 방법을 알아봅니다.
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="../ThanoSQL_query/UPLOAD_SYNTAX/">
+        <h3>모델 업로드 하기</h3>
+        <p>
+          직접 만든 모델을 업로드하여 ThanoSQL 내부에서 사용하는 방법을 알아봅니다.
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="../ThanoSQL_query/GET_SYNTAX/">
+        <h3>모델 및 튜토리얼 데이터 세트 가져오기</h3>
+        <p>
+          ThanoSQL Pre-built 모델 및 튜토리얼 데이터 세트 가져오는 방법을 알아봅니다. 
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="../ThanoSQL_query/CREATE_TABLE_SYNTAX/">
+        <h3>비정형 데이터 변환하기</h3>
+        <p>
+          비정형 데이터(이미지, 오디오, 비디오)를 인공지능 모델을 통해 수치화하여 데이터 테이블을 생성하는 방법을 알아봅니다.
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="../ThanoSQL_query/CONVERT_USING_SYNTAX/">
+        <h3>비정형 특성 추가하기</h3>
+        <p>
+          비정형 데이터(이미지, 오디오, 비디오)의 정보를 인공지능 모델을 통해 수치화하고 사용할 데이터 테이블에 추가하는 방법을 알아봅니다.
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="../ThanoSQL_query/SEARCH_SYNTAX/">
+        <h3>비정형 데이터 검색하기</h3>
+        <p>
+          비정형 데이터(이미지, 오디오, 비디오)에서 내용이나 의미 또는 유사도 등을 검색하는 방법을 알아봅니다.
+        </p>
+      </a>
+    </li>
+    <li>
+      <a href="../ThanoSQL_query/PRINT_SYNTAX/">
+        <h3>결과 출력하기</h3>
+        <p>
+          비정형 데이터(이미지, 오디오, 비디오)을 출력하는 방법을 알아봅니다.
         </p>
       </a>
     </li>
@@ -37,7 +86,7 @@
   </header>
   <ul class="fullclick">
     <li>
-      <a href="../modelling/BUILD_MODEL_SYNTAX/">
+      <a href="../ThanoSQL_ml/BUILD_MODEL_SYNTAX/">
         <h3>모델 학습하기</h3>
         <p>
             ThanoSQL 모델을 학습시키는 방법을 알아봅니다.
@@ -45,7 +94,7 @@
       </a>
     </li>
     <li>
-      <a href="../modelling/EVALUATE_MODEL_SYNTAX/">
+      <a href="../ThanoSQL_ml/EVALUATE_MODEL_SYNTAX/">
         <h3>모델 평가하기</h3>
         <p>
             ThanoSQL 모델을 하는 평가하는 방법을 알아봅니다.
@@ -53,7 +102,7 @@
       </a>
     </li>
     <li>
-      <a href="../modelling/FIT_MODEL_SYNTAX/">
+      <a href="../ThanoSQL_ml/FIT_MODEL_SYNTAX/">
         <h3>모델 재학습하기</h3>
         <p>
             ThanoSQL 모델을 재학습시키는 방법을 알아봅니다.
@@ -61,7 +110,7 @@
       </a>
     </li>
     <li>
-      <a href="../modelling/TRANSFORM_MODEL_SYNTAX/">
+      <a href="../ThanoSQL_ml/TRANSFORM_MODEL_SYNTAX/">
         <h3>모델 적용을 위한 데이터 전처리하기</h3>
         <p>
             예측을 위해 학습한 ThanoSQL 모델을 통해 전처리하는 방법을 알아봅니다.
@@ -69,7 +118,7 @@
       </a>
     </li>
     <li>
-      <a href="../modelling/PREDICT_MODEL_SYNTAX/">
+      <a href="../ThanoSQL_ml/PREDICT_MODEL_SYNTAX/">
         <h3>모델 적용하기</h3>
         <p>
             학습한 ThanoSQL 모델을 이용하여 예측하는 방법을 알아봅니다. 
@@ -77,7 +126,7 @@
       </a>
     </li>    
     <li>
-      <a href="../modelling/DELETE_MODEL_SYNTAX/">
+      <a href="../ThanoSQL_ml/DELETE_MODEL_SYNTAX/">
         <h3>모델 삭제하기</h3>
         <p>
             모델 관리를 위해 학습한 ThanoSQL 모델을 삭제하는 방법을 알아봅니다.
@@ -87,53 +136,26 @@
   </ul>
 </div>
 
-
 <div class="card">
   <header>
-    <h2 id="card-h2"> ThanoSQL Query 다루기</h2>
+    <h2 id="card-h2"> ThanoSQL Rest API 다루기</h2>
   </header>
   <ul class="fullclick">
     <li>
-      <a href="../modelling/LIST_SYNTAX/">
-        <h3>저장한 모델 확인하기</h3>
+      <a href="../ThanoSQL_connecting/data_upload/">
+        <h3>데이터 불러오기</h3>
         <p>
-          ThanoSQL에 저장한 모델을 조회하는 방법을 알아봅니다.
+            REST API를 사용하기 위해 데이터를 불러오는 방법을 알아봅니다.
         </p>
       </a>
     </li>
     <li>
-      <a href="../modelling/CREATE_TABLE_SYNTAX/">
-        <h3>비정형 데이터 변환하기</h3>
+      <a href="../ThanoSQL_connecting/thanosql_api/rest_api_token/">
+        <h3>REST API 사용하기</h3>
         <p>
-          비정형 데이터(이미지, 오디오, 비디오)를 인공지능 모델을 통해 수치화하여 데이터 테이블을 생성하는 방법을 알아봅니다.
-        </p>
-      </a>
-    </li>
-    <li>
-      <a href="../modelling/CONVERT_USING_SYNTAX/">
-        <h3>비정형 특성 추가하기</h3>
-        <p>
-          비정형 데이터(이미지, 오디오, 비디오)의 정보를 인공지능 모델을 통해 수치화하고 사용할 데이터 테이블에 추가하는 방법을 알아봅니다.
-        </p>
-      </a>
-    </li>
-    <li>
-      <a href="../modelling/SEARCH_SYNTAX/">
-        <h3>비정형 데이터 검색하기</h3>
-        <p>
-          비정형 데이터(이미지, 오디오, 비디오)에서 내용이나 의미 또는 유사도 등을 검색하는 방법을 알아봅니다.
-        </p>
-      </a>
-    </li>
-    <li>
-      <a href="../modelling/PRINT_SYNTAX/">
-        <h3>결과 출력하기</h3>
-        <p>
-          비정형 데이터(이미지, 오디오, 비디오)을 출력하는 방법을 알아봅니다.
+            REST API를 사용하여 ThanoSQL을 사용하는 방법을 알아봅니다.
         </p>
       </a>
     </li>
   </ul>
 </div>
-   
-

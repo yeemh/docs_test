@@ -1,5 +1,6 @@
 nav:
-    - What is ThanoSQL?: index.md
-    - quick_start
-    - how-to_guides
-    - tutorials
+  - index.md
+  - getting_started
+  - tutorial
+  - how-to_guides
+  - FAQ

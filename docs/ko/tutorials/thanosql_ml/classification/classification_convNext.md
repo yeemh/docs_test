@@ -1,7 +1,8 @@
-# __이미지 분류 모델 만들기__
+---
+title: 이미지 분류 모델 만들기
+---
 
-**[이전 문서 - Auto-ML을 사용하여 분류 모델 만들기](/tutorials/thanosql_ml/classification/automl_classification/)** <br>
-**[다음 문서 - 텍스트 분류 모델 만들기](/tutorials/thanosql_ml/classification/classification_Electra/)**
+# __이미지 분류 모델 만들기__
 
 ## 시작 전 사전 정보
 
@@ -16,7 +17,7 @@
 ## 튜토리얼 소개
 
 !!! note "분류 작업 이해하기"
-    분류 작업은 목표값(Target)이 속한 범주(Category 또는 Class)를 예측하기 위해 사용하는 [머신러닝(기계학습/Machine Learning)](https://ko.wikipedia.org/wiki/%EA%B8%B0%EA%B3%84_%ED%95%99%EC%8A%B5)의 한 형태입니다. 예를 들어, 남성 또는 여성을 분류하는 이진 분류와 동물의 종(개, 고양이, 토끼 등)을 예측하는 다중 분류 모두 분류 작업에 포함됩니다.
+    분류 작업은 목푯값(Target)이 속한 범주(Category 또는 Class)를 예측하기 위해 사용하는 [머신러닝(기계학습/Machine Learning)](https://ko.wikipedia.org/wiki/%EA%B8%B0%EA%B3%84_%ED%95%99%EC%8A%B5)의 한 형태입니다. 예를 들어, 남성 또는 여성을 분류하는 이진 분류와 동물의 종(개, 고양이, 토끼 등)을 예측하는 다중 분류 모두 분류 작업에 포함됩니다.
 
 2010년부터 인공지능 모델을 사용해서 이미지를 분류하는 대회([ImageNet](https://en.wikipedia.org/wiki/ImageNet))가 열려 왔습니다. 대회 초기 우승한 모델의 분류 성능은 약 72%였으나 2015년 우승한 [ResNet](https://arxiv.org/abs/1512.03385) 모델은 약 96%의 성능을 기록하며 특정 영역에서는 인간의 분류 능력을 뛰어넘기 시작했습니다.
 
@@ -42,18 +43,18 @@ __아래는 ThanoSQL 이미지 분류 모델의 활용 및 예시입니다.__
 !!! note "본 튜토리얼에서는"
     :point_right: 대표적인 AI 오픈데이터 공유 플랫폼인 [AI-Hub](https://aihub.or.kr/)의 `상품 이미지` 데이터 세트를 사용하여 10,000종 이상의 상품을 분류하는 모델을 구축합니다. 구축된 모델은 스마트물류창고, 무인 스토어등에서 탐지, 식별 솔루션으로 활용이 가능합니다. 데이터 세트는 일반적으로 이미지 분류 기술의 학습에 활용하는 이미지 및 라벨(정답)쌍의 약 10,000 종 이상의 상품 데이터 세트로 구성되어 있고 총 1,440,000 장의 이미지가 포함되어 있습니다. 본 튜토리얼에서는 ThanoSQL의 사용방법을 익히고 빠른 결과 확인을 위해, 훈련용 데이터 1,800장과 테스트 데이터 200장만을 사용합니다. <br>
 
-![상품 이미지 예시](/img/thanosql_ml/classification/classification_convNext/classification_convNext_data_intro.png)
+[![상품 이미지 예시](/img/thanosql_ml/classification/classification_convnext/classification_convnext_data_intro.png)](/img/thanosql_ml/classification/classification_convnext/classification_convnext_data_intro.png)
 
 
 
 !!! warning "튜토리얼 주의 사항"
-    - 이미지 분류 모델은 하나의 이미지에서 하나의 목표값(Target, 범주/레이블/라벨)를 예측하는 용도로 사용할 수 있습니다.
-    - 이미지의 경로를 나타내는 컬럼(Column)과, 이미지의 목표값을 나타내는 컬럼이 존재해야 합니다.
+    - 이미지 분류 모델은 하나의 이미지에서 하나의 목푯값(Target, 범주/레이블/라벨)를 예측하는 용도로 사용할 수 있습니다.
+    - 이미지의 경로를 나타내는 컬럼(Column)과, 이미지의 목푯값을 나타내는 컬럼이 존재해야 합니다.
     - 해당 이미지 분류 모델의 베이스 모델(`CONVNEXT`)은 GPU를 사용합니다. 사용한 모델의 크기와 배치 사이즈에 따라 GPU 메모리가 부족할 수 있습니다. 이 경우, 더 작은 모델을 사용하시거나 배치 사이즈를 줄여보십시오.
 
 ## __0. 데이터 세트 준비__
 
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스 사용](/quick_start/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.
 
 ```sql
@@ -75,9 +76,10 @@ OPTIONS(overwrite = True)
 FROM "tutorial_data/product_image_data/product_image_test.csv"
 ```
 
-!!! note "__OPTIONS__"
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
+!!! note "__쿼리 세부 정보__"
+    - "__COPY__" 쿼리 구문을 사용하여 DB에 저장 할 데이터 세트명을 지정합니다. 
+    - "__OPTIONS__" 쿼리 구문을 통해 __COPY__ 에 사용할 옵션을 지정합니다.
+        - "overwrite" : 동일 이름의 데이터 세트가 DB상에 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) 
 
 
 
@@ -91,9 +93,7 @@ SELECT *
 FROM product_image_train
 LIMIT 5
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/train_data_limit_5.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/train_data_limit_5.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/train_data_limit_5.png)](/img/thanosql_ml/classification/classification_convnext/train_data_limit_5.png)
 
 !!! note "__데이터 이해하기__"
     -  <mark style="background-color:#D7D0FF ">image_path</mark>: 각 이미지의 파일의 위치 정보
@@ -113,9 +113,7 @@ SELECT image_path
 FROM product_image_train
 LIMIT 5
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/print_image_train_data.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/print_image_train_data.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/print_image_train_data.png)](/img/thanosql_ml/classification/classification_convnext/print_image_train_data.png)
 
 ## __2. 사전 학습된 모델을 사용하여 상품 이미지 분류 결과 예측__
 
@@ -128,13 +126,11 @@ AS
 SELECT *
 FROM product_image_test
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_1.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_1.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_1.png)](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_1.png)
 
 ## __3. 이미지 분류 모델 생성__
 
-이전 단계에서 확인한  <mark style="background-color:#FFEC92 ">product_image_train</mark> 데이터 세트를 사용하여 이미지 분류 모델을 만듭니다. 아래의 쿼리 구문을 실행하여 <mark style="background-color:#E9D7FD ">my_product_classifier</mark>이라는 이름의 모델을 만듭니다.
+이전 단계에서 확인한  <mark style="background-color:#FFEC92 ">product_image_train</mark> 데이터 세트를 사용하여 이미지 분류 모델을 만듭니다. 아래의 쿼리 구문을 실행하여 <mark style="background-color:#E9D7FD ">my_product_classifier</mark>이라는 이름의 모델을 만듭니다.  
 (쿼리 실행 시 예상 소요 시간: 5 min)
 
 ```sql
@@ -157,7 +153,7 @@ FROM product_image_train
     - "__USING__" 쿼리 구문을 통해 베이스 모델로 `ConvNeXt_Tiny`를 사용할 것을 명시합니다.
     - "__OPTIONS__" 쿼리 구문을 통해 모델 생성에 사용할 옵션을 지정합니다.
         - "image_col" : 이미지 경로를 담은 컬럼의 이름
-        - "label_col" : 목표값의 정보를 담은 컬럼의 이름
+        - "label_col" : 목푯값의 정보를 담은 컬럼의 이름
         - "epochs : 모든 학습 데이터 세트를 학습하는 횟수
 
 !!! tip ""
@@ -169,7 +165,7 @@ FROM product_image_train
 
 ## __4. 생성된 모델을 사용하여 상품 이미지 분류 결과 예측__
 
-이전 단계에서 만든 상품 이미지 분류 모델(<mark style="background-color:#FFEC92 ">my_product_classifier</mark>)을 사용해서 특정 이미지(학습에 이용되지 않은 데이터 테이블, <mark style="background-color:#D7D0FF">product_image_test</mark>)의 목표값을 예측해 봅니다.  아래 쿼리를 수행하고 나면, 예측 결과는 <mark style="background-color:#D7D0FF">predicted</mark> 컬럼에 저장되어 반환됩니다.
+이전 단계에서 만든 상품 이미지 분류 모델(<mark style="background-color:#FFEC92 ">my_product_classifier</mark>)을 사용해서 특정 이미지(학습에 이용되지 않은 데이터 테이블, <mark style="background-color:#D7D0FF">product_image_test</mark>)의 목푯값을 예측해 봅니다.  아래 쿼리를 수행하고 나면, 예측 결과는 <mark style="background-color:#D7D0FF">predicted</mark> 컬럼에 저장되어 반환됩니다.
 
 ```sql
 %%thanosql
@@ -181,16 +177,12 @@ AS
 SELECT *
 FROM product_image_test
 ```
-<a href ="/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_2.png">
-    <img src = "/img/thanosql_ml/classification/classification_convNext/predict_on_test_data_2.png"></img>
-</a>
+[![IMAGE](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_2.png)](/img/thanosql_ml/classification/classification_convnext/predict_on_test_data_2.png)
 
 !!! note "__쿼리 세부 정보__"
     - "__PREDICT USING__" 쿼리 구문을 통해 이전 단계에서 만든 <mark style="background-color:#E9D7FD ">my_product_classifier</mark> 모델을 예측에 사용합니다.
     - "__OPTIONS__" 쿼리 구문을 통해 예측에 사용할 옵션을 지정합니다.
         - "image_col" : 예측에 사용할 이미지의 경로가 기록되어 있는 컬럼의 이름
-
-<br>
 
 ## __5. 튜토리얼을 마치며__
 
@@ -201,7 +193,7 @@ FROM product_image_test
 * [나만의 데이터 업로드하기](/how-to_guides/ThanoSQL_connecting/data_upload/)
 * [중급 이미지 분류 모델 만들기]
 * [이미지 변환과 Auto-ML을 이용한 나만의 모델 만들기]
-* [나만의 이미지 분류 모델 배포하기](/how-to_guides/thanosql_api/rest_api_thanosql_query/)
+* [나만의 이미지 분류 모델 배포하기](/how-to_guides/ThanoSQL_connecting/thanosql_api/rest_api_thanosql_query/)
 
 
 !!! tip "__나만의 서비스를 위한 모델 배포 관련 문의__"

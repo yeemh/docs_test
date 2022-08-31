@@ -1,7 +1,8 @@
+---
+title: 텍스트로 이미지 검색하기
+---
+
 # __텍스트로 이미지 검색하기__
-
-
-**[이전 문서 - 이미지로 이미지 검색하기](/tutorials/thanosql_search/image_search/simclr_image_search/)** <br> **[다음 문서 - Auto-ML을 사용하여 분류 모델 만들기](/tutorials/thanosql_ml/classification/automl_classification/)**
 
 ## 시작 전 사전 정보
 
@@ -33,7 +34,7 @@ __아래는 ThanoSQL 텍스트-이미지 검색 알고리즘의 활용 및 예�
 이번 튜토리얼에서는 텍스트-이미지 검색 모델을 사용하여, ThanoSQL DB의 `Unsplash Dataset - Lite` 데이터 세트의 25,000 장의 이미지 중에서 텍스트로 원하는 이미지를 검색해 봅니다. 
 
 ## __0. 데이터 세트 준비__
-ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/quick_start/how_to_use_ThanoSQL/#5-thanosql)
+ThanoSQL의 쿼리 구문을 사용하기 위해서는 [ThanoSQL 워크스페이스](/getting_started/how_to_use_ThanoSQL/#5-thanosql)
 에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.
 ```sql
 %load_ext thanosql
@@ -48,9 +49,10 @@ OPTIONS(overwrite=True)
 FROM "tutorial_data/unsplash_data/unsplash.csv"
 ```
 
-!!! note "__OPTIONS__" 
-    __overwrite가 True일 때__, 사용자는 이전 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 있습니다.  
-    반면, __overwrite가 False일 때__, 사용자는 이전에 생성했던 데이터 테이블과 같은 이름의 데이터 테이블을 생성할 수 없습니다.
+!!! note "__쿼리 세부 정보__"
+    - "__COPY__" 쿼리 구문을 사용하여 DB에 저장 할 데이터 세트명을 지정합니다. 
+    - "__OPTIONS__" 쿼리 구문을 통해 __COPY__ 에 사용할 옵션을 지정합니다.
+        - "overwrite" : 동일 이름의 데이터 세트가 DB상에 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) 
 
 ## __1. 데이터 세트 확인__
 
@@ -64,7 +66,7 @@ SELECT photo_id, image_path, photo_image_url, photo_description, ai_description
 FROM unsplash_data
 LIMIT 5
 ```
-<img src = "/img/thanosql_search/clip_search/select_data.png"></img>
+[![IMAGE](/img/thanosql_search/clip_search/select_data.png)](/img/thanosql_search/clip_search/select_data.png)
 
 !!! note "데이터 이해하기"
     - `photo_id` 이미지의 고유 id 컬럼 명
@@ -81,15 +83,15 @@ SELECT image_path
 FROM unsplash_data 
 LIMIT 5
 ```
-<a href = "/img/thanosql_search/clip_search/print_dataset_image.png">
-    <img src = "/img/thanosql_search/clip_search/print_dataset_image.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/print_dataset_image.png)](/img/thanosql_search/clip_search/print_dataset_image.png)
 
 ## __2. 텍스트 검색을 위한 이미지 수치화 모델 생성하기__
 
 !!! danger "참고 사항"
     텍스트-이미지 검색 알고리즘은 학습에 오랜 시간이 걸리고 총 4억 개의 데이터 세트로 사전 학습된 모델을 사용하기 때문에 "__BUILD MODEL__" 쿼리 구문을 이용한 학습 과정을 본 튜토리얼에서는 생략합니다. `tutorial_search_clip` 모델은 베이스 알고리즘으로 `clipen`을 사용한 사전학습 된 모델을 가져와서 사용하게 됩니다. "__CONVERT USING__" 쿼리 구문을 실행하게 되면 "모델명(`tutorial_search_clip`)_베이스 알고리즘명(`clipen`)"으로 이미지가 수치화 된 컬럼이 자동으로 생성이 되며, "__SEARCH IMAGE__" 쿼리 구문을 실행하게 되면 "모델명(`tutorial_search_clip`)_베이스 알고리즘 명(`clipen`)_similarity수(1)"로 이미지 유사도 컬럼이 자동으로 생성 됩니다. 여기수 "수"는 검색에 사용한 텍스트의 갯수를 의미합니다. 2개 이상의 텍스트로 검색이 이루어 질 경우 순서에 따라 컬럼의 수가 순차적으로 증가되어 생성 됩니다. 자세한 사항은 아래 내용을 참고하세요.
 (쿼리 실행 시 예상 소요 시간: 3 min)  
+
+다음 "__CONVERT USING__" 쿼리 구문을 실행하여 `unsplash_data` 이미지들을 수치화 합니다. 수치화된 결과값은 새로 생긴 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen</mark> 컬럼에 저장됩니다. (결과 컬럼명은 {model_name}_{base_model_name}으로 추가됩니다) 
 
 ```sql
 %%thanosql
@@ -105,25 +107,23 @@ FROM unsplash_data
 ```
 
 !!! note "쿼리 세부 정보"
-
     - "__CONVERT USING__" 쿼리 구문은 `tutorial_search_clip` 모델을 이미지 수치화를 위한 알고리즘으로 사용합니다.  
-    - "__OPTIONS__" 쿼리 구문은 이미지 수치화 시 필요한 변수들을 정의합니다. ThanoSQL DB 내에 저장될 테이블 이름("table_name")을 정의합니다. 이미지의 저장 경로를 저장한 컬럼 명을 "image_col"에서 정의합니다. 본 튜토리얼에서는 `image_path`를 사용합니다. "batch_size"는 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다. 논문에 따르면 클 수록 학습 성능이 증가하지만 메모리의 크기를 고려하여 128을 사용합니다. 
-
-```sql
-%%thanosql
-SELECT *
-FROM unsplash_data
-LIMIT 5
-```
-<img src = "/img/thanosql_search/clip_search/select_data_with_embedding.png"></img>
-
-`CONVERT` 쿼리의 결과로 `tutorial_search_clip_clipen` 열이 생성된 것을 볼 수 있습니다. `{model_name}_{base_model_name}`이라는 이름으로 임베딩 값을 담은 열이 추가되게 됩니다.
+    - "__OPTIONS__" 쿼리 구문은 이미지 수치화 시 필요한 변수들을 정의합니다. 
+        - "table_name" : ThanoSQL DB 내에 저장될 테이블 이름
+        - "image_col" : 이미지 경로를 담고 있는 컬럼 명
+        - "batch_size" : 한번의 학습에서 읽는 데이터 세트 묶음의 크기. 논문에 따르면 클 수록 학습 성능이 증가하지만 메모리의 크기를 고려하여 128을 사용합니다. (DEFAULT : 16)  
+           
+[![IMAGE](/img/thanosql_search/clip_search/select_data_with_embedding.png)](/img/thanosql_search/clip_search/select_data_with_embedding.png)
 
 <br>
 
 ## __3. 텍스트로 이미지 검색하기__
 
-"__SEARCH IMAGE__" 쿼리 구문과 생성한 이미지 수치화 모델(`tutorial_search_clip`)을 이용하여 이미지를 검색할 수 있습니다. 우선 하나의 텍스트로 검색하고 결과를 확인합니다. "모델명(`tutorial_search_clip`)_베이스 알고리즘 명(`clipen`)_similarity수(1)"로 이미지 유사도 컬럼이 자동으로 생성 된 것을 확인할 수 있습니다.
+
+"__SEARCH IMAGE__"  쿼리 구문과 생성한 `tutorial_search_clip` 모델을 사용하여 텍스트 기반 이미지 검색을
+ 할 수 있습니다. 다음 쿼리 구문을 실행하여 "a black cat" 이라는 텍스트와 임베딩 된 `unsplash_data` 
+이미지들의 유사도를 계산합니다. 결괏값은 새로 추가된 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> 컬럼에 
+저장됩니다.
 
 ```sql
 %%thanosql
@@ -133,17 +133,13 @@ AS
 SELECT * 
 FROM unsplash_data
 ```
-<a href = "/img/thanosql_search/clip_search/search_result_raw.png">
-    <img src = "/img/thanosql_search/clip_search/search_result_raw.png"></img>
-</a>
-
+[![IMAGE](/img/thanosql_search/clip_search/search_result_raw.png)](/img/thanosql_search/clip_search/search_result_raw.png)
 
 !!! note "쿼리 세부 정보"
-
     - "__SEARCH IMAGE__" 쿼리 구문을 사용하여 이미지를 찾을 것임을 명시합니다. "text" 변수를 이용해서 찾고자 하는 이미지의 텍스트 내용을 입력합니다. 
     - "__USING__" 쿼리 구문을 통해 검색에 사용할 모델로 `tutorial_search_clip`을 사용할 것을 명시합니다.
 
-쿼리 구문의 결과로 `tutorial_search_clip_clipen_similarity1` 행이 생성된 것을 볼 수 있습니다. 검색 알고리즘으로 사용하기 위해서는 유사도 계산 결과를 이용해서 가장 유사한 이미지를 선별해서 확인해야 합니다. 아래 쿼리 구문을 수행하여 DB에서 해당 텍스트와 가장 유사한 이미지 5개를 확인합니다.
+아래 쿼리 구문을 실행하여 'a black cat' 텍스트와 가장 유사한 이미지 5개의 유사도를 확인합니다.
 
 ```sql
 %%thanosql
@@ -158,18 +154,15 @@ FROM (
 ORDER BY tutorial_search_clip_clipen_similarity1 DESC 
 LIMIT 5
 ```
-<a href = "/img/thanosql_search/clip_search/search_result_sorted.png">
-    <img src = "/img/thanosql_search/clip_search/search_result_sorted.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/search_result_sorted.png)](/img/thanosql_search/clip_search/search_result_sorted.png)
 
-!!! note "쿼리 세부 정보"
-    
+!!! note "쿼리 세부 정보"    
     - "__SEARCH IMAGE__" 쿼리 구문은 입력한 텍스트와 이미지 사이의 유사도를 계산하여 반환합니다.
-    - 첫 번째 "__SELECT__" 쿼리 구문은 괄호 안의 쿼리 결과에서 "image_path" 컬럼과 `tutorial_search_clip_clipen_similarity1` 컬럼을 선택합니다.
-    - "__ORDER BY__" 쿼리 구문은 결과를 `tutorial_search_clip_clipen_similarity1` 컬럼의 값을 기준으로 정렬하는데, 정렬은 내림차순("__DESC__")이며, 그 중 상위 5개("__LIMIT__" 5)의 결과를 출력합니다.
+    - 첫 번째 "__SELECT__" 쿼리 구문은 괄호 안의 쿼리 결과에서 <mark style="background-color:#D7D0FF ">image_path</mark> 컬럼과 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> 컬럼을 선택합니다.<br>
+    - "__ORDER BY__" 쿼리 구문은 결과를 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> 컬럼의 값을 기준으로 정렬하는데, 정렬은 내림차순("__DESC__")이며, 그 중 상위 5개("__LIMIT__" 5)의 결과를 출력합니다.
 
 
-이제 입력한 텍스트 'a black cat'과 가장 유사한 이미지가 순서대로 정렬되어 보여집니다. 이 쿼리 구문을 "__PRINT__"문과 같이 사용한다면, 결과 이미지를 바로 확인할 수 있습니다.
+이전 쿼리 구문을 "__PRINT__"문과 함께 응용하여, 결과 이미지를 바로 확인할 수 있습니다.
 
 ```sql
 %%thanosql
@@ -188,16 +181,13 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_black_cat.png">
-    <img src = "/img/thanosql_search/clip_search/result_black_cat.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_black_cat.png)](/img/thanosql_search/clip_search/result_black_cat.png)
 
 
 !!! note "쿼리 세부 정보"
-    이 쿼리는 위의 쿼리와 합쳐 세 단계로 구성됩니다.  
+    이 쿼리는 위의 쿼리와 합쳐 세 단계로 구성됩니다.
 
-    - 첫 번째 괄호 안의 "__SELECT__" 쿼리 구문을 통해 바로 위 단계의 결과를 생성합니다.
-    
+    - 첫 번째 괄호 안의 "__SELECT__" 쿼리 구문을 통해 바로 위 단계의 결과를 생성합니다.    
     - "__PRINT IMAGE__" 쿼리 구문을 사용하여 해당 이미지를 출력합니다.
 
 ```sql
@@ -217,9 +207,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_dog_on_chair.png">
-    <img src = "/img/thanosql_search/clip_search/result_dog_on_chair.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_dog_on_chair.png)](/img/thanosql_search/clip_search/result_dog_on_chair.png)
 
 ```sql
 %%thanosql
@@ -238,9 +226,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_gloomy.png">
-    <img src = "/img/thanosql_search/clip_search/result_gloomy.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_gloomy.png)](/img/thanosql_search/clip_search/result_gloomy.png)
 
 
 ```sql
@@ -260,9 +246,7 @@ AS (
     )
 ```
 
-<a href = "/img/thanosql_search/clip_search/result_happy.png">
-    <img src = "/img/thanosql_search/clip_search/result_happy.png"></img>
-</a>
+[![IMAGE](/img/thanosql_search/clip_search/result_happy.png)](/img/thanosql_search/clip_search/result_happy.png)
 
 ## __4. 튜토리얼을 마치며__
 
