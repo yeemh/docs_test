@@ -12,11 +12,8 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v2
 
-      - name: Install pip
-        run: python -m pip install --upgrade pip
-
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXTRA_PACKAGES: "build-base libxml2-dev"
+          EXTRA_PACKAGES: "build-base python3-lxml"
