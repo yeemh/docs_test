@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install packages
-        run: sudo apt-get install -y libxml2-dev libxslt1-dev zlib1g-dev python3-pip | sudo pip install --upgrade pip setuptools wheel
+        run: sudo apt-get install -y libxml2 libxslt1 gcc
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
