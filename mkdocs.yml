@@ -53,8 +53,8 @@ plugins:
   # Adding the date of last update
   - git-revision-date-localized:
       type: iso_date # Format yyyy-mm-dd
-  - mkdocs-jupyter:
-      include_source: True # Enable download ipynb files
+  # - mkdocs-jupyter:
+  #     include_source: True # Enable download ipynb files
 
 # Extensions
 markdown_extensions:
