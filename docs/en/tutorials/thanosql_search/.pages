@@ -1,1 +1,4 @@
-collapse_single_pages: true
+nav:
+    - select_image_query.ipynb
+    - simclr_image_search.ipynb
+    - clip_image_search.ipynb
