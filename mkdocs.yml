@@ -1,6 +1,6 @@
 site_name: ThanoSQL
 site_description: AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로
-site_url: https://docs.thanosql.ai/
+site_url: https://docs2.thanosql.ai/
 site_author: Smartmind Team
 
 theme:
@@ -78,15 +78,11 @@ markdown_extensions:
       alternate_style: true
 
 # Git info
-repo_name: smartmind-team/thanosql-docs
-repo_url: https://github.com/smartmind-team/thanosql-docs
+repo_name: yeemh/docs_test
+repo_url: https://github.com/yeemh/docs_test
 edit_uri: ""
 
 extra:
-  # Google Analytics
-  analytics:
-    provider: google
-    property: G-8KVG4NMMFK
   generator: false # Hide "Made with Material for Mkdocs"
 
 extra_css:
