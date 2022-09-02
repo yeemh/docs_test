@@ -10,7 +10,6 @@ theme:
   custom_dir: overrides
   features:
     - navigation.expand # Default dropdown to expand
-    - navigation.instant # Instant loading
     - navigation.sections # At sidebar top-level section name with bold & not dropdown menu
     - navigation.tabs # Make top-level sections
     - navigation.tabs.sticky # Make top-level sections always visible
@@ -26,7 +25,9 @@ plugins:
       default_language: ko
       docs_structure: folder
       languages:
-        ko: 한국어
+        ko:
+          name: 한국어
+          build: false
         en: English
       nav_translations: # manage directory names
         ko:
