@@ -25,9 +25,7 @@ plugins:
       default_language: ko
       docs_structure: folder
       languages:
-        ko:
-          name: 한국어
-          build: false
+        ko: 한국어
         en: English
       nav_translations: # manage directory names
         ko:
@@ -56,6 +54,9 @@ plugins:
       type: iso_date # Format yyyy-mm-dd
   - mkdocs-jupyter:
       include_source: True # Enable download ipynb files
+  - redirects:
+      redirect_maps:
+        '/ko/*': '/*'
 
 # Extensions
 markdown_extensions:

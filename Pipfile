@@ -11,6 +11,7 @@ pymdown-extensions = "*"
 mkdocs-static-i18n = "*"
 mkdocs-awesome-pages-plugin = "*"
 mkdocs-jupyter = "*"
+mkdocs-redirects = "*"
 
 [dev-packages]
 
