@@ -1,3 +1,4 @@
 nav:
-  - data_upload.md
-  - thanosql_api
+  - rest_api_thanosql_query.md
+  - rest_api_thanosql_insert.md
+  - rest_api_thanosql_search.md

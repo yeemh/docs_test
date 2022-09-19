@@ -1,16 +1,12 @@
 ---
-title: 결과 출력하기
+title: PRINT
 ---
 
-# __결과 출력하기 (PRINT)__
+# __PRINT__
 
-## 시작 전 사전 정보
+## __1. PRINT 문__
 
-- 마지막 수정날짜 : {{ git_revision_date_localized }}
-
-## __1. PRINT 구문 개요__
-
-사용자는 "__PRINT__" 구문을 사용하여 이미지, 오디오 그리고 비디오 파일을 출력할 수 있습니다. 또한, 서브 쿼리를 사용하여 "__SEARCH__" 구문을 통해 나온 결과를 바로 출력 할 수 있습니다. 
+사용자는 "__PRINT__" 구문을 사용하여 이미지, 오디오 그리고 비디오 파일을 출력할 수 있습니다. 
 
 ## __2. PRINT 구문__
 "__PRINT__" 구문
@@ -30,7 +26,7 @@ OPTIONS(
 AS 
 [출력할 데이터 세트]
 ```
-## __3. PRINT 구문 예시__
+## __3. PRINT 예시__
 
 ### __3.1 이미지 출력__ 
 
@@ -88,7 +84,7 @@ FROM junyong_vid
 
 ### __3.4 서브 쿼리를 사용하여 출력하기__
 
-다음 쿼리는 이전 [SEARCH 쿼리](/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX)에서 만들었던 "__SEARCH__" 쿼리문을 "__PRINT__" 구문의 서브 쿼리로 사용하여 "__SEARCH__"의 결과 테이블을 바로 출력합니다.
+다음 쿼리는 이전 [SEARCH](/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX)에서 만들었던 "__SEARCH__" 쿼리문을 "__PRINT__" 구문의 서브 쿼리로 사용하여 "__SEARCH__"의 결과 테이블을 바로 출력합니다.
 
 ```sql
 %%thanosql

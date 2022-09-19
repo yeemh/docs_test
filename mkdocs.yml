@@ -30,38 +30,41 @@ plugins:
       nav_translations: # manage directory names
         ko:
           Getting started: 시작하기
-          Tutorials: 사용해보기
-          Image search: Query 무작정 따라하기
-          Thanosql ml: ML 무작정 따라하기
+          Tutorials: 튜토리얼
+          Thanosql search: ThanoSQL Search
+          Thanosql ml: ThanoSQL ML
           Classification: 분류 모델 만들기
           Regression: 회귀 모델 만들기
           Audio recognition: 음성 인식 모델 만들기
-          How to guides: 안내 가이드
-          ThanoSQL query: ThanoSQL Query 다루기
-          ThanoSQL ml: ThanoSQL ML 다루기
-          ThanoSQL connecting: ThanoSQL REST API 다루기
+          How to guides: 참조
+          ThanoSQL query: ThanoSQL Statement Reference
+          ThanoSQL connecting: ThanoSQL REST API Reference
+          ThanoSQL model: ThanoSQL Pre-built Model Statement Reference
           Thanosql api: REST API 사용하기
           FAQ: 자주 묻는 질문
         en:
           Getting started: Getting Started
           Tutorials: Tutorials
-          How to guides: Guides
+          Thanosql search: ThanoSQL Search
+          Thanosql ml: ThanoSQL ML
+          How to guides: Reference
+          ThanoSQL query: ThanoSQL Statement Reference
+          ThanoSQL connecting: ThanoSQL REST API Reference
+          ThanoSQL model: ThanoSQL Pre-built Model Statement Reference
           FAQ: FAQ
   - awesome-pages: # Omits nav and control over page
       strict: false # For ipynb tutorial folder
   # Adding the date of last update
   - git-revision-date-localized:
       type: iso_date # Format yyyy-mm-dd
-  - mkdocs-jupyter:
-      include_source: True # Enable download ipynb files
-  - redirects:
-      redirect_maps:
-        '/ko/*': '/*'
+  # - mkdocs-jupyter: # Currently not using. If going to use, run pipenv install mkdocs-jupyter
+  #     include_source: True # Enable download ipynb files
 
 # Extensions
 markdown_extensions:
   - admonition
   - attr_list
+  - footnotes
   - toc:
       permalink: true
   - pymdownx.details

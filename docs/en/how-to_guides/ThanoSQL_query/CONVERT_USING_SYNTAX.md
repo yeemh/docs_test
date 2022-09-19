@@ -1,33 +1,27 @@
 ---
-title: Add unstructured properties
+title: CONVERT
 ---
 
-# **Add unstructured properties (CONVERT USING)**
+# __CONVERT__
 
-## Preface
+## __1. CONVERT Statement__
 
-- Updated Date : {{ git_revision_date_localized }}
-
-## **1. CONVERT USING Query Syntax Overview**
-
-The "**CONVERT USING**" syntax uses information from unstructured data, such as images, videos, and voice, to convert to vector format using a quantization algorithm and add this value to the dataset you want to use.
-
-## **2. CONVERT USING Query Syntax**
+The "__CONVERT__" statement allows users to convert unstructured data such as images, videos, and audio to vector format using a vectorization algorithm and append it to the given data table. 
+## __2. CONVERT Syntax__
 
 ```sql
 CONVERT USING [AI_model_to_use]
 OPTIONS(
-    table_name=[Table_name_to_be_saved]
+    table_name=[table_name_to_be_saved]
     )
 AS
-[data_set_to_use]
+[dataset_to_use]
 ```
 
-## **3. CONVERT USING Query Syntax example**
+## __3. CONVERT Examples__
 
-### **3.1 `Color_descriptor` Image quantification using algorithms**
-
-The example below uses the color feature extraction model created in [Transform Unstructured Data(CREATE TABLE)](/en/how-to_guides/ThanoSQL_query/CREATE_TABLE_SYNTAX/) to store the quantized results by adding a new column to the "color_descriptor_table_test" table stored in the ThanoSQL DB.
+### __3.1 Image vectorization using `Color_descriptor` algorithm__
+The example below uses the color feature extraction model created in [CREATE TABLE](/en/how-to_guides/ThanoSQL_query/CREATE_TABLE_SYNTAX/) to store the vectorized results as a new column to the "color_descriptor_table_test" table.
 
 ```sql
 %%thanosql
@@ -42,9 +36,9 @@ FROM color_descriptor_table_test
 
 [![IMAGE](/img/thanosql_syntax/query/CONVERT/img1.png)](/img/thanosql_syntax/query/CONVERT/img1.png)
 
-### **3.2 `clip_en` Image digitization using algorithms**
+### __3.2 Image vectorization using `clip_en` algorithm__
 
-The example below stores the quantized results using the `clip_en` algorithm by adding a new column to the "mnist_dataset" table stored on the ThanoSQL DB.
+The example below stores the vectorized results of the images using the `clip_en` algorithm as a new column to the "mnist_dataset" table.
 
 ```sql
 %%thanosql

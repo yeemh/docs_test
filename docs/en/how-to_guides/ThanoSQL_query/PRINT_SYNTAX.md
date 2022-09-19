@@ -1,45 +1,39 @@
 ---
-title: Print the result
+title: PRINT
 ---
 
-# **Print the result (PRINT)**
+# __PRINT__
 
-## Preface
+## __1. PRINT Statement__
+The "__PRINT__" statement allows users to to output images, audio, and video files.
 
-- Updated Date : {{ git_revision_date_localized }}
+## __2. PRINT Syntax__
 
-## **1. PRINT Syntax Overview**
-
-Users can use the "**PRINT**" syntax to output images, audio, and video files. You can also use subqueries to immediately output results from the "**SEARCH**" syntax.
-
-## **2. PRINT Syntax**
-
-"**PRINT**" Syntax
-
+The "__PRINT__" syntax
 ```sql
 %%thanosql
 PRINT IMAGE | AUDIO | VIDEO
 AS
-[data_set_to_output]
+[dataset_to_output]
 ```
 
-"**PRINT**" syntax using OPTIONS
+The "__PRINT__" syntax with an "__OPTIONS__" clause.
 
 ```sql
 %%thanosql
 PRINT IMAGE | AUDIO | VIDEO
-OPTIONS(
+OPTIONS (
     image_col | audio_col | video_col = [image_path_column_name]
     )
 AS
-[data_set_to_output]
+[dataset_to_output]
 ```
 
-## **3. PRINT Syntax example**
+## __3. PRINT Example__
 
-### **3.1 Image Print**
+### __3.1 Image Print__
 
-Outputs image files in the data table using the "**PRINT**" query statement.
+Outputs image files from the table.
 
 ```sql
 %%thanosql
@@ -53,11 +47,11 @@ FROM junyong_img
 ```
 
 !!! note ""
-    - `junyong_img` : Data table containing image file paths
+    - `junyong_img` : Table containing paths of the image files
 
-### **3.2 Audio Print**
+### __3.2 Audio Print__
 
-Outputs audio files in the data table using the "**PRINT**" query statement.
+Outputs audio files from the table.
 
 ```sql
 %%thanosql
@@ -73,11 +67,11 @@ FROM junyong_aud
 [![IMAGE](/img/thanosql_syntax/query/PRINT/PRINT_img1.png)](/img/thanosql_syntax/query/PRINT/PRINT_img1.png)
 
 !!! note ""
-    - `junyong_aud` : Data table containing audio file paths
+    - `junyong_aud` : Table containing paths of the audio files
 
-### **3.3 Video Print**
+### __3.3 Video Print__
 
-Outputs video files in the data table using the "**PRINT**" query statement.
+Outputs video files from the table.
 
 ```sql
 %%thanosql
@@ -91,11 +85,11 @@ FROM junyong_vid
 ```
 
 !!! note ""
-    - `junyong_vid` : Data table containing video file paths
+    - `junyong_vid` : Table containing paths of the video files
 
-### **3.4 Printing using subqueries**
+### __3.4 Print with a subquery__
 
-The following query immediately outputs the result table of "**SEARCH**" using the "**SEARCH**" query statement created in the previous [SEARCH query](/en/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX) as a subquery of the "**PRINT**" syntax.
+The following statement outputs the results of "__SEARCH__" statement created in the nested [SEARCH](/en/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX). 
 
 ```sql
 %%thanosql

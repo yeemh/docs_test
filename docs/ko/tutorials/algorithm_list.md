@@ -1,0 +1,118 @@
+---
+title: ThanoSQL 모든 튜토리얼
+---
+
+# __ThanoSQL 모든 튜토리얼__ 
+
+<div class="card">
+    <header>
+        <h2 id="card-h2"> ThanoSQL Search</h2>
+    </header>
+    <ul class="fullclick">
+        <li>
+            <a href="/tutorials/thanosql_search/search_image_by_keyword/">
+                <h3>
+                    키워드로 이미지 검색하기
+                </h3>
+                <p>
+                    <br>ThanoSQL의 키워드-이미지 검색 모델을 사용하여 특정 키워드를 이용해 원하는 음식 이미지에 대한 검색을 진행합니다.</br>
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_search/search_image_by_image/">
+                <h3>
+                    이미지로 이미지 검색하기
+                </h3>
+                <p>
+                    <br>ThanoSQL의 이미지-이미지 검색 모델을 사용하여 손글씨 데이터를 입력하고 DB 내에서 입력 이미지와 유사한 이미지에 대한 검색을 진행합니다.</br>
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_search/search_image_by_text/">
+                <h3>
+                    텍스트로 이미지 검색하기 
+                </h3>
+                <p>
+                    <br>ThanoSQL의 텍스트-이미지 검색 모델을 사용하여 텍스트로 원하는 이미지에 대한 검색을 진행합니다.</br>
+                </p>
+            </a>
+        </li>
+    </ul>
+    <header>
+        <h2 id="card-h2"> ThanoSQL ML</h2>
+    </header>
+    <ul class="fullclick">
+        <li>
+            <a href="/tutorials/thanosql_ml/classification/automl_classification/">
+                <h3>
+                    Auto-ML을 사용하여 분류 모델 만들기
+                </h3>
+                <p>
+                    <br>ThanoSQL의 Auto-ML을 사용하여 생존자 예측 분류를 진행합니다.</br>
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_ml/classification/image_classification/">
+                <h3>
+                    이미지 분류 모델 만들기
+                </h3>
+                <p>
+                    <br>
+                         ThanoSQL의 이미지 분류 모델을 사용하여 10,000종 이상의 상품에 대한 분류를 진행합니다.
+                    </br>  
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_ml/classification/text_classification/">
+                <h3>
+                    텍스트 분류 모델 만들기
+                </h3>
+                <p>
+                    <br>
+                        ThanoSQL의 텍스트 분류 모델을 사용하여 영화 리뷰의 감정에 대한 분류를 진행합니다.
+                    </br>
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_ml/regression/automl_regression/">
+                <h3>
+                    Auto-ML을 사용하여 예측 모델 만들기
+                </h3>
+                <p>
+                    <br>
+                        ThanoSQL의 Auto-ML을 사용하여 자전거의 수요에 대한 예측을 진행합니다.
+                    </br>
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_ml/audio_recognition/speech_recognition/">
+                <h3>
+                    오디오 파일을 받아쓰는 음성 인식 모델 만들기
+                </h3>
+                <p>
+                    <br>
+                        ThanoSQL의 음성 인식 모델을 사용하여 음성 파일의 텍스트로의 변환을 진행합니다.
+                    </br>
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/tutorials/thanosql_ml/udm_tutorial/">
+                <h3>
+                    User Defined Model in ThanoSQL
+                </h3>
+                <p>
+                    <br>
+                        사용자가 Python으로 만든 모델을 ThanoSQL에 업로드하여 예측을 진행합니다.
+                    </br>
+                </p>
+            </a>
+        </li>
+    </ul>
+</div>
