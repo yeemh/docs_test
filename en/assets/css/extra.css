@@ -1,0 +1,121 @@
+:root > * {
+  --md-primary-fg-color: #604bcc;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  margin-bottom: 32px;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 5%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+  border: none;
+  transition: box-shadow 0.28s ease-in-out;
+}
+.card header {
+  background: #eceff1;
+  padding: 16px 32px;
+}
+#card-h2 {
+  color: #9aa0a6;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+}
+
+.card .fullclick {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0;
+}
+.card .fullclick li {
+  margin: 12px 0 !important;
+  min-height: 68px;
+  padding: 0;
+}
+.card .fullclick a {
+  border: 1px solid transparent;
+  display: block;
+  margin: 0;
+  padding: 23px;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.card .fullclick a:hover {
+  transition: box-shadow 0.28s ease-in-out;
+  box-shadow: 0 1px 3px 0 rgb(1 67 163 / 5%), 0 4px 8px 3px rgb(1 67 163 / 15%);
+  border: 1px solid #604bcc;
+  border-radius: 4px;
+  transition: box-shadow 0.28s ease-in-out;
+}
+.card .fullclick h3 {
+  color: #4a5960;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0;
+}
+.card .fullclick a:hover h3 {
+  color: #604bcc;
+}
+.card .fullclick p {
+  color: rgba(82, 110, 122, 0.92);
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+.card .fullclick a:hover p {
+  color: #604bcc;
+}
+
+img {
+  max-height:400px;
+  max-width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* DataFrame */
+/* From: https://github.com/jupyter/notebook/blob/master/notebook/static/notebook/less/renderedhtml.less */
+table {
+  width: max-content;
+}
+table.dataframe {
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+table.dataframe thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+table.dataframe tr, table.dataframe th, table.dataframe td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+table.dataframe th {
+  font-weight: bold;
+}
+table.dataframe tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+table.dataframe tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+* + table {
+  margin-top: 1em;
+}
+.df_size {
+  overflow: scroll;
+}

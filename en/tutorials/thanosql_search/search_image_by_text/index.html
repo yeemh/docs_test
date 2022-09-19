@@ -1,0 +1,2406 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로">
+      
+      
+        <meta name="author" content="Smartmind Team">
+      
+      
+        <link rel="canonical" href="https://docs2.thanosql.ai/en/tutorials/thanosql_search/search_image_by_text/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Search Image by Text - ThanoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="/assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#search-image-by-text" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="ThanoSQL" class="md-header__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../../../../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ThanoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Search Image by Text
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../../../../tutorials/thanosql_search/search_image_by_text/" hreflang="ko" class="md-select__link">
+                    한국어
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="./" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yeemh/docs_test" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../" class="md-tabs__link">
+      Intro
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../getting_started/how_to_use_ThanoSQL/" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../algorithm_list/" class="md-tabs__link md-tabs__link--active">
+        Tutorials
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../how-to_guides/reference/" class="md-tabs__link">
+        Reference
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../FAQ/frequently_asked_question/" class="md-tabs__link">
+        FAQ
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="ThanoSQL" class="md-nav__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../../../../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    ThanoSQL
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yeemh/docs_test" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/how_to_use_ThanoSQL/" class="md-nav__link">
+        ThanoSQL Web Manual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/hello_ThanoSQL/" class="md-nav__link">
+        ThanoSQL Workspace Manual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/data_upload/" class="md-nav__link">
+        How to upload your data to ThanoSQL workspace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm_list/" class="md-nav__link">
+        ThanoSQL All Tutorials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          ThanoSQL Search
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Search" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Search
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_image_by_keyword/" class="md-nav__link">
+        Search Image by Keyword
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_image_by_image/" class="md-nav__link">
+        Search Image by Image
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Search Image by Text
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Search Image by Text
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial-introduction" class="md-nav__link">
+    Tutorial Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-prepare-dataset-and-model" class="md-nav__link">
+    0. Prepare Dataset and Model
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Prepare Dataset and Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-dataset" class="md-nav__link">
+    Prepare Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-model" class="md-nav__link">
+    Prepare the Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-check-dataset" class="md-nav__link">
+    1. Check Dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-creating-a-vectorization-model" class="md-nav__link">
+    2. Creating a Vectorization Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-search" class="md-nav__link">
+    3. Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-in-conclusion" class="md-nav__link">
+    4. In Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          ThanoSQL ML
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL ML" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL ML
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/classification/automl_classification/" class="md-nav__link">
+        Create a Classification Model Using AutoML
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/classification/image_classification/" class="md-nav__link">
+        Create an Image Classification Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/classification/text_classification/" class="md-nav__link">
+        Create a Text Classification Model
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          Regression
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Regression" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Regression
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/regression/automl_regression/" class="md-nav__link">
+        Create a Regression Model Using AutoML
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_3" type="checkbox" id="__nav_3_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3">
+          Audio recognition
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Audio recognition" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Audio recognition
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/audio_recognition/speech_recognition/" class="md-nav__link">
+        Create a Speech Recognition Model
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/udm_tutorial/" class="md-nav__link">
+        Using the Custom Model in ThanoSQL
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/reference/" class="md-nav__link">
+        Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          ThanoSQL Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/BUILD_MODEL_SYNTAX/" class="md-nav__link">
+        BUILD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/FIT_MODEL_SYNTAX/" class="md-nav__link">
+        FIT MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/UPLOAD_SYNTAX/" class="md-nav__link">
+        UPLOAD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/DELETE_MODEL_SYNTAX/" class="md-nav__link">
+        DELETE  MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/TRANSFORM_MODEL_SYNTAX/" class="md-nav__link">
+        TRANSFORM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/PREDICT_MODEL_SYNTAX/" class="md-nav__link">
+        PREDICT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/EVALUATE_MODEL_SYNTAX/" class="md-nav__link">
+        EVALUATE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/CREATE_TABLE_SYNTAX/" class="md-nav__link">
+        CREATE TABLE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/CONVERT_USING_SYNTAX/" class="md-nav__link">
+        CONVERT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/SEARCH_SYNTAX/" class="md-nav__link">
+        SEARCH
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/PRINT_SYNTAX/" class="md-nav__link">
+        PRINT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/GET_SYNTAX/" class="md-nav__link">
+        GET
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/LIST_SYNTAX/" class="md-nav__link">
+        LIST
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          ThanoSQL Pre-built Model Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Pre-built Model Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Pre-built Model Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/AutomlClassifier/" class="md-nav__link">
+        AutomlClassifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/AutomlRegressor/" class="md-nav__link">
+        AutomlRegressor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/ConvNeXt_EfficientNet/" class="md-nav__link">
+        ConvNeXt & EfficientNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/Albert_Electra/" class="md-nav__link">
+        Albert & Electra
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/wav2vec2/" class="md-nav__link">
+        Wav2Vec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/SimCLR/" class="md-nav__link">
+        SimCLR
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/CLIP/" class="md-nav__link">
+        CLIP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          ThanoSQL REST API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL REST API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL REST API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_query/" class="md-nav__link">
+        How to Query using ThanoSQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_insert/" class="md-nav__link">
+        How to Upload to ThanoSQL DB
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_search/" class="md-nav__link">
+        How to Use ThanoSQL Search
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FAQ/frequently_asked_question/" class="md-nav__link">
+        FAQs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial-introduction" class="md-nav__link">
+    Tutorial Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-prepare-dataset-and-model" class="md-nav__link">
+    0. Prepare Dataset and Model
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Prepare Dataset and Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-dataset" class="md-nav__link">
+    Prepare Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-model" class="md-nav__link">
+    Prepare the Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-check-dataset" class="md-nav__link">
+    1. Check Dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-creating-a-vectorization-model" class="md-nav__link">
+    2. Creating a Vectorization Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-search" class="md-nav__link">
+    3. Search
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-in-conclusion" class="md-nav__link">
+    4. In Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+
+
+                
+
+
+<h1 id="search-image-by-text"><strong>Search Image by Text</strong><a class="headerlink" href="#search-image-by-text" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Tutorial Difficulty : ★★☆☆☆</li>
+<li>7 min read</li>
+<li>Languages : <a href="https://en.wikipedia.org/wiki/SQL">SQL</a> (100%)</li>
+<li>File location : tutorial_en/thanosql_search/search_image_by_text.ipynb</li>
+<li>References : <a href="https://unsplash.com/data">Unsplash Dataset - Lite</a>, <a href="https://arxiv.org/abs/2103.00020">Learning Transferable Visual Models From Natural Language Supervision</a></li>
+</ul>
+<h2 id="tutorial-introduction">Tutorial Introduction<a class="headerlink" href="#tutorial-introduction" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+    <h4 class="admonition-title">Understanding Vectorizaion</h4>
+    <p>For computers to understand human language, it must be vectorized. Recently, studies on pre-built models such as <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a> and <a href="https://en.wikipedia.org/wiki/GPT-3">GPT-3</a> have been actively carried out, showing remarkable results. These models identify the meaning of each sentence based on <a href="https://en.wikipedia.org/wiki/Self-supervised_learning">Self-Supervised Learning</a>, and sentences with similar meanings are vectorized and placed close to each other in a low-dimensional space. Self-supervised learning allows learning without labeling by determining whether each sentence/context is true/false. It randomly shuffles the order between sentences or masks some words.</p>
+</div>
+
+<p>The handling of different forms of input, such as texts and images, together is called multi-modal. "<strong>CLIP: Connecting Text and Image</strong>" utilizes a multi-modal model to understand low-dimensional vectors. While previous models only trained <a href="https://en.wikipedia.org/wiki/Feature_(machine_learning)">features</a> of the image, the multi-modal model can train both images and texts. It can even learn the features of the texts that describe the images. In addition, by placing texts and images together in a low-dimensional space, the similarity between texts and images can be calculated. From this, a search algorithm can be derived.</p>
+<p>ThanoSQL uses machine learning algorithms to vectorize datasets. The vectorized data is stored in a database column, and is used to search for similar images. This can be done by calculating the similarity scores.</p>
+<p><strong>The following are examples and applications of the ThanoSQL text-image search algorithm.</strong></p>
+<ul>
+<li>Describe the desired scene of an image or video you have with text and search for the image that is the most similar to it. Using text-based descriptions rather than the keywords of a product, search for the most similar product images.</li>
+<li>Search for a timestamp in a Youtube video to place an advertisement in. Easily search for mountain or camping scenes to insert your travel advertisement. </li>
+</ul>
+<div class="admonition note">
+    <h4 class="admonition-title">In this tutorial</h4>
+    <p>👉 Unsplash released images taken by more than 200,000 photographers for free to be used as an AI dataset. <code>Unsplash Dataset - Lite</code> consists of 25,000 nature-themed images with 25,000 keywords. </p>
+</div>
+
+<p>In this tutorial, we will use the text-image search model to search for images from the <code>Unsplash Dataset - Lite</code> dataset using text.</p>
+<h2 id="0-prepare-dataset-and-model"><strong>0. Prepare Dataset and Model</strong><a class="headerlink" href="#0-prepare-dataset-and-model" title="Permanent link">&para;</a></h2>
+<p>As mentioned in the <a href="https://docs.thanosql.ai/en/getting_started/how_to_use_ThanoSQL/#5-thanosql-workspace">ThanoSQL Workspace</a>, you must create an API token and run the query below to execute the query of ThanoSQL. </p>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">thanosql</span>
+<span class="o">%</span><span class="n">thanosql</span> <span class="n">API_TOKEN</span><span class="o">=&lt;</span><span class="n">Issued_API_TOKEN</span><span class="o">&gt;</span>
+</code></pre></div>
+<h3 id="prepare-dataset"><strong>Prepare Dataset</strong><a class="headerlink" href="#prepare-dataset" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">GET</span> <span class="n">THANOSQL</span> <span class="n">DATASET</span> <span class="n">unsplash_data</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>GET THANOSQL DATASET</strong>" downloads the specified dataset to the workspace. </li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for the <strong>GET THANOSQL DATASET</strong> clause.
+        <ul>
+            <li>"overwrite" : determines whether to overwrite a dataset if it already exists. If set as True, the old dataset is replaced with the new dataset (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">COPY</span> <span class="n">unsplash_data</span> 
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">FROM</span> <span class="s1">&#39;thanosql-dataset/unsplash_data/unsplash.csv&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>COPY</strong>" specifies the name of the dataset to be saved as a database table. </li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for the <strong>COPY</strong> clause.
+        <ul>
+           <li>"overwrite" : determines whether to overwrite a table if it already exists. If set as True, the old table is replaced with the new table (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<h3 id="prepare-the-model"><strong>Prepare the Model</strong><a class="headerlink" href="#prepare-the-model" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">GET</span> <span class="n">THANOSQL</span> <span class="n">MODEL</span> <span class="n">tutorial_search_clip</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">AS</span> <span class="n">tutorial_search_clip</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details </h4>
+    <ul>
+        <li>"<strong>GET THANOSQL MODEL</strong>" downloads the specified model to the workspace. </li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for the <strong>GET THANOSQL MODEL</strong> clause.
+        <ul>
+            <li>"overwrite" : determines whether to overwrite a model if it already exists. If set as True, the old model is replaced with the new model (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+        <li>"<strong>AS</strong>" names the given model. If not specified, the model will be named as the default <code>THANOSQL MODEL</code> name.</li>
+    </ul>
+</div>
+
+<h2 id="1-check-dataset"><strong>1. Check Dataset</strong><a class="headerlink" href="#1-check-dataset" title="Permanent link">&para;</a></h2>
+<p>To create a text-image search model, we use the <code>unsplash_data</code> table. To check the contents of the table, run the query below.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="n">photo_id</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">photo_image_url</span><span class="p">,</span> <span class="n">photo_description</span><span class="p">,</span> <span class="n">ai_description</span>
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">Understanding the Data</h4>
+    <ul>
+        <li><code>photo_id</code>: unique id column of the image.</li>
+        <li><code>image_path</code>: the name of the column that stores the image path.</li>
+        <li><code>photo_image_url</code>: the name of the column indicating the address of the original image in the unsplash website.</li>
+        <li><code>photo_description</code>: the name of the column that represents a short description of the image.</li>
+        <li><code>ai_description</code>: the name of the column that describes the image generated by AI.</li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span>
+<span class="n">SELECT</span> <span class="n">image_path</span> 
+<span class="n">FROM</span> <span class="n">unsplash_data</span> 
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_16_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_16_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_16_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_16_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_16_9.jpg" /></p>
+<h2 id="2-creating-a-vectorization-model"><strong>2. Creating a Vectorization Model</strong><a class="headerlink" href="#2-creating-a-vectorization-model" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+    <h4 class="admonition-title">Notes</h4>
+    <p>Because the text-image algorithm takes a long time to train and since it uses a pre-trained model that used 400 million datasets to train, we omit the training process that uses the "<strong>BUILD MODEL</strong>" query in this tutorial. The <code>tutorial_search_clip</code> model utilizes a pre-trained model that uses <code>clipen</code>. When the "<strong>CONVERT USING</strong>" statement is executed, a column containing the vectorized images is created with the name "model_name (<code>tutorial_search_clip</code>)_base algorithm_name (<code>clipen</code>)". When the "<strong>SEARCH IMAGE</strong>" statement is executed, an similarity column is created with the name "model_name (<code>tutorial_search_clip</code>)_base algorithm_name (<code>clipen</code>)_similarity count(1)". "Count" here refers to the number of texts used in the search. When a search is performed with two or more texts, the number of columns is sequentially increased. For more details, see below.</p>
+</div>
+<p>(Expected time to execute query: 3 min)  </p>
+<p>To vectorize the <code>unsplash_data</code> images, run the "<strong>CONVERT USING</strong>" query. Results are stored in the new <mark style="background-color:#D7D0FF">tutorial_search_clip_clipen</mark> column. (The resulting column name will be added as {model_name}_{base_model_name}) </p>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">CONVERT</span> <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+<span class="n">OPTIONS</span> <span class="p">(</span>
+    <span class="n">image_col</span><span class="o">=</span><span class="s2">&quot;image_path&quot;</span><span class="p">,</span> 
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;unsplash_data&quot;</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span>
+    <span class="p">)</span>
+<span class="n">AS</span> 
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+      <th>tutorial_search_clip_clipen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+      <td>[-0.0148640582, 0.0549194068, 0.0118315415, 0....</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+      <td>[-0.0345519036, 0.0314463899, -0.0065574604, 0...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+      <td>[-0.031663157000000004, 0.0538793579, 0.013499...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+      <td>[0.0018179789000000001, 0.009972040500000001, ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+      <td>[-0.0223454703, 0.0129929734, -0.0019434979, -...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>24963</th>
+      <td>c7OrOMxrurA</td>
+      <td>thanosql-dataset/unsplash_data/c7OrOMxrurA.jpg</td>
+      <td>https://images.unsplash.com/photo-159300793778...</td>
+      <td>None</td>
+      <td>black metal fence during daytime</td>
+      <td>[-0.0114669325, -0.0021708854, -0.0104937684, ...</td>
+    </tr>
+    <tr>
+      <th>24964</th>
+      <td>15IuQ5a0Qwg</td>
+      <td>thanosql-dataset/unsplash_data/15IuQ5a0Qwg.jpg</td>
+      <td>https://images.unsplash.com/photo-159296761254...</td>
+      <td>Pearl earrings and seashells</td>
+      <td>white and brown seashell on white surface</td>
+      <td>[-0.0289349873, 0.051604818600000005, 0.015792...</td>
+    </tr>
+    <tr>
+      <th>24965</th>
+      <td>w8nrcXz8pwk</td>
+      <td>thanosql-dataset/unsplash_data/w8nrcXz8pwk.jpg</td>
+      <td>https://images.unsplash.com/photo-159299937329...</td>
+      <td>None</td>
+      <td>leopard on brown tree trunk during daytime</td>
+      <td>[0.0069489880000000006, -0.0320789367, -0.0139...</td>
+    </tr>
+    <tr>
+      <th>24966</th>
+      <td>n1jHrRhehUI</td>
+      <td>thanosql-dataset/unsplash_data/n1jHrRhehUI.jpg</td>
+      <td>https://images.unsplash.com/photo-159192792878...</td>
+      <td>Floral truck in the streets of Rome</td>
+      <td>woman in beige coat and white hat standing on ...</td>
+      <td>[0.005270903, -0.0013724641000000001, 0.025223...</td>
+    </tr>
+    <tr>
+      <th>24967</th>
+      <td>Ic74ACoaAX0</td>
+      <td>thanosql-dataset/unsplash_data/Ic74ACoaAX0.jpg</td>
+      <td>https://images.unsplash.com/photo-159240763188...</td>
+      <td>None</td>
+      <td>green plants on brown rocky mountain under blu...</td>
+      <td>[-0.0143270381, 0.0594774038, 0.0045367004, -0...</td>
+    </tr>
+  </tbody>
+</table>
+<p>24968 rows × 6 columns</p>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>CONVERT USING</strong>" uses the <code>tutorial_search_clip</code> model as an algorithm for image vectorization.</li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values required for image vectorization.
+        <ul>
+            <li>"table_name" : the name of the table</li>
+            <li>"image_col" : the name of the column containing the image path </li>
+            <li>"batch_size" : the size of dataset bundle utilized in a single cycle of training. The larger the number, the better the learning performance. However, considering the size of the memory, only 128 is used in this case. (DEFAULT: 16) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+      <th>tutorial_search_clip_clipen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+      <td>[-0.0148640582, 0.0549194068, 0.0118315415, 0....</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+      <td>[-0.0345519036, 0.0314463899, -0.0065574604, 0...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+      <td>[-0.031663157000000004, 0.0538793579, 0.013499...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+      <td>[0.0018179789000000001, 0.009972040500000001, ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+      <td>[-0.0223454703, 0.0129929734, -0.0019434979, -...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="3-search"><strong>3. Search</strong><a class="headerlink" href="#3-search" title="Permanent link">&para;</a></h2>
+<p>Perform a text-based image search using the "<strong>SEARCH IMAGE</strong>" query statement and the <code>tutorial_search_clip</code> model created. Execute the following query with the text value of "a black cat" and embedded <code>unsplash_data</code> images to calculate the similarity. The result values are saved into the newly added <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> column.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a black cat&quot;</span>
+<span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+<span class="n">AS</span> 
+<span class="n">SELECT</span> <span class="o">*</span> 
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+      <th>tutorial_search_clip_clipen</th>
+      <th>tutorial_search_clip_clipen_similarity1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+      <td>[-0.0148640582, 0.0549194068, 0.0118315415, 0....</td>
+      <td>0.185725</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+      <td>[-0.0345519036, 0.0314463899, -0.0065574604, 0...</td>
+      <td>0.148399</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+      <td>[-0.031663157000000004, 0.0538793579, 0.013499...</td>
+      <td>0.187703</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+      <td>[0.0018179789000000001, 0.009972040500000001, ...</td>
+      <td>0.177512</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+      <td>[-0.0223454703, 0.0129929734, -0.0019434979, -...</td>
+      <td>0.218824</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>24963</th>
+      <td>c7OrOMxrurA</td>
+      <td>thanosql-dataset/unsplash_data/c7OrOMxrurA.jpg</td>
+      <td>https://images.unsplash.com/photo-159300793778...</td>
+      <td>None</td>
+      <td>black metal fence during daytime</td>
+      <td>[-0.0114669325, -0.0021708854, -0.0104937684, ...</td>
+      <td>0.226402</td>
+    </tr>
+    <tr>
+      <th>24964</th>
+      <td>15IuQ5a0Qwg</td>
+      <td>thanosql-dataset/unsplash_data/15IuQ5a0Qwg.jpg</td>
+      <td>https://images.unsplash.com/photo-159296761254...</td>
+      <td>Pearl earrings and seashells</td>
+      <td>white and brown seashell on white surface</td>
+      <td>[-0.0289349873, 0.051604818600000005, 0.015792...</td>
+      <td>0.147114</td>
+    </tr>
+    <tr>
+      <th>24965</th>
+      <td>w8nrcXz8pwk</td>
+      <td>thanosql-dataset/unsplash_data/w8nrcXz8pwk.jpg</td>
+      <td>https://images.unsplash.com/photo-159299937329...</td>
+      <td>None</td>
+      <td>leopard on brown tree trunk during daytime</td>
+      <td>[0.0069489880000000006, -0.0320789367, -0.0139...</td>
+      <td>0.227299</td>
+    </tr>
+    <tr>
+      <th>24966</th>
+      <td>n1jHrRhehUI</td>
+      <td>thanosql-dataset/unsplash_data/n1jHrRhehUI.jpg</td>
+      <td>https://images.unsplash.com/photo-159192792878...</td>
+      <td>Floral truck in the streets of Rome</td>
+      <td>woman in beige coat and white hat standing on ...</td>
+      <td>[0.005270903, -0.0013724641000000001, 0.025223...</td>
+      <td>0.169803</td>
+    </tr>
+    <tr>
+      <th>24967</th>
+      <td>Ic74ACoaAX0</td>
+      <td>thanosql-dataset/unsplash_data/Ic74ACoaAX0.jpg</td>
+      <td>https://images.unsplash.com/photo-159240763188...</td>
+      <td>None</td>
+      <td>green plants on brown rocky mountain under blu...</td>
+      <td>[-0.0143270381, 0.0594774038, 0.0045367004, -0...</td>
+      <td>0.152199</td>
+    </tr>
+  </tbody>
+</table>
+<p>24968 rows × 7 columns</p>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>SEARCH IMAGE</strong>" searches for images. Input the text description of the image using the "text" variable. </li>
+        <li>"<strong>USING</strong>" specifies <code>tutorial_search_clip</code> as the model.</li>
+    </ul>
+</div>
+
+<p>Execute the query below to view the similarity of the 5 most similar images to 'a black cat'.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+<span class="n">FROM</span> <span class="p">(</span>
+    <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a black cat&quot;</span>
+    <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+    <span class="n">AS</span> 
+    <span class="n">SELECT</span> <span class="o">*</span> 
+    <span class="n">FROM</span> <span class="n">unsplash_data</span>
+    <span class="p">)</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>image_path</th>
+      <th>tutorial_search_clip_clipen_similarity1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>thanosql-dataset/unsplash_data/UMyfDjQ6Ep8.jpg</td>
+      <td>0.316560</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>thanosql-dataset/unsplash_data/7XJ3d0xK444.jpg</td>
+      <td>0.311931</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>thanosql-dataset/unsplash_data/m8HsSWh-y6E.jpg</td>
+      <td>0.310819</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>thanosql-dataset/unsplash_data/6ST6S6i9IGM.jpg</td>
+      <td>0.310214</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>thanosql-dataset/unsplash_data/aFyD5aWKu6k.jpg</td>
+      <td>0.309158</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>SEARCH IMAGE</strong>" calculates and returns the similarity between the input text and the image.</li>
+        <li>The first "<strong>SELECT</strong>" returns the <mark style="background-color:#D7D0FF ">image_path</mark> column and the <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> column from the result nested query.</li>
+        <li>"<strong>ORDER BY</strong>" sorts the results using the <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> column in descending order ("<strong>DESC</strong>"). The top 5 results ("<strong>LIMIT</strong>" 5) are returned.</li>
+    </ul>
+</div>
+
+<p>To immediately print out the resulting images, nest the previous query with a "<strong>PRINT</strong>" clause. </p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a black cat&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/UMyfDjQ6Ep8.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_29_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/7XJ3d0xK444.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_29_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/m8HsSWh-y6E.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_29_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/6ST6S6i9IGM.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_29_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/aFyD5aWKu6k.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_29_9.jpg" /></p>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <p>This query, combined with the query above, is made of three levels.</p>
+    <ul>
+        <li>"<strong>SELECT</strong>", in the first parentheses, produces the result of the step immediately above.</li>
+        <li>"<strong>PRINT IMAGE</strong>" prints the results of the query as images.</li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a dog on a chair&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/jZUr3AuI8io.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_31_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/nnKBZTWzlMQ.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_31_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/HG2KpOO0vSc.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_31_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/f6qFneRNwNI.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_31_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/GKY4WDO3QgY.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_31_9.jpg" /></p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;gloomy photos&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/Xo4vJrtrmmA.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_32_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/QheWOfwEUio.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_32_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/_zHYUQmWrzk.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_32_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/Tu_lH5CFFZw.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_32_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/DfYPBHaOR04.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_32_9.jpg" /></p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;the feeling when your program finally works&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/nDLYtRqJtMw.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_33_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/qNJpGSCv_Jc.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_33_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/Yb5OBk-OxJY.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_33_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/6etH6346MHE.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_33_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/7GX5aICb5i4.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/en/img/tutorials/thanosql_search/search_image_by_text/output_33_9.jpg" /></p>
+<h2 id="4-in-conclusion"><strong>4. In Conclusion</strong><a class="headerlink" href="#4-in-conclusion" title="Permanent link">&para;</a></h2>
+<p>In this tutorial, we searched for images in the <code>unsplash dataset</code> by text using a multi-modal text/image vectorization model. As this is a beginner-level tutorial, we focused on the process and showing visible results rather than accuracy. The image search can retrieve more accurate results by utilizing various queries.</p>
+<div class="admonition tip">
+    <h4 class="admonition-title">Inquiries about deploying a model for your own service</h4>
+    <p>If you have any difficulties creating your own model using ThanoSQL or applying it to your services, please feel free to contact us below😊</p>
+    <p>For inquiries regarding building text-image search models: contact@smartmind.team</p>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-09-19</span>
+      
+    
+  </small>
+</div>
+
+              
+
+<style>
+    .jupyter-wrapper a {
+        color: var(--md-typeset-a-color)
+    }
+</style>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../search_image_by_image/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Search Image by Image" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Search Image by Image
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../thanosql_ml/classification/automl_classification/" class="md-footer__link md-footer__link--next" aria-label="Next: Create a Classification Model Using AutoML" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Create a Classification Model Using AutoML
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      D-201, 39, Maeheon-ro 8-gil, Seocho-gu, Seoul 06770 South Korea<br />Email : contact@smartmind.team<br />Phone : (+82) 070-7151-9357<br /><br />© Since 2018 SmartMind, Inc. All Rights Reserved.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest"], "search": "../../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

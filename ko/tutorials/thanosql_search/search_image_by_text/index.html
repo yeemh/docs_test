@@ -1,0 +1,2425 @@
+
+<!doctype html>
+<html lang="kr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로">
+      
+      
+        <meta name="author" content="Smartmind Team">
+      
+      
+        <link rel="canonical" href="https://docs2.thanosql.ai/ko/tutorials/thanosql_search/search_image_by_text/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>텍스트로 이미지 검색하기 - ThanoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="/assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="ThanoSQL" class="md-header__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../../../../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ThanoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              텍스트로 이미지 검색하기
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="언어설정">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../../../../tutorials/thanosql_search/search_image_by_text/" hreflang="ko" class="md-select__link">
+                    한국어
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="../../../../en/tutorials/thanosql_search/search_image_by_text/" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="지우기" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yeemh/docs_test" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../" class="md-tabs__link">
+      개요
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../getting_started/how_to_use_ThanoSQL/" class="md-tabs__link">
+        시작하기
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../algorithm_list/" class="md-tabs__link md-tabs__link--active">
+        튜토리얼
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../how-to_guides/reference/" class="md-tabs__link">
+        참조
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../FAQ/frequently_asked_question/" class="md-tabs__link">
+        자주 묻는 질문
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="ThanoSQL" class="md-nav__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../../../../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    ThanoSQL
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yeemh/docs_test" title="저장소로 이동" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          시작하기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="시작하기" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          시작하기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/how_to_use_ThanoSQL/" class="md-nav__link">
+        ThanoSQL 웹 사용법
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/hello_ThanoSQL/" class="md-nav__link">
+        ThanoSQL 워크스페이스 사용법
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting_started/data_upload/" class="md-nav__link">
+        ThanoSQL 데이터 업로드하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          튜토리얼
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="튜토리얼" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          튜토리얼
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm_list/" class="md-nav__link">
+        ThanoSQL 모든 튜토리얼
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          ThanoSQL Search
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Search" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Search
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_image_by_keyword/" class="md-nav__link">
+        키워드로 이미지 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_image_by_image/" class="md-nav__link">
+        이미지로 이미지 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          텍스트로 이미지 검색하기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        텍스트로 이미지 검색하기
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    시작 전 사전 정보
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    튜토리얼 소개
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    0. 데이터 세트 및 모델 준비
+  </a>
+  
+    <nav class="md-nav" aria-label="0. 데이터 세트 및 모델 준비">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    데이터 세트 준비
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    모델 준비
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 데이터 세트 확인
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 텍스트 검색을 위한 이미지 수치화 모델 생성하기
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 텍스트로 이미지 검색하기
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 튜토리얼을 마치며
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          ThanoSQL ML
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL ML" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL ML
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          분류 모델 만들기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="분류 모델 만들기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          분류 모델 만들기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/classification/automl_classification/" class="md-nav__link">
+        Auto-ML을 사용하여 분류 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/classification/image_classification/" class="md-nav__link">
+        이미지 분류 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/classification/text_classification/" class="md-nav__link">
+        텍스트 분류 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          회귀 모델 만들기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="회귀 모델 만들기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          회귀 모델 만들기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/regression/automl_regression/" class="md-nav__link">
+        Auto-ML을 사용하여 예측 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_3" type="checkbox" id="__nav_3_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3">
+          음성 인식 모델 만들기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="음성 인식 모델 만들기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          음성 인식 모델 만들기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/audio_recognition/speech_recognition/" class="md-nav__link">
+        오디오 파일을 받아쓰는 음성 인식 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanosql_ml/udm_tutorial/" class="md-nav__link">
+        User Defined Model in ThanoSQL
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          참조
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="참조" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          참조
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/reference/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          ThanoSQL Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/BUILD_MODEL_SYNTAX/" class="md-nav__link">
+        BUILD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/FIT_MODEL_SYNTAX/" class="md-nav__link">
+        FIT MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/UPLOAD_SYNTAX/" class="md-nav__link">
+        UPLOAD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/DELETE_MODEL_SYNTAX/" class="md-nav__link">
+        DELETE MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/TRANSFORM_MODEL_SYNTAX/" class="md-nav__link">
+        TRANSFORM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/PREDICT_MODEL_SYNTAX/" class="md-nav__link">
+        PREDICT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/EVALUATE_MODEL_SYNTAX/" class="md-nav__link">
+        EVALUATE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/CREATE_TABLE_SYNTAX/" class="md-nav__link">
+        CREATE TABLE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/CONVERT_USING_SYNTAX/" class="md-nav__link">
+        CONVERT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/SEARCH_SYNTAX/" class="md-nav__link">
+        SEARCH
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/PRINT_SYNTAX/" class="md-nav__link">
+        PRINT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/GET_SYNTAX/" class="md-nav__link">
+        GET
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_query/LIST_SYNTAX/" class="md-nav__link">
+        LIST
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          ThanoSQL Pre-built Model Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Pre-built Model Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Pre-built Model Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/AutomlClassifier/" class="md-nav__link">
+        AutomlClassifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/AutomlRegressor/" class="md-nav__link">
+        AutomlRegressor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/ConvNeXt_EfficientNet/" class="md-nav__link">
+        ConvNeXt & EfficientNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/Albert_Electra/" class="md-nav__link">
+        Albert & Electra
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/wav2vec2/" class="md-nav__link">
+        Wav2Vec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/SimCLR/" class="md-nav__link">
+        SimCLR
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_model/CLIP/" class="md-nav__link">
+        CLIP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          ThanoSQL REST API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL REST API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL REST API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_query/" class="md-nav__link">
+        ThanoSQL 구문 활용
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_insert/" class="md-nav__link">
+        ThanoSQL DB 업로드
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_search/" class="md-nav__link">
+        ThanoSQL 서치 사용
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          자주 묻는 질문
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="자주 묻는 질문" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          자주 묻는 질문
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FAQ/frequently_asked_question/" class="md-nav__link">
+        FAQs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    시작 전 사전 정보
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    튜토리얼 소개
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    0. 데이터 세트 및 모델 준비
+  </a>
+  
+    <nav class="md-nav" aria-label="0. 데이터 세트 및 모델 준비">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    데이터 세트 준비
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    모델 준비
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 데이터 세트 확인
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 텍스트 검색을 위한 이미지 수치화 모델 생성하기
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 텍스트로 이미지 검색하기
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 튜토리얼을 마치며
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+
+
+                
+
+
+<h1 id="_1"><strong>텍스트로 이미지 검색하기</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">시작 전 사전 정보<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>튜토리얼 난이도 : ★★☆☆☆</li>
+<li>읽는데 걸리는 시간 : 7분</li>
+<li>사용 언어 : <a href="https://ko.wikipedia.org/wiki/SQL">SQL</a> (100%)</li>
+<li>실행 파일 위치 : tutorial/thanosql_search/search_image_by_text.ipynb  </li>
+<li>참고 문서 : <a href="https://unsplash.com/data">Unsplash Dataset - Lite</a>, <a href="https://arxiv.org/abs/2103.00020">Learning Transferable Visual Models From Natural Language Supervision</a></li>
+</ul>
+<h2 id="_3">튜토리얼 소개<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+    <h4 class="admonition-title">텍스트 수치화 기술 이해하기</h4>
+    <p>자연어를 컴퓨터가 이해하려면 자연어를 수치화 해야 합니다. 최근 <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>나 <a href="https://en.wikipedia.org/wiki/GPT-3">GPT-3</a>와 같은 사전학습 모델에 대한 연구가 활발히 이루어지고 있으며, 주목할 만한 성과를 보여주고 있습니다. 이러한 모델들은 <a href="https://en.wikipedia.org/wiki/Self-supervised_learning">자가 학습(Self-Supervised Learning)</a>을 기반으로 각 문장들의 의미를 파악하고 유사한 의미를 갖는 각 문장들을 가깝게 위치하도록 저차원 공간에 수치화하여 표현합니다. 문장 간의 순서를 무작위로 섞거나 일부 단어를 마스킹하는 방식 등을 이용해 각 문장/문맥의 참/거짓 여부를 판단함으로써 라벨링 작업이 없어도 학습이 가능하도록 지원합니다.</p>
+</div>
+
+<p>텍스트와 이미지 같이 다른 형태의 입력 자료를 함께 다루는 문제를 멀티 모달(Multi-modal)이라고 합니다. "<strong>CLIP: Connecting Text and Image</strong>"은 대표적인 멀티 모달 모델로 수치화 된 저차원 공간에 대한 이해를 다루고 있습니다. 기존 모델이 이미지 자체의 <a href="https://ko.wikipedia.org/wiki/%ED%8A%B9%EC%A7%95_(%EA%B8%B0%EA%B3%84_%ED%95%99%EC%8A%B5)">특징(Feature)</a>만을 학습 했다면, 멀티 모달 모델에서는 이미지와 텍스트를 모두 입력 자료로 사용하면서 해당 이미지를 설명하는 텍스트에 대한 특징까지 동시에 학습할 수 있습니다. 또한, 텍스트와 이미지가 저차원 공간에 함께 위치함으로써 텍스트와 이미지 사이의 유사도를 판단할 수 있게 되며, 이를 응용하면 검색 알고리즘으로 사용할 수 있습니다.</p>
+<p>ThanoSQL은 인공지능 알고리즘을 이용해서 데이터 세트를 수치화 합니다. 이렇게 수치화 된 데이터는 DB의 컬럼 내에 저장되고, 입력받은 텍스트의 수치화 결과와 유사도 계산을 통해 비슷한 이미지를 검색하는데 사용됩니다.</p>
+<p><strong>아래는 ThanoSQL 텍스트-이미지 검색 알고리즘의 활용 및 예시 입니다.</strong></p>
+<ul>
+<li>사용자가 보유하고 있는 이미지나 동영상에서 원하는 장면을 텍스트로 묘사하고 이와 가장 유사한 이미지를 검색합니다. 사용자가 검색하는 상품에 대한 키워드가 아닌 텍스트 기반의 설명을 듣고 가장 유사한 상품 이미지를 노출합니다.</li>
+<li>유튜브 영상 등에서 내가 원하는 광고를 넣고 싶은 시간을 검색합니다. 여행 광고를 넣기 위해서 산이나 캠핑 장면 등이 나오는 장면을 손쉽게 검색하고 광고를 삽입합니다. </li>
+</ul>
+<div class="admonition note">
+    <h4 class="admonition-title">본 튜토리얼에서는</h4>
+    <p>👉 Unsplash는 20만 명 이상의 사진가들이 참여한 이미지들을 AI를 위한 데이터 세트로 무료로 공개했습니다. <code>Unsplash Dataset - Lite</code>는 25,000 장의 자연을 테마로한 이미지로 구성되어 있으며, 25,000 개의 키워드를 함께 제공합니다. </p>
+</div>
+
+<p>이번 튜토리얼에서는 텍스트-이미지 검색 모델을 사용하여, ThanoSQL DB의 <code>Unsplash Dataset - Lite</code> 데이터 세트의 25,000 장의 이미지 중에서 텍스트로 원하는 이미지를 검색해 봅니다.</p>
+<h2 id="0"><strong>0. 데이터 세트 및 모델 준비</strong><a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<p>ThanoSQL의 쿼리 구문을 사용하기 위해서는 <a href="https://docs.thanosql.ai/getting_started/how_to_use_ThanoSQL/#5-thanosql">ThanoSQL 워크스페이스</a>
+에서 언급된 것처럼 API 토큰을 생성하고 아래의 쿼리를 실행해야 합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">thanosql</span>
+<span class="o">%</span><span class="n">thanosql</span> <span class="n">API_TOKEN</span><span class="o">=&lt;</span><span class="n">발급받은_API_TOKEN</span><span class="o">&gt;</span>
+</code></pre></div>
+<h3 id="_4"><strong>데이터 세트 준비</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">GET</span> <span class="n">THANOSQL</span> <span class="n">DATASET</span> <span class="n">unsplash_data</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <ul>
+        <li>"<strong>GET THANOSQL DATASET</strong>" 쿼리 구문을 사용하여 원하는 데이터 세트를 워크스페이스에 저장합니다. </li>
+        <li>"<strong>OPTIONS</strong>" 쿼리 구문을 통해 <strong>GET THANOSQL DATASET</strong> 에 사용할 옵션을 지정합니다.
+        <ul>
+            <li>"overwrite" : 동일 이름의 데이터 세트가 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">COPY</span> <span class="n">unsplash_data</span> 
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">FROM</span> <span class="s1">&#39;thanosql-dataset/unsplash_data/unsplash.csv&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <ul>
+        <li>"<strong>COPY</strong>" 쿼리 구문을 사용하여 DB에 저장 할 데이터 세트명을 지정합니다. </li>
+        <li>"<strong>OPTIONS</strong>" 쿼리 구문을 통해 <strong>COPY</strong> 에 사용할 옵션을 지정합니다.
+        <ul>
+            <li>"overwrite" : 동일 이름의 데이터 세트가 DB상에 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<h3 id="_5"><strong>모델 준비</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">GET</span> <span class="n">THANOSQL</span> <span class="n">MODEL</span> <span class="n">tutorial_search_clip</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">AS</span> <span class="n">tutorial_search_clip</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <ul>
+        <li>"<strong>GET THANOSQL MODEL</strong>" 쿼리 구문을 사용하여 원하는 모델을 워크스페이스 및 DB에 저장합니다. </li>
+        <li>"<strong>OPTIONS</strong>" 쿼리 구문을 통해 <strong>GET THANOSQL MODEL</strong> 에 사용할 옵션을 지정합니다.
+        <ul>
+            <li>"overwrite" : 동일 이름의 데이터 세트가 존재하는 경우 덮어쓰기 가능 유무 설정. True일 경우 기존 데이터 세트는 새로운 데이터 세트로 변경됨 (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+        <li>"<strong>AS</strong>" 쿼리 구문을 사용하여 해당 모델의 이름을 지정합니다. AS 구문을 사용하지 않을 경우 <code>THANOSQL MODEL</code>의 이름을 그대로 사용합니다. </li>
+    </ul>
+</div>
+
+<h2 id="1"><strong>1. 데이터 세트 확인</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>텍스트-이미지 검색 모델을 만들기 위해 우리는 ThanoSQL DB에 저장되어 있는 <code>unsplash_data</code> 테이블을 사용합니다. 아래의 쿼리문을 실행하고 테이블의 내용을 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="n">photo_id</span><span class="p">,</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">photo_image_url</span><span class="p">,</span> <span class="n">photo_description</span><span class="p">,</span> <span class="n">ai_description</span>
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">데이터 이해하기</h4>
+    <ul>
+        <li><code>photo_id</code> 이미지의 고유 id 컬럼 명</li>
+        <li><code>image_path</code> 이미지가 위치한 경로의 컬럼 명</li>
+        <li><code>photo_image_url</code> 웹사이트 unsplash에서의 원본 이미지 주소를 나타내는 컬럼 명</li>
+        <li><code>photo_description</code> 해당 이미지에 대해 사람이 작성한 짧은 설명을 나타내는 컬럼 명</li>
+        <li><code>ai_description</code> AI가 생성해낸 해당 이미지에 대한 설명을 나타내는 컬럼 명</li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span>
+<span class="n">SELECT</span> <span class="n">image_path</span> 
+<span class="n">FROM</span> <span class="n">unsplash_data</span> 
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_16_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_16_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_16_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_16_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_16_9.jpg" /></p>
+<h2 id="2"><strong>2. 텍스트 검색을 위한 이미지 수치화 모델 생성하기</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+    <h4 class="admonition-title">참고 사항</h4>
+    <p>텍스트-이미지 검색 알고리즘은 학습에 오랜 시간이 걸리고 총 4억 개의 데이터 세트로 사전 학습된 모델을 사용하기 때문에 "<strong>BUILD MODEL</strong>" 쿼리 구문을 이용한 학습 과정을 본 튜토리얼에서는 생략합니다. <code>tutorial_search_clip</code> 모델은 베이스 알고리즘으로 <code>clipen</code>을 사용한 사전학습 된 모델을 가져와서 사용하게 됩니다. "<strong>CONVERT USING</strong>" 쿼리 구문을 실행하게 되면 "모델명(<code>tutorial_search_clip</code>)_베이스 알고리즘명(<code>clipen</code>)"으로 이미지가 수치화 된 컬럼이 자동으로 생성이 되며, "<strong>SEARCH IMAGE</strong>" 쿼리 구문을 실행하게 되면 "모델명(<code>tutorial_search_clip</code>)_베이스 알고리즘 명(<code>clipen</code>)_similarity수(1)"로 이미지 유사도 컬럼이 자동으로 생성 됩니다. 여기서 "수"는 검색에 사용한 텍스트의 갯수를 의미합니다. 2개 이상의 텍스트로 검색이 이루어 질 경우 순서에 따라 컬럼의 수가 순차적으로 증가되어 생성 됩니다. 자세한 사항은 아래 내용을 참고하세요.</p>
+</div>
+<p>(쿼리 실행 시 예상 소요 시간: 3 min)  </p>
+<p>다음 "<strong>CONVERT USING</strong>" 쿼리 구문을 실행하여 <code>unsplash_data</code> 이미지들을 수치화 합니다. 수치화된 결과값은 새로 생긴 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen</mark> 컬럼에 저장됩니다. (결과 컬럼명은 {model_name}_{base_model_name}으로 추가됩니다) </p>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">CONVERT</span> <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+<span class="n">OPTIONS</span> <span class="p">(</span>
+    <span class="n">image_col</span><span class="o">=</span><span class="s2">&quot;image_path&quot;</span><span class="p">,</span> 
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;unsplash_data&quot;</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span>
+    <span class="p">)</span>
+<span class="n">AS</span> 
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+      <th>tutorial_search_clip_clipen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+      <td>[-0.0148640582, 0.0549194068, 0.0118315415, 0....</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+      <td>[-0.0345519036, 0.0314463899, -0.0065574604, 0...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+      <td>[-0.031663157000000004, 0.0538793579, 0.013499...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+      <td>[0.0018179789000000001, 0.009972040500000001, ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+      <td>[-0.0223454703, 0.0129929734, -0.0019434979, -...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>24963</th>
+      <td>c7OrOMxrurA</td>
+      <td>thanosql-dataset/unsplash_data/c7OrOMxrurA.jpg</td>
+      <td>https://images.unsplash.com/photo-159300793778...</td>
+      <td>None</td>
+      <td>black metal fence during daytime</td>
+      <td>[-0.0114668589, -0.0021708228, -0.0104938177, ...</td>
+    </tr>
+    <tr>
+      <th>24964</th>
+      <td>15IuQ5a0Qwg</td>
+      <td>thanosql-dataset/unsplash_data/15IuQ5a0Qwg.jpg</td>
+      <td>https://images.unsplash.com/photo-159296761254...</td>
+      <td>Pearl earrings and seashells</td>
+      <td>white and brown seashell on white surface</td>
+      <td>[-0.0289349593, 0.0516048148, 0.0157920811, -0...</td>
+    </tr>
+    <tr>
+      <th>24965</th>
+      <td>w8nrcXz8pwk</td>
+      <td>thanosql-dataset/unsplash_data/w8nrcXz8pwk.jpg</td>
+      <td>https://images.unsplash.com/photo-159299937329...</td>
+      <td>None</td>
+      <td>leopard on brown tree trunk during daytime</td>
+      <td>[0.006948946, -0.032078824900000004, -0.013961...</td>
+    </tr>
+    <tr>
+      <th>24966</th>
+      <td>n1jHrRhehUI</td>
+      <td>thanosql-dataset/unsplash_data/n1jHrRhehUI.jpg</td>
+      <td>https://images.unsplash.com/photo-159192792878...</td>
+      <td>Floral truck in the streets of Rome</td>
+      <td>woman in beige coat and white hat standing on ...</td>
+      <td>[0.0052709519, -0.0013724031000000002, 0.02522...</td>
+    </tr>
+    <tr>
+      <th>24967</th>
+      <td>Ic74ACoaAX0</td>
+      <td>thanosql-dataset/unsplash_data/Ic74ACoaAX0.jpg</td>
+      <td>https://images.unsplash.com/photo-159240763188...</td>
+      <td>None</td>
+      <td>green plants on brown rocky mountain under blu...</td>
+      <td>[-0.0143270288, 0.0594773069, 0.0045367181, -0...</td>
+    </tr>
+  </tbody>
+</table>
+<p>24968 rows × 6 columns</p>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <ul>
+        <li>"<strong>CONVERT USING</strong>" 쿼리 구문은 <code>tutorial_search_clip</code> 모델을 이미지 수치화를 위한 알고리즘으로 사용합니다.  </li>
+        <li>"<strong>OPTIONS</strong>" 쿼리 구문은 이미지 수치화 시 필요한 변수들을 정의합니다.
+        <ul>
+            <li>"table_name" : ThanoSQL DB 내에 저장될 테이블 이름</li>
+            <li>"image_col" : 이미지 경로를 담고 있는 컬럼 명</li>
+            <li>"batch_size" : 한번의 학습에서 읽는 데이터 세트 묶음의 크기. 논문에 따르면 클 수록 학습 성능이 증가하지만 메모리의 크기를 고려하여 128을 사용합니다. (DEFAULT : 16)  </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+      <th>tutorial_search_clip_clipen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+      <td>[-0.0148640582, 0.0549194068, 0.0118315415, 0....</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+      <td>[-0.0345519036, 0.0314463899, -0.0065574604, 0...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+      <td>[-0.031663157000000004, 0.0538793579, 0.013499...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+      <td>[0.0018179789000000001, 0.009972040500000001, ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+      <td>[-0.0223454703, 0.0129929734, -0.0019434979, -...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="3"><strong>3. 텍스트로 이미지 검색하기</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>"<strong>SEARCH IMAGE</strong>"  쿼리 구문과 생성한 <code>tutorial_search_clip</code> 모델을 사용하여 텍스트 기반 이미지 검색을
+ 할 수 있습니다. 다음 쿼리 구문을 실행하여 "a black cat" 이라는 텍스트와 임베딩 된 <code>unsplash_data</code> 
+이미지들의 유사도를 계산합니다. 결괏값은 새로 추가된 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> 컬럼에 
+저장됩니다.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a black cat&quot;</span>
+<span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+<span class="n">AS</span> 
+<span class="n">SELECT</span> <span class="o">*</span> 
+<span class="n">FROM</span> <span class="n">unsplash_data</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>photo_id</th>
+      <th>image_path</th>
+      <th>photo_image_url</th>
+      <th>photo_description</th>
+      <th>ai_description</th>
+      <th>tutorial_search_clip_clipen</th>
+      <th>tutorial_search_clip_clipen_similarity1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XMyPniM9LF0</td>
+      <td>thanosql-dataset/unsplash_data/XMyPniM9LF0.jpg</td>
+      <td>https://images.unsplash.com/uploads/1411949294...</td>
+      <td>Woman exploring a forest</td>
+      <td>woman walking in the middle of forest</td>
+      <td>[-0.0148640582, 0.0549194068, 0.0118315415, 0....</td>
+      <td>0.185725</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rDLBArZUl1c</td>
+      <td>thanosql-dataset/unsplash_data/rDLBArZUl1c.jpg</td>
+      <td>https://images.unsplash.com/photo-141633941111...</td>
+      <td>Succulents in a terrarium</td>
+      <td>succulent plants in clear glass terrarium</td>
+      <td>[-0.0345519036, 0.0314463899, -0.0065574604, 0...</td>
+      <td>0.148399</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cNDGZ2sQ3Bo</td>
+      <td>thanosql-dataset/unsplash_data/cNDGZ2sQ3Bo.jpg</td>
+      <td>https://images.unsplash.com/photo-142014251503...</td>
+      <td>Rural winter mountainside</td>
+      <td>rocky mountain under gray sky at daytime</td>
+      <td>[-0.031663157000000004, 0.0538793579, 0.013499...</td>
+      <td>0.187703</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>iuZ_D1eoq9k</td>
+      <td>thanosql-dataset/unsplash_data/iuZ_D1eoq9k.jpg</td>
+      <td>https://images.unsplash.com/photo-141487280988...</td>
+      <td>Poppy seeds and flowers</td>
+      <td>red common poppy flower selective focus phography</td>
+      <td>[0.0018179789000000001, 0.009972040500000001, ...</td>
+      <td>0.177512</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BeD3vjQ8SI0</td>
+      <td>thanosql-dataset/unsplash_data/BeD3vjQ8SI0.jpg</td>
+      <td>https://images.unsplash.com/photo-141700759404...</td>
+      <td>Silhouette near dark trees</td>
+      <td>trees during night time</td>
+      <td>[-0.0223454703, 0.0129929734, -0.0019434979, -...</td>
+      <td>0.218824</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>24963</th>
+      <td>c7OrOMxrurA</td>
+      <td>thanosql-dataset/unsplash_data/c7OrOMxrurA.jpg</td>
+      <td>https://images.unsplash.com/photo-159300793778...</td>
+      <td>None</td>
+      <td>black metal fence during daytime</td>
+      <td>[-0.0114668589, -0.0021708228, -0.0104938177, ...</td>
+      <td>0.226402</td>
+    </tr>
+    <tr>
+      <th>24964</th>
+      <td>15IuQ5a0Qwg</td>
+      <td>thanosql-dataset/unsplash_data/15IuQ5a0Qwg.jpg</td>
+      <td>https://images.unsplash.com/photo-159296761254...</td>
+      <td>Pearl earrings and seashells</td>
+      <td>white and brown seashell on white surface</td>
+      <td>[-0.0289349593, 0.0516048148, 0.0157920811, -0...</td>
+      <td>0.147114</td>
+    </tr>
+    <tr>
+      <th>24965</th>
+      <td>w8nrcXz8pwk</td>
+      <td>thanosql-dataset/unsplash_data/w8nrcXz8pwk.jpg</td>
+      <td>https://images.unsplash.com/photo-159299937329...</td>
+      <td>None</td>
+      <td>leopard on brown tree trunk during daytime</td>
+      <td>[0.006948946, -0.032078824900000004, -0.013961...</td>
+      <td>0.227299</td>
+    </tr>
+    <tr>
+      <th>24966</th>
+      <td>n1jHrRhehUI</td>
+      <td>thanosql-dataset/unsplash_data/n1jHrRhehUI.jpg</td>
+      <td>https://images.unsplash.com/photo-159192792878...</td>
+      <td>Floral truck in the streets of Rome</td>
+      <td>woman in beige coat and white hat standing on ...</td>
+      <td>[0.0052709519, -0.0013724031000000002, 0.02522...</td>
+      <td>0.169803</td>
+    </tr>
+    <tr>
+      <th>24967</th>
+      <td>Ic74ACoaAX0</td>
+      <td>thanosql-dataset/unsplash_data/Ic74ACoaAX0.jpg</td>
+      <td>https://images.unsplash.com/photo-159240763188...</td>
+      <td>None</td>
+      <td>green plants on brown rocky mountain under blu...</td>
+      <td>[-0.0143270288, 0.0594773069, 0.0045367181, -0...</td>
+      <td>0.152199</td>
+    </tr>
+  </tbody>
+</table>
+<p>24968 rows × 7 columns</p>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <ul>
+        <li>"<strong>SEARCH IMAGE</strong>" 쿼리 구문을 사용하여 이미지를 찾을 것임을 명시합니다. "text" 변수를 이용해서 찾고자 하는 이미지의 텍스트 내용을 입력합니다. </li>
+        <li>"<strong>USING</strong>" 쿼리 구문을 통해 검색에 사용할 모델로 <code>tutorial_search_clip</code>을 사용할 것을 명시합니다.</li>
+    </ul>
+</div>
+
+<p>아래 쿼리 구문을 실행하여 'a black cat' 텍스트와 가장 유사한 이미지 5개의 유사도를 확인합니다.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+<span class="n">FROM</span> <span class="p">(</span>
+    <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a black cat&quot;</span>
+    <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+    <span class="n">AS</span> 
+    <span class="n">SELECT</span> <span class="o">*</span> 
+    <span class="n">FROM</span> <span class="n">unsplash_data</span>
+    <span class="p">)</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>image_path</th>
+      <th>tutorial_search_clip_clipen_similarity1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>thanosql-dataset/unsplash_data/UMyfDjQ6Ep8.jpg</td>
+      <td>0.316560</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>thanosql-dataset/unsplash_data/7XJ3d0xK444.jpg</td>
+      <td>0.311931</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>thanosql-dataset/unsplash_data/m8HsSWh-y6E.jpg</td>
+      <td>0.310819</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>thanosql-dataset/unsplash_data/6ST6S6i9IGM.jpg</td>
+      <td>0.310214</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>thanosql-dataset/unsplash_data/aFyD5aWKu6k.jpg</td>
+      <td>0.309158</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <ul>
+        <li>"<strong>SEARCH IMAGE</strong>" 쿼리 구문은 입력한 텍스트와 이미지 사이의 유사도를 계산하여 반환합니다.</li>
+        <li>첫 번째 "<strong>SELECT</strong>" 쿼리 구문은 괄호 안의 쿼리 결과에서 <mark style="background-color:#D7D0FF ">image_path</mark> 컬럼과 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> 컬럼을 선택합니다.</li>
+        <li>"<strong>ORDER BY</strong>" 쿼리 구문은 결과를 <mark style="background-color:#D7D0FF ">tutorial_search_clip_clipen_similarity1</mark> 컬럼의 값을 기준으로 정렬하는데, 정렬은 내림차순("<strong>DESC</strong>")이며, 그 중 상위 5개("<strong>LIMIT</strong>" 5)의 결과를 출력합니다.</li>
+    </ul>
+</div>
+
+<p>이전 쿼리 구문을 "<strong>PRINT</strong>"문과 함께 응용하여, 결과 이미지를 바로 확인할 수 있습니다.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a black cat&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/UMyfDjQ6Ep8.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_29_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/7XJ3d0xK444.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_29_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/m8HsSWh-y6E.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_29_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/6ST6S6i9IGM.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_29_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/aFyD5aWKu6k.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_29_9.jpg" /></p>
+<div class="admonition note">
+    <h4 class="admonition-title">쿼리 세부 정보</h4>
+    <p>이 쿼리는 위의 쿼리와 합쳐 세 단계로 구성됩니다.</p>
+    <ul>
+        <li>첫 번째 괄호 안의 "<strong>SELECT</strong>" 쿼리 구문을 통해 바로 위 단계의 결과를 생성합니다.</li>
+        <li>"<strong>PRINT IMAGE</strong>" 쿼리 구문을 사용하여 해당 이미지를 출력합니다.</li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;a dog on a chair&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/jZUr3AuI8io.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_31_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/nnKBZTWzlMQ.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_31_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/HG2KpOO0vSc.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_31_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/f6qFneRNwNI.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_31_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/GKY4WDO3QgY.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_31_9.jpg" /></p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;gloomy photos&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/Xo4vJrtrmmA.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_32_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/QheWOfwEUio.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_32_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/_zHYUQmWrzk.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_32_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/Tu_lH5CFFZw.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_32_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/DfYPBHaOR04.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_32_9.jpg" /></p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PRINT</span> <span class="n">IMAGE</span> 
+<span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> 
+    <span class="n">FROM</span> <span class="p">(</span>
+        <span class="n">SEARCH</span> <span class="n">IMAGE</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;the feeling when your program finally works&quot;</span>
+        <span class="n">USING</span> <span class="n">tutorial_search_clip</span>
+        <span class="n">AS</span> 
+        <span class="n">SELECT</span> <span class="o">*</span> 
+        <span class="n">FROM</span> <span class="n">unsplash_data</span>
+        <span class="p">)</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">tutorial_search_clip_clipen_similarity1</span> <span class="n">DESC</span> 
+    <span class="n">LIMIT</span> <span class="mi">5</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Searching...
+/home/jovyan/thanosql-dataset/unsplash_data/nDLYtRqJtMw.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_33_1.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/qNJpGSCv_Jc.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_33_3.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/Yb5OBk-OxJY.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_33_5.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/6etH6346MHE.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_33_7.jpg" /></p>
+<div class="highlight"><pre><span></span><code>/home/jovyan/thanosql-dataset/unsplash_data/7GX5aICb5i4.jpg
+</code></pre></div>
+<p><img alt="jpeg" src="/img/tutorials/thanosql_search/search_image_by_text/output_33_9.jpg" /></p>
+<h2 id="4"><strong>4. 튜토리얼을 마치며</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>이번 튜토리얼에서는 멀티 모달 텍스트/이미지 수치화 모델을 사용하여 <code>unsplash 데이터 세트</code>에서 텍스트를 통한 이미지 검색을 해보았습니다. 초급 단계의 튜토리얼인 만큼 간단한 쿼리를 통해 눈에 보이는 결과를 얻는 것 위주로 진행했습니다. 이미지 검색을 조금 더 다채로운 쿼리와 함께 사용한다면, 보다 원하는 결과에 가까운 값을 얻을 수 있을 것입니다.</p>
+<div class="admonition tip">
+    <h4 class="admonition-title">나만의 서비스를 위한 모델 배포 관련 문의</h4>
+    <p>ThanoSQL을 활용해 나만의 모델을 만들거나, 나의 서비스에 적용하는데 어려움이 있다면 언제든 아래로 문의주세요😊</p>
+    <p>텍스트-이미지 검색 모델 구축 관련 문의: contact@smartmind.team</p>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      마지막 업데이트:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-09-19</span>
+      
+    
+  </small>
+</div>
+
+              
+
+<style>
+    .jupyter-wrapper a {
+        color: var(--md-typeset-a-color)
+    }
+</style>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            맨위로
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../search_image_by_image/" class="md-footer__link md-footer__link--prev" aria-label="이전: 이미지로 이미지 검색하기" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              이미지로 이미지 검색하기
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../thanosql_ml/classification/automl_classification/" class="md-footer__link md-footer__link--next" aria-label="다음: Auto-ML을 사용하여 분류 모델 만들기" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              Auto-ML을 사용하여 분류 모델 만들기
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      D-201, 39, Maeheon-ro 8-gil, Seocho-gu, Seoul 06770 South Korea<br />Email : contact@smartmind.team<br />Phone : (+82) 070-7151-9357<br /><br />© Since 2018 SmartMind, Inc. All Rights Reserved.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest"], "search": "../../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.config.lang": "en", "search.config.pipeline": " ", "search.config.separator": "[\\s\\-]+", "search.placeholder": "\uac80\uc0c9", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version.title": "\ubc84\uc804 \uc120\ud0dd"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

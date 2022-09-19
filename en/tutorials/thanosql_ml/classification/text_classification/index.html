@@ -1,0 +1,2061 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로">
+      
+      
+        <meta name="author" content="Smartmind Team">
+      
+      
+        <link rel="canonical" href="https://docs2.thanosql.ai/en/tutorials/thanosql_ml/classification/text_classification/">
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Create a Text Classification Model - ThanoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="/assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#create-a-text-classification-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="ThanoSQL" class="md-header__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ThanoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Create a Text Classification Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../../../../../tutorials/thanosql_ml/classification/text_classification/" hreflang="ko" class="md-select__link">
+                    한국어
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="./" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yeemh/docs_test" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../" class="md-tabs__link">
+      Intro
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../getting_started/how_to_use_ThanoSQL/" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../algorithm_list/" class="md-tabs__link md-tabs__link--active">
+        Tutorials
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../how-to_guides/reference/" class="md-tabs__link">
+        Reference
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../FAQ/frequently_asked_question/" class="md-tabs__link">
+        FAQ
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="ThanoSQL" class="md-nav__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../../../../../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    ThanoSQL
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yeemh/docs_test" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Getting Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/how_to_use_ThanoSQL/" class="md-nav__link">
+        ThanoSQL Web Manual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/hello_ThanoSQL/" class="md-nav__link">
+        ThanoSQL Workspace Manual
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../getting_started/data_upload/" class="md-nav__link">
+        How to upload your data to ThanoSQL workspace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithm_list/" class="md-nav__link">
+        ThanoSQL All Tutorials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          ThanoSQL Search
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Search" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Search
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanosql_search/search_image_by_keyword/" class="md-nav__link">
+        Search Image by Keyword
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanosql_search/search_image_by_image/" class="md-nav__link">
+        Search Image by Image
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../thanosql_search/search_image_by_text/" class="md-nav__link">
+        Search Image by Text
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          ThanoSQL ML
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL ML" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL ML
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Classification
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Classification" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../automl_classification/" class="md-nav__link">
+        Create a Classification Model Using AutoML
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image_classification/" class="md-nav__link">
+        Create an Image Classification Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Create a Text Classification Model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Create a Text Classification Model
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial-introduction" class="md-nav__link">
+    Tutorial Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-prepare-dataset-and-model" class="md-nav__link">
+    0. Prepare Dataset and Model
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Prepare Dataset and Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-dataset" class="md-nav__link">
+    Prepare Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-model" class="md-nav__link">
+    Prepare the Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1check-dataset" class="md-nav__link">
+    1.Check Dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-predict-movie-review-sentiment-using-pretrained-model" class="md-nav__link">
+    2. Predict Movie Review Sentiment Using Pretrained Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-a-text-classification-model" class="md-nav__link">
+    3. Create a Text Classification Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-predict-movie-review-sentiment" class="md-nav__link">
+    4. Predict Movie Review Sentiment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-in-conclusion" class="md-nav__link">
+    5. In Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          Regression
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Regression" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Regression
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../regression/automl_regression/" class="md-nav__link">
+        Create a Regression Model Using AutoML
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_3" type="checkbox" id="__nav_3_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3">
+          Audio recognition
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Audio recognition" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Audio recognition
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../audio_recognition/speech_recognition/" class="md-nav__link">
+        Create a Speech Recognition Model
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../udm_tutorial/" class="md-nav__link">
+        Using the Custom Model in ThanoSQL
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/reference/" class="md-nav__link">
+        Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          ThanoSQL Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/BUILD_MODEL_SYNTAX/" class="md-nav__link">
+        BUILD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/FIT_MODEL_SYNTAX/" class="md-nav__link">
+        FIT MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/UPLOAD_SYNTAX/" class="md-nav__link">
+        UPLOAD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/DELETE_MODEL_SYNTAX/" class="md-nav__link">
+        DELETE  MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/TRANSFORM_MODEL_SYNTAX/" class="md-nav__link">
+        TRANSFORM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/PREDICT_MODEL_SYNTAX/" class="md-nav__link">
+        PREDICT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/EVALUATE_MODEL_SYNTAX/" class="md-nav__link">
+        EVALUATE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/CREATE_TABLE_SYNTAX/" class="md-nav__link">
+        CREATE TABLE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/CONVERT_USING_SYNTAX/" class="md-nav__link">
+        CONVERT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/SEARCH_SYNTAX/" class="md-nav__link">
+        SEARCH
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/PRINT_SYNTAX/" class="md-nav__link">
+        PRINT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/GET_SYNTAX/" class="md-nav__link">
+        GET
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_query/LIST_SYNTAX/" class="md-nav__link">
+        LIST
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          ThanoSQL Pre-built Model Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Pre-built Model Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Pre-built Model Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/AutomlClassifier/" class="md-nav__link">
+        AutomlClassifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/AutomlRegressor/" class="md-nav__link">
+        AutomlRegressor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/ConvNeXt_EfficientNet/" class="md-nav__link">
+        ConvNeXt & EfficientNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/Albert_Electra/" class="md-nav__link">
+        Albert & Electra
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/wav2vec2/" class="md-nav__link">
+        Wav2Vec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/SimCLR/" class="md-nav__link">
+        SimCLR
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_model/CLIP/" class="md-nav__link">
+        CLIP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          ThanoSQL REST API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL REST API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL REST API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_query/" class="md-nav__link">
+        How to Query using ThanoSQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_insert/" class="md-nav__link">
+        How to Upload to ThanoSQL DB
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../how-to_guides/ThanoSQL_connecting/rest_api_thanosql_search/" class="md-nav__link">
+        How to Use ThanoSQL Search
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../FAQ/frequently_asked_question/" class="md-nav__link">
+        FAQs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial-introduction" class="md-nav__link">
+    Tutorial Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-prepare-dataset-and-model" class="md-nav__link">
+    0. Prepare Dataset and Model
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Prepare Dataset and Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-dataset" class="md-nav__link">
+    Prepare Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-the-model" class="md-nav__link">
+    Prepare the Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1check-dataset" class="md-nav__link">
+    1.Check Dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-predict-movie-review-sentiment-using-pretrained-model" class="md-nav__link">
+    2. Predict Movie Review Sentiment Using Pretrained Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-a-text-classification-model" class="md-nav__link">
+    3. Create a Text Classification Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-predict-movie-review-sentiment" class="md-nav__link">
+    4. Predict Movie Review Sentiment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-in-conclusion" class="md-nav__link">
+    5. In Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+
+
+                
+
+
+<h1 id="create-a-text-classification-model"><strong>Create a Text Classification Model</strong><a class="headerlink" href="#create-a-text-classification-model" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Tutorial Difficulty: ★☆☆☆☆</li>
+<li>10 min read</li>
+<li>Languages : <a href="https://en.wikipedia.org/wiki/SQL">SQL</a> (100%)</li>
+<li>File location : tutorial_en/thanosql_ml/classification/text_classification.ipynb</li>
+<li>References : <a href="https://www.kaggle.com/code/lakshmi25npathi/sentiment-analysis-of-imdb-movie-reviews/data">(Kaggle) IMDB Movie Reviews</a>, <a href="https://arxiv.org/abs/2003.10555">ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators</a></li>
+</ul>
+<h2 id="tutorial-introduction">Tutorial Introduction<a class="headerlink" href="#tutorial-introduction" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+    <h4 class="admonition-title">Understanding Classification</h4>
+    <p>Classification is a type of <a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> that predicts which category (Category or Class) the target belongs to. For example, both binary classifications (used for classifying men or women) and multiple classifications (used to predict animal species such as dogs, cats, rabbits, etc.) are included in the classification tasks. <br></p>
+</div>
+
+<p><a href="https://en.wikipedia.org/wiki/Natural_language_processing">Natural Language Processing (NLP)</a> is a branch of artificial intelligence that uses machine learning to process and interpret text-based data.</p>
+<div class="admonition tip">
+    <h4 class="admonition-title">What is <a href="https://en.wikipedia.org/wiki/Natural_language_processing">Natural Language Processing (NLP)</a></h4>
+    <p>Depending on the task, NLP can be divided into two categories: Natural Language Understanding (NLU) and Natural Language Generation (NLG). NLU is the process of converting a person's natural language into a value that a computer can understand. NLG, on the other hand, refers to the process of translating computer-readable values into natural language that humans can understand.</p>
+</div>
+
+<p>Recent advancements in pre-training techniques, such as <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a> and <a href="https://en.wikipedia.org/wiki/GPT-3">GPT-3</a>, allow for the development of a common language comprehension model prior to fine-tuning for specific NLP tasks, such as emotional analysis or question-and-answer.</p>
+<div class="admonition summary">
+    <p>This means that you can use data more efficiently by minimizing <a href="https://en.wikipedia.org/wiki/Labeled_data">data labeling</a> operations for large datasets.</p>
+</div>
+
+<p>ThanoSQL includes a variety of pre-trained AI models along with various functions that allow users to easily create their own text classification models even with limited data labeling. Users can use this to extract potentially useful insights from text data that would otherwise be difficult and apply them to a wide range of applications.</p>
+<p><strong>The following are examples and applications of the ThanoSQL text classification model.</strong></p>
+<ul>
+<li>
+<p>The ThanoSQL text classification model makes it easy to utilize text classification models to build a chatbot and analyze sentiment of text in a bulletin board. This will later enable the customer to connect with the appropriate customer service representative.</p>
+</li>
+<li>
+<p>The ThanoSQL text classification model allows news or post sharing services to categorize their published contents into groups. Additionally, it provides sentiment analysis of grouped items, enabling effective handling of issues that could arise unexpectedly from customer frustration response.</p>
+</li>
+</ul>
+<div class="admonition note">
+    <h4 class="admonition-title">In this tutorial</h4>
+    <p>👉 Create a model to classify the emotions of movie reviews using the <mark style="background-color:#FFD79C">IMDB Movie Reviews</mark> dataset from <a href="https://www.kaggle.com/">Kaggle</a>. This dataset consists of 50,000 movie review texts and each reviews are rated as either positive or negative. Based on the movie rating, a value less than 5 is expressed as negative and a value greater than 7 is expressed as positive. Each film has no more than 30 reviews.</p>
+</div>
+
+<div class="admonition warning">
+    <h4 class="admonition-title">Tutorial Precautions</h4>
+    <ul>
+        <li>A text classification model can be used to predict one target value (Target, Category) from one text value.</li>
+        <li>Both a column representing the text and a column representing the target value of the text must exist.</li>
+        <li>The base model of the corresponding text classification model (<code>ELECTRA</code>) uses GPU. Depending on the size and the batch size of the model used, GPU memory may be insufficient. In this case, try using a smaller model or reducing the batch size of the model.</li>
+    </ul>
+</div>
+
+<h2 id="0-prepare-dataset-and-model"><strong>0. Prepare Dataset and Model</strong><a class="headerlink" href="#0-prepare-dataset-and-model" title="Permanent link">&para;</a></h2>
+<p>As mentioned in the <a href="https://docs.thanosql.ai/en/getting_started/how_to_use_ThanoSQL/#5-thanosql-workspace">ThanoSQL Workspace</a>, you must create an API token and run the query below to execute the query of ThanoSQL. </p>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">thanosql</span>
+<span class="o">%</span><span class="n">thanosql</span> <span class="n">API_TOKEN</span><span class="o">=&lt;</span><span class="n">Issued_API_TOKEN</span><span class="o">&gt;</span>
+</code></pre></div>
+<h3 id="prepare-dataset"><strong>Prepare Dataset</strong><a class="headerlink" href="#prepare-dataset" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">GET</span> <span class="n">THANOSQL</span> <span class="n">DATASET</span> <span class="n">movie_review_data</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>GET THANOSQL DATASET</strong>" downloads the specified dataset to the workspace. </li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for the <strong>GET THANOSQL DATASET</strong> clause.
+        <ul>
+            <li>"overwrite" : determines whether to overwrite a dataset if it already exists. If set as True, the old dataset is replaced with the new dataset (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">COPY</span> <span class="n">movie_review_train</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">FROM</span> <span class="s2">&quot;thanosql-dataset/movie_review_data/movie_review_train.csv&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">COPY</span> <span class="n">movie_review_test</span> 
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">FROM</span> <span class="s2">&quot;thanosql-dataset/movie_review_data/movie_review_test.csv&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>COPY</strong>" specifies the name of the dataset to be saved as a database table. </li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for the <strong>COPY</strong> clause.
+        <ul>
+           <li>"overwrite" : determines whether to overwrite a table if it already exists. If set as True, the old table is replaced with the new table (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<h3 id="prepare-the-model"><strong>Prepare the Model</strong><a class="headerlink" href="#prepare-the-model" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">GET</span> <span class="n">THANOSQL</span> <span class="n">MODEL</span> <span class="n">tutorial_text_classification</span>
+<span class="n">OPTIONS</span> <span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">AS</span> <span class="n">tutorial_text_classification</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details </h4>
+    <ul>
+        <li>"<strong>GET THANOSQL MODEL</strong>" downloads the specified model to the workspace. </li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for the <strong>GET THANOSQL MODEL</strong> clause.
+        <ul>
+            <li>"overwrite" : determines whether to overwrite a model if it already exists. If set as True, the old model is replaced with the new model (True|False, DEFAULT : False) </li>
+        </ul>
+        </li>
+        <li>"<strong>AS</strong>" names the given model. If not specified, the model will be named as the default <code>THANOSQL MODEL</code> name.</li>
+    </ul>
+</div>
+
+<h2 id="1check-dataset"><strong>1.Check Dataset</strong><a class="headerlink" href="#1check-dataset" title="Permanent link">&para;</a></h2>
+<p>To create a movie review sentiment classification model, we use the <mark style="background-color:#FFEC92 ">movie_review_train</mark> table from the ThanoSQL database. To check the table's contents, run the following query.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">movie_review_train</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>This is the kind of movie that BEGS to be show...</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bulletproof is quite clearly a disposable film...</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A beautiful shopgirl in London is swept off he...</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VERY dull, obvious, tedious Exorcist rip-off f...</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Do we really need any more narcissistic garbag...</td>
+      <td>negative</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="admonition note">
+   <h4 class="admonition-title">Understanding the Data</h4>
+   <ul>
+      <li><mark style="background-color:#D7D0FF ">review</mark>: movie review in text format</li>
+      <li><mark style="background-color:#D7D0FF ">sentiment</mark> : target value indicating whether the review has a positive or negative sentiment</li>
+   </ul>
+</div>
+
+<h2 id="2-predict-movie-review-sentiment-using-pretrained-model"><strong>2. Predict Movie Review Sentiment Using Pretrained Model</strong><a class="headerlink" href="#2-predict-movie-review-sentiment-using-pretrained-model" title="Permanent link">&para;</a></h2>
+<p>To predict the movie review sentiment classification result using the pretrained <mark style="background-color:#E9D7FD ">tutorial_text_classification</mark> model, run the following query.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PREDICT</span> <span class="n">USING</span> <span class="n">tutorial_text_classification</span>
+<span class="n">OPTIONS</span> <span class="p">(</span>
+    <span class="n">text_col</span><span class="o">=</span><span class="s1">&#39;review&#39;</span>
+    <span class="p">)</span>
+<span class="n">AS</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">movie_review_test</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+      <th>predicted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I read the book before seeing the movie, and t...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>"9/11," hosted by Robert DeNiro, presents foot...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Yesterday I attended the world premiere of "De...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Moonwalker is a Fantasy Music film staring Mic...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Welcome to Oakland, where the dead come out to...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>I remember catching this movie on one of the S...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>CyberTracker is set in Los Angeles sometime in...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>There is so much that is wrong with this film,...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>I am a firm believer that a film, TV serial or...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>I think vampire movies (usually) are wicked. E...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 3 columns</p>
+</div>
+
+<h2 id="3-create-a-text-classification-model"><strong>3. Create a Text Classification Model</strong><a class="headerlink" href="#3-create-a-text-classification-model" title="Permanent link">&para;</a></h2>
+<p>To create a text classification model with the name <mark style="background-color:#E9D7FD ">my_movie_review_classifier</mark> using the <mark style="background-color:#FFEC92 ">movie_review_train</mark> dataset, run the following query. 
+(Estimated time required for query execution: 3 min)</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">BUILD</span> <span class="n">MODEL</span> <span class="n">my_movie_review_classifier</span>
+<span class="n">USING</span> <span class="n">ElectraEn</span>
+<span class="n">OPTIONS</span> <span class="p">(</span>
+    <span class="n">text_col</span><span class="o">=</span><span class="s1">&#39;review&#39;</span><span class="p">,</span>
+    <span class="n">label_col</span><span class="o">=</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+<span class="n">AS</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">movie_review_train</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Building model...
+Success
+</code></pre></div>
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>BUILD MODEL</strong>" creates and trains a model named <mark style="background-color:#E9D7FD">my_movie_review_classifier</mark>.</li>
+        <li>"<strong>USING</strong>" specifies <code>ElectraEn</code> as the base model.</li>
+        <li>"<strong>OPTIONS</strong>" specifies the option values used to create the model.
+        <ul> 
+            <li> "text_col" : the name of the column containing the text to be used for the training. </li> 
+            <li> "label_col" : the name of the column containing information about the target. </li> 
+            <li>"epochs" : number of times to train with the training dataset.</li>
+            <li> "batch_size" is the size of dataset bundle utilized in a single cycle of training.</li>
+            <li>"overwrite" : determines whether to overwrite a model if it already exists. If set as True, the old model is replaced with the new model (True|False, DEFAULT : False) </li>
+    </ul>
+</div>
+
+<div class="admonition tip">
+    <p>In this example, we set "epochs" to 1 to train the model quickly. In general, larger number of "epochs" increases performance of the inference at the cost of the computation time.</p>
+</div>
+
+<h2 id="4-predict-movie-review-sentiment"><strong>4. Predict Movie Review Sentiment</strong><a class="headerlink" href="#4-predict-movie-review-sentiment" title="Permanent link">&para;</a></h2>
+<p>To use the text classification model created in the previous step for prediction of <mark style="background-color:#FFEC92 ">movie_review_test</mark>, run the following query.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">thanosql</span>
+<span class="n">PREDICT</span> <span class="n">USING</span> <span class="n">my_movie_review_classifier</span>
+<span class="n">OPTIONS</span> <span class="p">(</span>
+    <span class="n">text_col</span><span class="o">=</span><span class="s1">&#39;review&#39;</span>
+    <span class="p">)</span>
+<span class="n">AS</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">movie_review_test</span>
+</code></pre></div>
+<div class="df_size">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>review</th>
+      <th>sentiment</th>
+      <th>predicted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I read the book before seeing the movie, and t...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>"9/11," hosted by Robert DeNiro, presents foot...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Yesterday I attended the world premiere of "De...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Moonwalker is a Fantasy Music film staring Mic...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Welcome to Oakland, where the dead come out to...</td>
+      <td>positive</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>I remember catching this movie on one of the S...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>CyberTracker is set in Los Angeles sometime in...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>There is so much that is wrong with this film,...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>I am a firm believer that a film, TV serial or...</td>
+      <td>positive</td>
+      <td>positive</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>I think vampire movies (usually) are wicked. E...</td>
+      <td>negative</td>
+      <td>negative</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 3 columns</p>
+</div>
+
+<div class="admonition note">
+    <h4 class="admonition-title">Query Details</h4>
+    <ul>
+        <li>"<strong>PREDICT USING</strong>" predicts the outcome using the <mark style="background-color:#E9D7FD ">my_movie_review_classifier</mark>
+        <li>"<strong>OPTIONS</strong>" specifies the option values to be used for prediction.
+        <ul>
+            <li>"review" : the column containing the text to be used for prediction.</li>
+        </ul>
+        </li>
+    </ul>
+</div>
+
+<h2 id="5-in-conclusion"><strong>5. In Conclusion</strong><a class="headerlink" href="#5-in-conclusion" title="Permanent link">&para;</a></h2>
+<p>In this tutorial, we created a text classification model using the <mark style="background-color:#FFD79C">IMDB Movie Reviews</mark> dataset. As this is a beginner-level tutorial, we focused on the process rather than accuracy. Text classification models can be improved in accuracy through fine tuning that is suitable for the user's needs. You can train the base model using your own data, or use a <a href="https://en.wikipedia.org/wiki/Self-supervised_learning">Self-supervised Learning</a> model to vectorize and transform your data to create an automated machine learning (Auto-ML) for deployment. Create your own model and provide competitive services by combining various unstructured data (image, audio, video, etc.) and structured data with ThanoSQL.</p>
+<p>For the next step, the [Creating an Intermediate Text Classification Model] tutorial takes a deeper dive into the text classification models. If you want to learn more about building your own text classification model for your service, proceed with the following tutorials.</p>
+<ul>
+<li><a href="https://docs.thanosql.ai/en/getting_started/data_upload/">How to Upload to ThanoSQL DB</a></li>
+<li>[Creating an Intermediate Text Classification Model]</li>
+<li>[Create My model using text conversion and Auto-ML]</li>
+<li><a href="https://docs.thanosql.ai/en/how-to_guides/reference/">Deploy My text classification model</a></li>
+</ul>
+<div class="admonition tip">
+    <h4 class="admonition-title">Inquiries about deploying a model for your own service</h4>
+    <p>If you have any difficulties creating your own model using ThanoSQL or applying it to your service, please feel free to contact us below😊</p>
+    <p>For inquiries regarding building a text classification model: contact@smartmind.team</p>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-09-19</span>
+      
+    
+  </small>
+</div>
+
+              
+
+<style>
+    .jupyter-wrapper a {
+        color: var(--md-typeset-a-color)
+    }
+</style>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../image_classification/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Create an Image Classification Model" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Create an Image Classification Model
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../regression/automl_regression/" class="md-footer__link md-footer__link--next" aria-label="Next: Create a Regression Model Using AutoML" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Create a Regression Model Using AutoML
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      D-201, 39, Maeheon-ro 8-gil, Seocho-gu, Seoul 06770 South Korea<br />Email : contact@smartmind.team<br />Phone : (+82) 070-7151-9357<br /><br />© Since 2018 SmartMind, Inc. All Rights Reserved.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest"], "search": "../../../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
