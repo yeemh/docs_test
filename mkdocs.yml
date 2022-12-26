@@ -20,6 +20,8 @@ theme:
 
 plugins:
   - search # Built-in search plugin
+  - mkdocs-jupyter:
+      include_source: True # Enable download ipynb files
   # Multiple language versions
   - i18n:
       default_language: en
@@ -60,8 +62,6 @@ plugins:
   # Adding the date of last update
   - git-revision-date-localized:
       type: iso_date # Format yyyy-mm-dd
-  - mkdocs-jupyter:
-      include_source: True # Enable download ipynb files
 
 # Extensions
 markdown_extensions:
