@@ -1,4 +1,0 @@
-nav:
-    - select_image_query.md
-    - simclr_image_search.md
-    - clip_image_search.md

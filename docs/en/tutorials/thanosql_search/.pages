@@ -1,1 +1,6 @@
-collapse_single_pages: true
+nav:
+    - search_image_by_keyword.ipynb
+    - search_image_by_image.ipynb
+    - search_image_by_text.ipynb
+    - search_text_by_text.ipynb
+    - search_video_by_text.ipynb

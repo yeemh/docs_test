@@ -1,2 +1,3 @@
 nav:
-    - audio_recognition_wav2vec.md
+    - speech_recognition.ipynb
+    - speech_recognition2.ipynb
