@@ -1,0 +1,6 @@
+nav:
+    - classification
+    - regression
+    - audio_recognition
+    - question_answering
+    - udm_tutorial.ipynb
