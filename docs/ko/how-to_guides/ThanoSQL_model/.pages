@@ -1,0 +1,12 @@
+nav:
+    - AutomlClassifier.md
+    - AutomlRegressor.md
+    - ConvNeXt_EfficientNet.md
+    - Albert_Electra.md
+    - Wav2Vec2.md
+    - SimCLR.md
+    - CLIP.md
+    - SBERT.md
+    - Whisper.md
+    - XCLIP.md
+    - ViLT.md

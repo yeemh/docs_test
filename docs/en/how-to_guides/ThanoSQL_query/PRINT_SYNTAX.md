@@ -1,45 +1,47 @@
 ---
-title: Print the result
+title: PRINT
 ---
 
-# **Print the result (PRINT)**
+# __PRINT__
 
-## Preface
+## __1. PRINT Statement__
+The "__PRINT__" statement allows users to to output images, audio, and video files.
 
-- Updated Date : {{ git_revision_date_localized }}
+## __2. PRINT Syntax__
 
-## **1. PRINT Syntax Overview**
-
-Users can use the "**PRINT**" syntax to output images, audio, and video files. You can also use subqueries to immediately output results from the "**SEARCH**" syntax.
-
-## **2. PRINT Syntax**
-
-"**PRINT**" Syntax
-
+The "__PRINT__" syntax.
 ```sql
-%%thanosql
-PRINT IMAGE | AUDIO | VIDEO
+query_statement:
+    query_expr
+
+PRINT { IMAGE | AUDIO | VIDEO }
 AS
-[data_set_to_output]
+(query_expr)
 ```
 
-"**PRINT**" syntax using OPTIONS
+The "__PRINT__" syntax with an "__OPTIONS__" clause.
 
 ```sql
-%%thanosql
+query_statement:
+    query_expr
+
 PRINT IMAGE | AUDIO | VIDEO
-OPTIONS(
-    image_col | audio_col | video_col = [image_path_column_name]
+OPTIONS (
+    image_col | audio_col | video_col = (column_name)
     )
 AS
-[data_set_to_output]
+(query_expr)
 ```
 
-## **3. PRINT Syntax example**
+!!! note "__Query Details__"
+    - The "__OPTIONS__" clause allows you to change the value of a parameter. The definition of each parameter is as follows:
+        - "image_col | audio_col | video_col": the name of a column to be printed (str, default: 'image_path'|'audio_path'|'video_path')
 
-### **3.1 Image Print**
+## __3. PRINT Example__
 
-Outputs image files in the data table using the "**PRINT**" query statement.
+### __3.1 Image Print__
+
+Outputs image files from the table.
 
 ```sql
 %%thanosql
@@ -49,15 +51,15 @@ OPTIONS (
     )
 AS
 SELECT *
-FROM junyong_img
+FROM image_table
 ```
 
 !!! note ""
-    - `junyong_img` : Data table containing image file paths
+    - "image_table": table containing paths of the image files
 
-### **3.2 Audio Print**
+### __3.2 Audio Print__
 
-Outputs audio files in the data table using the "**PRINT**" query statement.
+Outputs audio files from the table.
 
 ```sql
 %%thanosql
@@ -67,17 +69,17 @@ OPTIONS (
     )
 AS
 SELECT *
-FROM junyong_aud
+FROM audio_table
 ```
 
 [![IMAGE](/img/thanosql_syntax/query/PRINT/PRINT_img1.png)](/img/thanosql_syntax/query/PRINT/PRINT_img1.png)
 
 !!! note ""
-    - `junyong_aud` : Data table containing audio file paths
+    - "audio_table": table containing paths of the audio files
 
-### **3.3 Video Print**
+### __3.3 Video Print__
 
-Outputs video files in the data table using the "**PRINT**" query statement.
+Outputs video files from the table.
 
 ```sql
 %%thanosql
@@ -87,27 +89,35 @@ OPTIONS (
     )
 AS
 SELECT *
-FROM junyong_vid
+FROM video_table
 ```
 
 !!! note ""
-    - `junyong_vid` : Data table containing video file paths
+    - "video_table": table containing paths of the video files
 
-### **3.4 Printing using subqueries**
+### __3.4 Print with a subquery__
 
-The following query immediately outputs the result table of "**SEARCH**" using the "**SEARCH**" query statement created in the previous [SEARCH query](/en/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX) as a subquery of the "**PRINT**" syntax.
+The following statement outputs the results of "__SEARCH__" statement created in the nested [SEARCH](/en/how-to_guides/ThanoSQL_query/SEARCH_SYNTAX). 
 
 ```sql
 %%thanosql
-PRINT IMAGE AS(
-    SELECT image_path as image, query1_score
+PRINT IMAGE 
+AS (
+    SELECT image_path, search_result 
     FROM (
-        SEARCH IMAGE text='12345'
-        USING clip_en
-        AS
-        SELECT *
-        FROM mnist_dataset)
-    ORDER BY query1_score DESC
-    LIMIT 10
+        SEARCH IMAGE 
+        USING my_image_search_model 
+        OPTIONS (
+            search_by='image',
+            search_input='thanosql-dataset/mnist_data/test/923.jpg',
+            emb_col='convert_result',
+            result_col='search_result'
+            )
+        AS 
+        SELECT * 
+        FROM mnist_test
+        )
+    ORDER BY search_result DESC 
+    LIMIT 4
     )
 ```

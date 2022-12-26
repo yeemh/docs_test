@@ -1,38 +1,52 @@
 ---
-title: Searching for unstructured data
+title: SEARCH
 ---
 
-# **Searching for unstructured data (SEARCH)**
+# __SEARCH__
 
-## Preface
+## __1. SEARCH Statement__
 
-- Updated Date : {{ git_revision_date_localized }}
+The "__SEARCH__" statement allows users to search for content, meaning, or similarity from the unstructured data table.
 
-## **1. SEARCH Syntax Overview**
-
-The "**SEARCH**" query syntax searches for content, meaning, or similarity in unstructured data.
-
-## **2. SEARCH Syntax**
+## __2. SEARCH Syntax__
 
 ```sql
-%%thanosql
+query_statement:
+    query_expr
 
-SEARCH [custom_data_table_name]
-USING [AI_model_to_use]
-AS [data_set_to_use]
-```
-
-## **3. SEARCH Query Syntax example**
-
-The query below uses `Color_Descriptor`, an AI model for quantifying images, to search for similar images.
-
-```sql
-%%thanosql
-SEARCH IMAGE images='tutorial/image_search/images/20150617_132435.jpg'
-USING Color_Descriptor
+SEARCH { IMAGE | AUDIO | VIDEO | TEXT | KEYWORD }
+USING (model_name_expression)
+OPTIONS (
+    expression [ , ...]
+    )
 AS
-SELECT *
-FROM color_descriptor_table_test
+(query_expr)
 ```
 
-[![IMAGE](/img/thanosql_syntax/query/SEARCH/SEARCH_img1.png)](/img/thanosql_syntax/query/SEARCH/SEARCH_img1.png)
+## __3. SEARCH Example__
+
+!!! note
+    - Examples are specific to one model, and the required option values ​​or the dataset used may differ from model to model. For a detailed description of each model, refer to the [ThanoSQL Model Statement Reference](/en/how-to_guides/reference/#thanosql-model-statement-reference)
+    - Because the example only works when a specific model and dataset are present, it may not run normally if copied and used as is.
+
+```sql
+%%thanosql
+SEARCH IMAGE
+USING my_image_search_model
+OPTIONS (
+    search_by='image',
+    search_input='thanosql-dataset/mnist_data/test/923.jpg',
+    emb_col='convert_result',
+    result_col='search_result'
+    )
+AS
+SELECT * 
+FROM mnist_test
+```
+
+!!! note "AI models that can be used with '__SEARCH__ statement'"
+    - SimCLR Model - SimCLR
+    - CLIP Model - CLIP
+    - XCLIP Model - XCLIP
+    - SBERT Model - SBERTKo, SBERTEn
+

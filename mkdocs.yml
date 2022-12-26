@@ -1,6 +1,6 @@
 site_name: ThanoSQL
-site_description: AI개발이 가능한 세상의 모든 비정형 데이터를 SQL로
-site_url: https://docs.thanosql.ai/
+site_description: ThanoSQL Documentation
+site_url: https://docs2.thanosql.ai/
 site_author: Smartmind Team
 
 theme:
@@ -10,7 +10,6 @@ theme:
   custom_dir: overrides
   features:
     - navigation.expand # Default dropdown to expand
-    - navigation.instant # Instant loading
     - navigation.sections # At sidebar top-level section name with bold & not dropdown menu
     - navigation.tabs # Make top-level sections
     - navigation.tabs.sticky # Make top-level sections always visible
@@ -23,31 +22,39 @@ plugins:
   - search # Built-in search plugin
   # Multiple language versions
   - i18n:
-      default_language: ko
+      default_language: en
       docs_structure: folder
       languages:
-        ko: 한국어
         en: English
+        ko: 한국어
       nav_translations: # manage directory names
-        ko:
-          Getting started: 시작하기
-          Tutorials: 사용해보기
-          Image search: Query 무작정 따라하기
-          Thanosql ml: ML 무작정 따라하기
-          Classification: 분류 모델 만들기
-          Regression: 회귀 모델 만들기
-          Audio recognition: 음성 인식 모델 만들기
-          How to guides: 안내 가이드
-          ThanoSQL query: ThanoSQL Query 다루기
-          ThanoSQL ml: ThanoSQL ML 다루기
-          ThanoSQL connecting: ThanoSQL REST API 다루기
-          Thanosql api: REST API 사용하기
-          FAQ: 자주 묻는 질문
         en:
           Getting started: Getting Started
           Tutorials: Tutorials
-          How to guides: Guides
+          Thanosql search: ThanoSQL Search
+          Thanosql ml: ThanoSQL ML
+          How to guides: Reference
+          ThanoSQL query: ThanoSQL Statement Reference
+          ThanoSQL connecting: ThanoSQL REST API Reference
+          ThanoSQL model: ThanoSQL Model Statement Reference
+          ThanoSQL function: ThanoSQL Function Statement Reference
           FAQ: FAQ
+        ko:
+          Getting started: 시작하기
+          Tutorials: 튜토리얼
+          Thanosql search: ThanoSQL Search
+          Thanosql ml: ThanoSQL ML
+          Classification: 분류 모델 만들기
+          Regression: 회귀 모델 만들기
+          Audio recognition: 음성 인식 모델 만들기
+          Question answering: 질의 응답 모델 사용하기
+          How to guides: 참조
+          ThanoSQL query: ThanoSQL Statement Reference
+          ThanoSQL connecting: ThanoSQL REST API Reference
+          ThanoSQL model: ThanoSQL Model Statement Reference
+          ThanoSQL function: ThanoSQL Function Statement Reference
+          Thanosql api: REST API 사용하기
+          FAQ: 자주 묻는 질문
   - awesome-pages: # Omits nav and control over page
       strict: false # For ipynb tutorial folder
   # Adding the date of last update
@@ -60,6 +67,7 @@ plugins:
 markdown_extensions:
   - admonition
   - attr_list
+  - footnotes
   - toc:
       permalink: true
   - pymdownx.details
@@ -78,15 +86,11 @@ markdown_extensions:
       alternate_style: true
 
 # Git info
-repo_name: smartmind-team/thanosql-docs
-repo_url: https://github.com/smartmind-team/thanosql-docs
+repo_name: yeemh/docs_test
+repo_url: https://github.com/yeemh/docs_test
 edit_uri: ""
 
 extra:
-  # Google Analytics
-  analytics:
-    provider: google
-    property: G-8KVG4NMMFK
   generator: false # Hide "Made with Material for Mkdocs"
 
 extra_css:

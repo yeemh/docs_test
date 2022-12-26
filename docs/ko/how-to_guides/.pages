@@ -1,6 +1,6 @@
 nav:
-    - algorithm_list.md
+    - reference.md
     - ThanoSQL_query
-    - ThanoSQL_ml
+    - ThanoSQL_model
+    - ThanoSQL_function
     - ThanoSQL_connecting
-    - OPTIONS.md
