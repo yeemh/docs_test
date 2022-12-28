@@ -31,19 +31,19 @@ __OPTIONS 절__
 
 ```sql
 OPTIONS (
-    [method_name={'split'}],
+    [method={'split'}],
     [interval=VALUE],
-    (table_name=expression),
-    (folder_name=expression)
+    (result_col=expression),
+    (result_dir=expression)
     )
 ```
 
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
-- "method_name": 영상 전처리 방식을 설정합니다. 현재는 'split'만 지원합니다. (str)
+- "method": 영상 전처리 방식을 설정합니다. 현재는 'split'만 지원합니다. (str)
 - "interval": 간격을 초 단위로 설정합니다. (int, optional, default: 1)
-- "table_name": 전처리 후 생성할 테이블 이름을 설정합니다. (str)
-- "folder_name": 전처리 후 분할 영상이 저장될 폴더 이름을 설정합니다. (str)
+- "result_col": 전처리 후 분할 영상 경로를 담을 컬럼 이름을 설정합니다. (str)
+- "result_dir": 전처리 후 분할 영상이 저장될 폴더 이름을 설정합니다. (str)
 
 __video_to_df 예시__
 
@@ -51,10 +51,10 @@ __video_to_df 예시__
 %%thanosql
 FUNCTION preprocess.video_to_df
 OPTIONS (
-   method_name='split',
+   method='split',
    interval=1,
-   table_name='video_split_table',
-   folder_name='video_split_folder'
+   result_col='video_split_path', 
+   result_dir='video_split_folder'
     )
 FROM 'thanosql-dataset/kinetics700_data/video/1ejgHKw8E3Y.mp4'
 ```

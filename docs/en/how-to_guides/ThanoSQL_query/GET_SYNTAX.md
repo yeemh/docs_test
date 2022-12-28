@@ -16,7 +16,7 @@ GET THANOSQL MODEL (ThanoSQL_model_name_expression)
 OPTIONS (
     model_name=(model_name_expression),
     overwrite=True
-) 
+    ) 
 ```
 
 !!! note "__Note__"    

@@ -22,7 +22,7 @@ FROM (file_path | dir_path)
 ```
 
 !!! note "쿼리 세부 정보"
-    - "OPTIONS" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+    - "__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
         - "overwrite": 동일 이름의 테이블이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 테이블은 새로운 테이블로 변경됩니다. (bool, optional, True|False, default: False)
 
 ## __3. COPY 예시__

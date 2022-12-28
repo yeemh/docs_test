@@ -6,7 +6,7 @@ title: BUILD MODEL
 
 ## __1. BUILD MODEL 문__
 
-사용자는 데이터 과학(Data Science)에 대한 전문 지식이 없어도 간단하게 "__BUILD MODEL__" 구문을 사용하여 원하는 인공지능 모델을 개발할 수 있습니다.
+사용자는 데이터 과학에 대한 전문 지식이 없어도 "__BUILD MODEL__" 구문을 사용하여 원하는 인공지능 모델을 개발할 수 있습니다.
 
 ## __2. BUILD MODEL 구문__
 
@@ -24,8 +24,11 @@ AS
 ```
 
 !!! note "쿼리 세부 정보"
-    - "OPTIONS" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+    - "__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
         - "overwrite": 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (bool, optional, True|False, default: False)
+
+!!! warning ""
+    "__USING__" 뒤에 작성하는 model_name_expression은 대/소문자의 영향을 받습니다.
 
 ## __3. BUILD MODEL 예시__
 

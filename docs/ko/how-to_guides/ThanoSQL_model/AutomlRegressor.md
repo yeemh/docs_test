@@ -49,7 +49,7 @@ OPTIONS (
     )
 ```
 
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "target_col": 데이터 테이블에서 분류 예측 모델에 목푯값이 되는 컬럼의 이름입니다. (str, default: 'target')
 - "features_to_drop": 데이터 테이블에서 학습에 이용하지 못하는 컬럼을 설정합니다. (list[str], optional)
@@ -57,16 +57,16 @@ OPTIONS (
 > "simple": 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.  
 > "iterative": 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
 - "datetime_attribs": 데이터 테이블에서 날짜에 해당하는 컬럼을 설정합니다. (list[str], optional)
-- "outlier_method": 데이터 테이블에서 이상치를 처리하는 방법을 설정합니다. (str, optional, 'knn'|'iso'|'pca', default: 'knn')
+- "outlier_method": 데이터 테이블에서 이상치를 처리하는 방법을 설정합니다. None일 경우, 데이터 테이블은 이상치를 포함합니다. (str, optional, 'knn'|'iso'|'pca', default: None)
 > "knn": K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.  
 > "iso": 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다.)  
 > "pca": 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.
-- "time_left_for_this_task": 적합한 분류 예측 모델을 찾는데 소요되는 초 단위 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다. (int, optional, default: 300)
+- "time_left_for_this_task": 적합한 분류 예측 모델을 찾는데 소요되는 초 단위 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다. (int, optional, default: 60)
 - "overwrite": 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (bool, optional, True|False, default: False)
 
 __BUILD MODEL 예시__
 
-[Auto-ML을 사용하여 예측 모델 만들기](/ko/tutorials/thanosql_ml/regression/automl_regression/)에서 "__BUILD MODEL__" 구문 사용 예시를 확인하실 수 있습니다.
+[AutoML을 사용하여 예측 모델 만들기](/ko/tutorials/thanosql_ml/regression/automl_regression/)에서 "__BUILD MODEL__" 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -115,7 +115,7 @@ OPTIONS (
     )
 ```
 
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "target_col": 데이터 테이블에서 분류 예측 모델에 목푯값이 되는 컬럼의 이름입니다. (str, default: 'target')
 - "features_to_drop": 데이터 테이블에서 학습에 이용하지 못하는 컬럼을 설정합니다. (list[str], optional)
@@ -123,11 +123,11 @@ OPTIONS (
 > "simple": 빈 값에 대해 범주형 변수는 최빈값으로, 연속형 변수는 평균으로 처리합니다.  
 > "iterative": 빈 값에 대해 나머지 속성을 통해 예측하는 알고리즘을 적용하여 처리합니다.
 - "datetime_attribs": 데이터 테이블에서 날짜에 해당하는 컬럼을 설정합니다. (list[str], optional)
-- "outlier_method": 데이터 테이블에서 이상치를 처리하는 방법을 설정합니다. (str, optional, 'knn'|'iso'|'pca', default: 'knn')
+- "outlier_method": 데이터 테이블에서 이상치를 처리하는 방법을 설정합니다. None일 경우, 데이터 테이블은 이상치를 포함합니다. (str, optional, 'knn'|'iso'|'pca', default: None)
 > "knn": K-NN 기반 접근법으로 각 데이터 사이의 거리를 기반으로 비정상 샘플을 검출합니다.  
 > "iso": 주어진 데이터 테이블에 대해서 Isolation Forest를 사용하여 트리 기반으로 랜덤하게 데이터 테이블을 분기하며 모든 관측치를 고립시키며 비정상 샘플을 검출합니다. (변수가 많은 데이터 세트에서도 효율적으로 작동합니다.)  
 > "pca": 주어진 데이터 테이블에 대해서 Principal Component Analysis(PCA, 주성분 분석)를 이용하여 차원을 축소하고 복원을 하는 과정을 통해 비정상 샘플을 검출합니다.
-- "time_left_for_this_task": 적합한 분류 예측 모델을 찾는데 소요되는 초 단위 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다. (int, optional, default: 300)
+- "time_left_for_this_task": 적합한 분류 예측 모델을 찾는데 소요되는 초 단위 시간을 의미합니다. 값이 클수록 적합한 모델을 찾을 가능성이 커집니다. (int, optional, default: 60)
 - "overwrite": 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (bool, optional, True|False, default: False)
 
 ## __PREDICT 구문__
@@ -155,14 +155,14 @@ OPTIONS (
     )
 ```
 
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "result_col": 데이터 테이블에서 예측 결과를 담을 컬럼 이름을 설정합니다. (str, optional, default: 'predict_result')
 - "table_name": ThanoSQL 워크스페이스 데이터베이스 내에 저장될 테이블 이름입니다. 기존에 사용한 테이블 이름으로 지정할 경우, 기존 테이블은 'predict_result' 컬럼을 추가한 테이블로 대체됩니다. 지정하지 않을 시 테이블을 저장하지 않습니다. (str, optional)
 
 __PREDICT 예시__
 
-[Auto-ML을 사용하여 예측 모델 만들기](/ko/tutorials/thanosql_ml/regression/automl_regression/)에서 "__PREDICT__" 구문 사용 예시를 확인하실 수 있습니다.
+[AutoML을 사용하여 예측 모델 만들기](/ko/tutorials/thanosql_ml/regression/automl_regression/)에서 "__PREDICT__" 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql
@@ -200,13 +200,13 @@ OPTIONS (
     )
 ```
 
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "target_col": 데이터 테이블에서 분류 예측 모델에 목푯값이 되는 컬럼의 이름입니다. (str, default: 'target')
 
 __EVALUATE 예시__
 
-[Auto-ML을 사용하여 예측 모델 만들기](/ko/tutorials/thanosql_ml/regression/automl_regression/)에서 "__EVALUATE__" 구문 사용 예시를 확인하실 수 있습니다.
+[AutoML을 사용하여 예측 모델 만들기](/ko/tutorials/thanosql_ml/regression/automl_regression/)에서 "__EVALUATE__" 구문 사용 예시를 확인하실 수 있습니다.
 
 ```sql
 %%thanosql

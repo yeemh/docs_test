@@ -65,7 +65,7 @@ USING SBERTEn
 OPTIONS (
     text_col='review',
     overwrite=True
-)
+    )
 AS
 SELECT *
 FROM movie_review_train
@@ -101,7 +101,7 @@ OPTIONS (
 The "__OPTIONS__" clause allows you to change the value of a parameter. The definition of each parameter is as follows.
 
 - "text_col": the name of the column containing the text to be used for the vectorization (str, default: 'text')
-- "table_name": the table name to be stored in the ThanoSQL workspace database. If a previously used table is specified, the existing table will be replaced by the new table with a 'convert_result' column. If not specified, the result dataframe will not be saved as a data table (str, optional)
+- "table_name": the table name to be stored in the ThanoSQL workspace database. If a previously used table is specified, the existing table will be replaced by the new table with a 'convert_result' column. If not specified, the result dataframe will not be saved as a table (str, optional)
 - "batch_size": the size of dataset bundle utilized in a single cycle of training (int, optional, default: 16)
 - "result_col": defines the column name that contains the vectorized results (str, optional, default: 'convert_result')
 
@@ -163,32 +163,20 @@ __SEARCH TEXT Example__
 An example "__SEARCH TEXT__" query can be found in [Search Text by Text](/en/tutorials/thanosql_search/search_text_by_text/).
 
 ```sql
-SEARCH KEYWORD
-USING movie_text_search_model
-OPTIONS (
-    text_col='review',
-    ngram_range=[1, 3],
-    use_stopwords=True
-    )
-AS (
-    SELECT review, sentiment, score
-    FROM (
-        SEARCH TEXT 
-        USING movie_text_search_model
-        OPTIONS (
-            search_by='text',
-            search_input='The best action movie',
-            emb_col='convert_result',
-            result_col='score'
-            )
-        AS 
-        SELECT * 
-        FROM movie_review_test
-        WHERE review LIKE '%%gun%%'
+SELECT review, sentiment, score
+FROM (
+    SEARCH TEXT text="This movie was my favorite movie of all time"
+    USING movie_text_search_model
+    OPTIONS (
+        emb_col="convert_result",
+        column_name="score"
         )
-    ORDER BY score DESC 
-    LIMIT 10
+    AS 
+    SELECT * 
+    FROM movie_review_test
     )
+ORDER BY score DESC 
+LIMIT 10
 ```
 
 ## __SEARCH KEYWORD Syntax__

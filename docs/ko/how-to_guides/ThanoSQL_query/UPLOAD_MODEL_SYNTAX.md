@@ -6,7 +6,7 @@ title: UPLOAD MODEL
 
 ## __1. UPLOAD MODEL 문__
 
-사용자는 "__UPLOAD MODEL__" 구문을 사용하여 직접 만든 모델을 업로드하여 ThanoSQL 상에서 이용할 수 있습니다.
+사용자는 "__UPLOAD MODEL__" 구문을 사용하여 직접 만든 모델을 업로드하여 ThanoSQL에서 이용할 수 있습니다.
 
 ## __2. UPLOAD MODEL 구문__
 
@@ -20,7 +20,7 @@ FROM [model_path_expression]
 ```
 
 !!! note "쿼리 세부 정보"
-    - "OPTIONS" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+    - "__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
         - "framework": 모델의 프레임워크를 설정합니다. (str, default: 'pytorch')
         - "overwrite": 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (bool, optional, True|False, default: False)
 
@@ -33,8 +33,8 @@ FROM [model_path_expression]
 %%thanosql
 UPLOAD MODEL beans_mobilevit
 OPTIONS (
-    framework="pytorch",
+    framework='pytorch',
     overwrite=True
     )
-FROM "trained_model.pth"
+FROM 'trained_model.pth'
 ```

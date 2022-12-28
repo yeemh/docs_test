@@ -6,7 +6,7 @@ title: ThanoSQL Workspace Manual
 
 ThanoSQL`s workspace is a web-based computing environment based on [Jupyter Lab](https://github.com/jupyterlab/jupyterlab).
 
-To use **ThanoSQL** in this environment, you must first load the **thanosql** cell magic.
+To use **ThanoSQL** in this environment, you must first load the **ThanoSQL cell magic**.
 
 !!! tip ""
     You can press the run button at the top, or you can run it with either the **Ctrl + Enter** or **Shift + Enter** shortcuts.

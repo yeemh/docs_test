@@ -6,7 +6,7 @@ title: DELETE MODEL
 
 ## __1. DELETE MODEL 문__
 
-사용자는 "__DELETE MODEL__" 구문을 사용하여 데이터 베이스에 만들어진 모델을 삭제할 수 있습니다.
+사용자는 "__DELETE MODEL__" 구문을 사용하여 ThanoSQL 워크스페이스 내에서 생성한 모델을 삭제할 수 있습니다.
 
 ## __2. DELETE MODEL 구문__
 
