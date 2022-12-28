@@ -1,0 +1,1790 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ThanoSQL Documentation">
+      
+      
+        <meta name="author" content="Smartmind Team">
+      
+      
+        <link rel="canonical" href="https://docs2.thanosql.ai/ko/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>개요 - ThanoSQL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="/assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#thanosql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ThanoSQL" class="md-header__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ThanoSQL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              개요
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Select language">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="../" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+                
+                <li class="md-select__item">
+                  <a href="./" hreflang="ko" class="md-select__link">
+                    한국어
+                  </a>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yeemh/docs_test" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      개요
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="getting_started/how_to_use_ThanoSQL/" class="md-tabs__link">
+        시작하기
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="tutorials/algorithm_list/" class="md-tabs__link">
+        튜토리얼
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="how-to_guides/reference/" class="md-tabs__link">
+        참조
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="FAQ/frequently_asked_question/" class="md-tabs__link">
+        자주 묻는 질문
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ThanoSQL" class="md-nav__button md-logo" aria-label="ThanoSQL" data-md-component="logo">
+      
+  <img src="../assets/images/docs_logo.png" alt="logo">
+
+    </a>
+    ThanoSQL
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yeemh/docs_test" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yeemh/docs_test
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          개요
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        개요
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#thanosql_1" class="md-nav__link">
+    ThanoSQL 정의
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thanosql_2" class="md-nav__link">
+    ThanoSQL의 장점
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          시작하기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="시작하기" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          시작하기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started/how_to_use_ThanoSQL/" class="md-nav__link">
+        ThanoSQL 웹 사용법
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started/hello_ThanoSQL/" class="md-nav__link">
+        ThanoSQL 워크스페이스 사용법
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started/data_upload/" class="md-nav__link">
+        ThanoSQL 데이터 업로드하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          튜토리얼
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="튜토리얼" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          튜토리얼
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/algorithm_list/" class="md-nav__link">
+        ThanoSQL 모든 튜토리얼
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          ThanoSQL Search
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Search" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Search
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_search/search_image_by_keyword/" class="md-nav__link">
+        키워드로 이미지 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_search/search_image_by_image/" class="md-nav__link">
+        이미지로 이미지 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_search/search_image_by_text/" class="md-nav__link">
+        텍스트로 이미지 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_search/search_text_by_text/" class="md-nav__link">
+        텍스트로 텍스트 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_search/search_video_by_text/" class="md-nav__link">
+        텍스트로 비디오 검색하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          ThanoSQL ML
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL ML" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL ML
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          분류 모델 만들기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="분류 모델 만들기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          분류 모델 만들기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/classification/automl_classification/" class="md-nav__link">
+        AutoML을 사용하여 분류 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/classification/image_classification/" class="md-nav__link">
+        이미지 분류 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/classification/text_classification/" class="md-nav__link">
+        텍스트 분류 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          회귀 모델 만들기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="회귀 모델 만들기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          회귀 모델 만들기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/regression/automl_regression/" class="md-nav__link">
+        AutoML을 사용하여 예측 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_3" type="checkbox" id="__nav_3_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3">
+          음성 인식 모델 만들기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="음성 인식 모델 만들기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          음성 인식 모델 만들기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/audio_recognition/speech_recognition/" class="md-nav__link">
+        오디오 파일을 받아쓰는 음성 인식 모델 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/audio_recognition/speech_recognition2/" class="md-nav__link">
+        오디오 파일을 받아쓰는 음성 인식 모델 사용하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_3_4" type="checkbox" id="__nav_3_3_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_4">
+          질의 응답 모델 사용하기
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="질의 응답 모델 사용하기" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          질의 응답 모델 사용하기
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/question_answering/visual_question_answering/" class="md-nav__link">
+        시각 질의 응답 모델 사용하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/thanosql_ml/udm_tutorial/" class="md-nav__link">
+        사용자의 모델을 ThanoSQL에서 사용하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          참조
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="참조" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          참조
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/reference/" class="md-nav__link">
+        개요
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          ThanoSQL Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/BUILD_MODEL_SYNTAX/" class="md-nav__link">
+        BUILD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/FIT_MODEL_SYNTAX/" class="md-nav__link">
+        FIT MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/UPLOAD_MODEL_SYNTAX/" class="md-nav__link">
+        UPLOAD MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/DELETE_MODEL_SYNTAX/" class="md-nav__link">
+        DELETE MODEL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/PREDICT_SYNTAX/" class="md-nav__link">
+        PREDICT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/EVALUATE_SYNTAX/" class="md-nav__link">
+        EVALUATE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/CONVERT_SYNTAX/" class="md-nav__link">
+        CONVERT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/SEARCH_SYNTAX/" class="md-nav__link">
+        SEARCH
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/PRINT_SYNTAX/" class="md-nav__link">
+        PRINT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/GET_SYNTAX/" class="md-nav__link">
+        GET
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/LIST_SYNTAX/" class="md-nav__link">
+        LIST
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/COPY_SYNTAX/" class="md-nav__link">
+        COPY
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_query/FUNCTION_SYNTAX/" class="md-nav__link">
+        FUNCTION
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          ThanoSQL Model Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Model Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Model Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/AutomlClassifier/" class="md-nav__link">
+        AutomlClassifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/AutomlRegressor/" class="md-nav__link">
+        AutomlRegressor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/ConvNeXt_EfficientNet/" class="md-nav__link">
+        ConvNeXt & EfficientNet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/Albert_Electra/" class="md-nav__link">
+        Albert & Electra
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/Wav2Vec2/" class="md-nav__link">
+        Wav2Vec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/SimCLR/" class="md-nav__link">
+        SimCLR
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/CLIP/" class="md-nav__link">
+        CLIP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/SBERT/" class="md-nav__link">
+        SBERT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/Whisper/" class="md-nav__link">
+        Whisper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/XCLIP/" class="md-nav__link">
+        XCLIP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_model/ViLT/" class="md-nav__link">
+        ViLT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4">
+          ThanoSQL Function Statement Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL Function Statement Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL Function Statement Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_function/Compute/" class="md-nav__link">
+        Compute
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_function/Preprocess/" class="md-nav__link">
+        Preprocess
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_5">
+          ThanoSQL REST API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="ThanoSQL REST API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          ThanoSQL REST API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_connecting/rest_api_thanosql_query/" class="md-nav__link">
+        ThanoSQL 구문 활용
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_connecting/rest_api_thanosql_upload/" class="md-nav__link">
+        ThanoSQL 워크스페이스 데이터베이스 업로드
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to_guides/ThanoSQL_connecting/rest_api_thanosql_search/" class="md-nav__link">
+        ThanoSQL 서치 사용
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          자주 묻는 질문
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="자주 묻는 질문" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          자주 묻는 질문
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="FAQ/frequently_asked_question/" class="md-nav__link">
+        FAQs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#thanosql_1" class="md-nav__link">
+    ThanoSQL 정의
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thanosql_2" class="md-nav__link">
+    ThanoSQL의 장점
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+
+
+                
+
+
+<h1 id="thanosql"><strong>ThanoSQL</strong><a class="headerlink" href="#thanosql" title="Permanent link">&para;</a></h1>
+<ul>
+<li>읽는데 걸리는 시간: 3분</li>
+<li>마지막 수정날짜: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-26</span></li>
+</ul>
+<h2 id="thanosql_1"><strong>ThanoSQL 정의</strong><a class="headerlink" href="#thanosql_1" title="Permanent link">&para;</a></h2>
+<p>ThanoSQL은 정형과 <strong>비정형 데이터</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 모두 <strong>SQL</strong><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>의 <a href="https://ko.wikipedia.org/wiki/%EC%BF%BC%EB%A6%AC">쿼리(Query, 질의)</a>를 사용하여 AI(인공지능) 모델링 및 검색을 가능하게 한 통합 플랫폼입니다. <strong>RDB</strong><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>(Relational DataBase, 관계형 데이터베이스), AI 그리고 Big Data Platform의 기능을 하나의 플랫폼에서 적용할 수 있으며, AI 기반의 디지털 전환 시 발생하는 비효율성을 획기적으로 줄일 수 있습니다.</p>
+<ul>
+<li>ThanoSQL에서는 정형과 비정형 데이터 모두 SQL 쿼리 형식으로 검색이 가능하며, 빠른 AI 모델링 또한 가능합니다.   </li>
+<li><strong>람다 아키텍처</strong><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> 기반의 비정형 빅데이터 플랫폼을 ThanoSQL 하나로 대체하여 개발, 배포 그리고 운영을 하나의 프로세스로 통합합니다.  </li>
+<li>빅데이터 처리 및 분산 병렬처리 기술을 기반으로 하여 기존 대비 2배 이상 빠르게 데이터 처리가 가능합니다.</li>
+</ul>
+<h2 id="thanosql_2"><strong>ThanoSQL의 장점</strong><a class="headerlink" href="#thanosql_2" title="Permanent link">&para;</a></h2>
+<p>AI 기반 디지털 전환은 다양한 언어, 프레임 워크 그리고 람다 아키텍처 기반의 빅데이터 플랫폼 등 광범위한 지식과 기술 구현, 지속적인 인사이트 발굴이 필요합니다. 이러한 복잡한 요구 사항들로 인해 기술 구현의 난이도와 프로세스의 복잡성이 점진적으로 증가하여 결국 개발, 배포, 운영 등에 많은 인력과 시간을 요구합니다.</p>
+<p>아래 그림은 데이터 엔지니어링 에코시스템 맵으로, 데이터 사이언스 및 빅데이터 분석 시스템 구축을 위한 60여 가지의 기술들을 한눈에 보여주고 있습니다. </p>
+<p><a href="/img/index/img1.png"><img alt="IMAGE" src="/img/index/img1.png" /></a></p>
+<p>이러한 배경에서 ThanoSQL은</p>
+<ul>
+<li>다양한 개발/운영 플랫폼, 언어, 프레임워크를 하나로 통합하여 획기적으로 개발 기간을 단축하고 비효율을 제거합니다. </li>
+</ul>
+<p>ThanoSQL을 활용하면 위 그림의 수많은 기술 스택들을 전혀 알 필요가 없으며, 오직 SQL과 Python만 사용해서 그 모든 기술 스택을 전부 아는 개발자(또는 데이터 엔지니어)들보다 빠르게 좋은 결과를 지속적으로 만들어낼 수 있습니다. </p>
+<p><a class="md-button md-button--primary" href="https://www.thanosql.ai/" target="_blank">ThanoSQL의 혁신적인 결과를 지금 체험해보세요</a></p>
+<div class="card">
+    <header>
+        <h2 id="card-h2"> ThanoSQL 시작하기</h2>
+    </header>
+    <ul class="fullclick">
+        <li>
+            <a href="/ko/getting_started/how_to_use_ThanoSQL/">
+                <h3>
+                    ThanoSQL 웹 사용법
+                </h3>
+                <p>
+                    ThanoSQL 웹에서의 계정 생성 및 관리 관련하여 제공되는 화면 및 기능에 대해 설명합니다. 
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/ko/getting_started/hello_ThanoSQL/">
+                <h3>
+                    ThanoSQL 워크스페이스 사용법
+                </h3>
+                <p>
+                    ThanoSQL 워크스페이스의 기본적인 사용법에 대해 설명합니다.  
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="/ko/getting_started/data_upload/">
+                <h3>
+                    ThanoSQL 데이터 업로드하기
+                </h3>
+                <p>
+                    ThanoSQL 워크스페이스에 로컬 컴퓨터에 있는 데이터를 업로드하는 2가지 방법에 대해 설명합니다.
+                </p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="card">
+    <header>
+        <h2 id="card-h2"> ThanoSQL 튜토리얼</h2>
+    </header>
+    <ul class="fullclick">
+        <li>
+            <a href="/ko/tutorials/algorithm_list/">
+                <h3>
+                    ThanoSQL 튜토리얼
+                </h3>
+                <p>
+                    ThanoSQL을 활용한 튜토리얼 예제를 설명합니다. 
+                </p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="card">
+    <header>
+        <h2 id="card-h2"> ThanoSQL 참조</h2>
+    </header>
+    <ul class="fullclick">
+        <li>
+            <a href="/ko/how-to_guides/reference/">
+                <h3>
+                    ThanoSQL 참조
+                </h3>
+                <p>
+                    ThanoSQL에서 제공하는 문법 및 기능에 대한 공식적인 요약을 제공합니다. 
+                </p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>식별 가능한 구조나 아키텍처가 없는 데이터입니다. 텍스트, 음성, 영상 등이 주로 해당되며 사전 정의 된 데이터 모델을 따르지 않으므로 관계형 데이터베이스에 적합하지 않습니다. 하지만 이러한 유연성으로 인해 확장 가능하며 제약이 없습니다. 비정형 데이터를 올바르게 분석하면 다양한 애플리케이션에 사용할 수 있으며 가치 있는 <a href="https://ko.wikipedia.org/wiki/%EB%B9%84%EC%A6%88%EB%8B%88%EC%8A%A4_%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4">비즈니스 인텔리전스</a> 통찰력(Insight)을 제공할 수 있습니다.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>관계형 데이터베이스 관리 시스템(RDBMS: Relational DataBase Management System)의 데이터를 처리하기 위해 설계된 특수 목적의 프로그래밍 언어이며 쿼리(Query) 언어라고 불리기도 합니다.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>관계형 데이터 모델에 기초를 둔 데이터베이스를 의미합니다. 관계형 데이터 모델이란, 데이터를 구성하는 데 필요한 방법 중 하나로 모든 데이터를 2차원의 테이블 형태로 표현합니다. 일반적으로 정형데이터를 다룹니다.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>대량의 데이터를 실시간으로 분석하기 어렵기 때문에, 실시간으로 획득이 가능한 데이터 테이블과 어떤 특정 정해진 시간에 계산을 미리 해놓은 배치(Batch) 테이블을 결합하여 대용량 데이터에서도 어느 정도의 실시간 분석이 가능하도록 혼합해서 사용하는 방식을 말합니다.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-12-26</span>
+      
+    
+  </small>
+</div>
+
+              
+
+<style>
+    .jupyter-wrapper a {
+        color: var(--md-typeset-a-color)
+    }
+    .jupyter-wrapper table.dataframe {
+        table-layout: auto;
+    }
+</style>
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+      
+        
+        <a href="getting_started/how_to_use_ThanoSQL/" class="md-footer__link md-footer__link--next" aria-label="Next: ThanoSQL 웹 사용법" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              ThanoSQL 웹 사용법
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      D-201, 39, Maeheon-ro 8-gil, Seocho-gu, Seoul 06770 South Korea<br />Email : contact@smartmind.team<br />Phone : (+82) 070-7151-9357<br /><br />© Since 2018 SmartMind, Inc. All Rights Reserved.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
