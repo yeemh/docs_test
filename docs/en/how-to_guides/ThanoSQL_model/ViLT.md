@@ -49,7 +49,7 @@ The "__OPTIONS__" clause allows you to change the value of a parameter. The defi
 - "image_col": the column containing the image path to be used for prediction (str, default: 'image_path')
 - "question": the question text to be used for prediction (str)
 - "result_col": defines the name of the column to contain the result (str, optional, default: "predict_result")
-- "table_name": the table name to be stored in the ThanoSQL workspace database. If a previously used table is specified, the existing table will be replaced by the new table with a 'predict_result' column. If not specified, the result dataframe will not be saved as a data table (str, optional)
+- "table_name": the table name to be stored in the ThanoSQL workspace database. If a previously used table is specified, the existing table will be replaced by the new table with a 'predict_result' column. If not specified, the result dataframe will not be saved as a table (str, optional)
 
 
 __PREDICT Example__

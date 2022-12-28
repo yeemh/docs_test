@@ -27,6 +27,9 @@ AS
     - The "__OPTIONS__" clause allows you to change the value of a parameter. The definition of each parameter is as follows.
         - "overwrite": determines whether to overwrite a model if it already exists. If set as True, the old model is replaced with the new model (bool, optional, True|False, default: False)
 
+!!! warning ""
+    The model_name_expression that comes after "__USING__" is case sensitive.
+
 ## __3. BUILD MODEL Example__
 
 !!! note

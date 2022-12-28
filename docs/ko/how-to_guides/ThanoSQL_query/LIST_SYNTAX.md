@@ -6,7 +6,7 @@ title: LIST
 
 ## __1. LIST 문__
 
-사용자는 "__LIST__" 구문을 사용하여 가장 최신의 ThanoSQL의 Pre-built 모델("THANOSQL MODEL"), ThanoSQL의 데이터 세트("THANOSQL DATASET"), 사용자가 만든 테이블("TABLE")과 모델("MODEL") 리스트를 확인할 수 있습니다.
+사용자는 "__LIST__" 구문을 사용하여 가장 최신의 ThanoSQL의 Pre-built 모델("THANOSQL MODEL"), ThanoSQL의 데이터 세트("THANOSQL DATASET"), 사용자가 만든 데이터 테이블("TABLE")과 모델("MODEL") 리스트를 확인할 수 있습니다.
 
 ## __2. LIST 구문__
 
@@ -31,7 +31,7 @@ LIST THANOSQL DATASET
 ```
 [![IMAGE](/img/thanosql_syntax/query/LIST/img3.png)](/img/thanosql_syntax/query/LIST/img3.png)
 
-"__LIST TABLE__" 구문은 사용자가 만든 테이블의 리스트를 확인합니다.
+"__LIST TABLE__" 구문은 사용자가 만든 데이터 테이블의 리스트를 확인합니다.
 
 ```sql
 LIST TABLE

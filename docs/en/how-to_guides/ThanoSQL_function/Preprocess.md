@@ -33,19 +33,19 @@ __OPTIONS Clause__
 
 ```sql
 OPTIONS (
-    [method_name={'split'}],
+    [method={'split'}],
     [interval=VALUE],
-    (table_name=expression),
-    (folder_name=expression)
+    (result_col=expression),
+    (result_dir=expression)
     )
 ```
 
 The "__OPTIONS__" clause allows you to change the value of a parameter. The definition of each parameter is as follows.
 
-- "method_name": video preprocessing method, currently only supports 'split' method (str)
-- "interval": setting of the interval in seconds (int, optional, default: 1)
-- "table_name": the name of the table to be created after preprocessing (str)
-- "folder_name": the name of the folder where the split video will be stored after preprocessing (str)
+- "method": video preprocessing method, currently only supports 'split' method (str)
+- "interval": setting of the interval in seconds (int, optional, default: 10)
+- "result_col": the name of the column containing paths of the preprocessed video (str)
+- "result_dir": the name of the folder where the split video will be stored after preprocessing (str)
 
 
 __video_to_df Example__
@@ -54,10 +54,10 @@ __video_to_df Example__
 %%thanosql
 FUNCTION preprocess.video_to_df 
 OPTIONS (
-   method_name='split', 
+   method='split', 
    interval=1, 
-   table_name='video_split_table', 
-   folder_name='video_split_folder'
+   result_col='video_split_path', 
+   result_dir='video_split_folder'
     )
 FROM 'thanosql-dataset/kinetics700_data/video/1ejgHKw8E3Y.mp4'
 ```

@@ -44,15 +44,15 @@ OPTIONS (
     [max_epochs=VALUE],
     [pretrained={True|False}],
     [overwrite={True|False}]
-)
+    )
 ```
 ​
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "image_col": 데이터 테이블에서 학습의 대상이 될 이미지의 경로를 담은 컬럼의 이름입니다. (str, default: 'image_path')
 - "batch_size": 한 번의 학습에서 읽는 데이터 세트 묶음의 크기입니다. (int, optional, default: 256)
 - "max_epochs": 모든 학습 데이터 세트를 학습하는 횟수를 설정합니다. (int, optional, default: 5)
-- "pretrained": 사전 학습된 ImageNet 가중치를 사용할지 안 할지를 설정합니다. (bool, optional, True|False, default: False)
+- "pretrained": 사전 학습된 ImageNet 가중치 사용 여부를 설정합니다. (bool, optional, True|False, default: False)
 - "overwrite": 동일 이름의 모델이 존재하는 경우 덮어쓰기 가능 유무를 설정합니다. True일 경우 기존 모델은 새로운 모델로 변경됩니다. (bool, optional, True|False, default: False)
 
 __BUILD MODEL 예시__
@@ -99,7 +99,7 @@ OPTIONS (
     [batch_size=VALUE]
     )
 ```
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "table_name": ThanoSQL 워크스페이스 데이터베이스 내에 저장될 테이블 이름입니다. 기존에 사용한 테이블 이름으로 지정할 경우, 기존 테이블은 'convert_result' 컬럼을 추가한 테이블로 대체됩니다. 지정하지 않을 시 테이블을 저장하지 않습니다. (str, optional)
 - "image_col": 데이터 테이블에서 이미지의 경로를 담은 컬럼의 이름입니다. (str, default: 'image_path')
@@ -151,7 +151,7 @@ OPTIONS (
     )
 ```
 
-"__OPTIONS__" 절은 매개변수의 값을 기본값에서 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
+"__OPTIONS__" 절에서 매개변수의 값을 기본값으로부터 변경할 수 있습니다. 각 매개변수의 의미는 아래와 같습니다.
 
 - "search_by": 검색할 때 사용할 이미지|텍스트|오디오|비디오 타입을 설정합니다. (str)
 - "search_input": 검색할 때 사용할 입력값입니다. (str)

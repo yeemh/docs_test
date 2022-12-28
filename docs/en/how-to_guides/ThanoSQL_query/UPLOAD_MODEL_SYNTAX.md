@@ -34,8 +34,8 @@ FROM [model_path_expression]
 %%thanosql
 UPLOAD MODEL beans_mobilevit
 OPTIONS (
-    framework="pytorch",
+    framework='pytorch',
     overwrite=True
     )
-FROM "trained_model.pth"
+FROM 'trained_model.pth'
 ```

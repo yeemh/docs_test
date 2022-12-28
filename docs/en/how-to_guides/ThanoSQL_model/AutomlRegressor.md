@@ -56,11 +56,11 @@ The "__OPTIONS__" clause allows you to change the value of a parameter. The defi
 > "simple": for empty values, categorical variables are treated as the most common value and continuous variables are treated as the mean
 > "iterative": applies an algorithm that predicts empty values with the remaining properties
 - "datetime_attribs": selects columns corresponding to the date (list[str], optional)
-- "outlier_method": determines how outliers are handled in the table (str, optional, 'knn'|'iso'|'pca' default: 'knn')
+- "outlier_method": determines how outliers are handled in the table. If None, the table includes outliers (str, optional, 'knn'|'iso'|'pca', default: None)
 > "knn": use a K-NN-based approach to detect abnormal samples based on the distance between each data.  
 > "iso": use Isolation Forest to randomly branch the data table on a tree basis, isolate all observations, and detect abnormal samples (Works efficiently on datasets with many variables)  
 > "pca": detect abnormal samples by reducing and restoring dimensions using the Principal Component Analysis(PCA)
-- "time_left_for_this_task": the total time given to find a suitable classification model in seconds (int, optional, default: 300)
+- "time_left_for_this_task": the total time given to find a suitable classification model in seconds (int, optional, default: 60)
 - "overwrite": determines whether to overwrite a model if it already exists. If set as True, the old model is replaced with the new model (bool, optional, True|False, default: False)
 
 __BUILD MODEL Example__
@@ -124,7 +124,7 @@ The "__OPTIONS__" clause allows you to change the value of a parameter. The defi
 > "simple": for empty values, categorical variables are treated as the most common value and continuous variables are treated as the mean
 > "iterative": applies an algorithm that predicts empty values with the remaining properties
 - "datetime_attribs": selects columns corresponding to the date (list[str], optional)
-- "outlier_method": determines how outliers are handled in the table (str, optional, 'knn'|'iso'|'pca' default: 'knn')
+- "outlier_method": determines how outliers are handled in the table. If None, the table includes outliers (str, optional, 'knn'|'iso'|'pca', default: None)
 > "knn": use a K-NN-based approach to detect abnormal samples based on the distance between each data.  
 > "iso": use Isolation Forest to randomly branch the data table on a tree basis, isolate all observations, and detect abnormal samples (Works efficiently on datasets with many variables)  
 > "pca": detect abnormal samples by reducing and restoring dimensions using the Principal Component Analysis(PCA)
@@ -160,7 +160,7 @@ OPTIONS (
 The "__OPTIONS__" clause allows you to change the value of a parameter. The definition of each parameter is as follows.
 
 - "result_col": the column that contains the predicted results (str, optional, default: 'predict_result')
-- "table_name": the table name to be stored in the ThanoSQL workspace database. If a previously used table is specified, the existing table will be replaced by the new table with a 'predict_result' column. If not specified, the result dataframe will not be saved as a data table (str, optional)
+- "table_name": the table name to be stored in the ThanoSQL workspace database. If a previously used table is specified, the existing table will be replaced by the new table with a 'predict_result' column. If not specified, the result dataframe will not be saved as a table (str, optional)
 
 
 __PREDICT Example__
